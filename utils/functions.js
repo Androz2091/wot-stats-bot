@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const request = require("request");
 
 module.exports = {
 
@@ -55,6 +56,27 @@ module.exports = {
         return usersData; // the array of profiles
         // Log in the console
         client.logger.log("User "+user.username+" registered ! ID : "+user.id);
+    },
+
+    /**
+     * Send back the found account with the nickname
+     * 
+     * @param {string} nickname The nickname
+     * @param {object} client The Discord client
+     * 
+     * @return {object} The account found
+     */
+    searchAccount: async function(nickname, client){
+        return new Promise(function(resolve, reject) {
+            request("https://api.worldoftanks.eu/wot/account/list/?application_id="+client.config.wargaming+"&search="+nickname, { json: true }, function (error, response, body) {
+                var nicknames = body.data;
+                if(nicknames.length < 1){
+                    reject("No account found");
+                } else {
+                    resolve(nicknames[0]);
+                }
+            });
+        });
     }
-      
+
 };

@@ -1,7 +1,8 @@
 var e = {
 	error:"<:error:573897651330875394>",
 	success:"<:success:573897847439622156>",
-	warn:"<:warn:564131051425890321>"
+	warn:"<:warn:564131051425890321>",
+	loading:"<a:loading:573925384114929684>"
 }
 var data = {
 	owner:"ThibaudFvrx ⚓#8291",
@@ -34,7 +35,14 @@ module.exports = class {
 				"Description"
 			],
 			HELP_NO_ALIASES: "Pas d'alias.",
-			HELP_REMIND: "Rappel : `[]` signifie paramètre obligatoire tandis que `()` signifie paramètre facultatif"
+			HELP_REMIND: "Rappel : `[]` signifie paramètre obligatoire tandis que `()` signifie paramètre facultatif",
+
+			// link
+			LINK_ALREADY_LINKED: (prefix) => e.error+" | Vous avez déjà lié un compte WoT ! Tapez `"+prefix+"unlink` puis rééssayez !",
+			LINK_NICKNAME: e.error+" | Veuillez entrer votre pseudo WoT !",
+			LINK_SEARCH: e.loading+" | Recherche du compte...",
+			LINK_ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
+			LINK_SUCCESS: (prefix) => e.success+" | Votre compte WoT a été correctement lié à votre compte Discord ! Pour voir votre profil, tapez `"+prefix+"profil` !"
         }
     }
 
