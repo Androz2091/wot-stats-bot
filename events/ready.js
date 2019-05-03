@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 
 module.exports = class {
 
@@ -31,8 +31,12 @@ module.exports = class {
         var i = 0;
         setInterval(function(){
             client.user.setActivity(games[i].name, {type: games[i].type});
-            if(games[parseInt(i + 1)]) i++;
-            else i = 0;
+            if(games[parseInt(i + 1, 10)]){
+                i++;
+            }
+            else{
+                i = 0;
+            }
         }, 20000);
     }
-}  
+};
