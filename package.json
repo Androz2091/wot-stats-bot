@@ -1,0 +1,22 @@
+{
+  "name": "worldoftanks-bot",
+  "version": "1.0.0",
+  "description": "Un bot Discord qui affiche vos stats World Of Tanks !",
+  "main": "wot-stats.js",
+  "scripts": {
+    "test": "node wot-stats.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Androz2091/WorldOfTanks-Bot.git"
+  },
+  "author": "Androz2091",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Androz2091/WorldOfTanks-Bot/issues"
+  },
+  "homepage": "https://github.com/Androz2091/WorldOfTanks-Bot#readme",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
+}
