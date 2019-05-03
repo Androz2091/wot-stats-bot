@@ -4,7 +4,8 @@ var e = {
 	warn:"<:warn:564131051425890321>"
 }
 var data = {
-	owner:"ThibaudFvrx ⚓#8291"
+	owner:"ThibaudFvrx ⚓#8291",
+	lang:"fr"
 }
 
 // This class is used to store languages strings
@@ -66,22 +67,20 @@ module.exports = class {
 	 * @param {boolean} isLongDate if displays hours and minutes too
 	 */
 	printDate(pdate, isLongDate){
-        var monthNames = [
+        let monthNames = [
             "janvier", "février", "mars",
             "avril", "mai", "juin", "juillet",
             "août", "septembre", "octobre",
             "novembre", "décembre"
         ];
 
-        var day = pdate.getDate();
-        var monthIndex = pdate.getMonth();
-        var year = pdate.getFullYear();
-        var hour = pdate.getHours();
-        var minute = pdate.getMinutes();
-
-		var thedate = (isLongDate) ? day + " " + monthNames[monthIndex] + " " + year + " à " + hour + "h" + minute 
-		: thedate = day + " " + monthNames[monthIndex] + " " + year;
-        return thedate;
+        let day = pdate.getDate();
+        let monthIndex = pdate.getMonth();
+        let year = pdate.getFullYear();
+        let hour = pdate.getHours();
+		let minute = pdate.getMinutes();
+		
+        return thedate = isLongDate  ? day + " " + monthNames[monthIndex] + " " + year + " à " + hour + "h" + minute : day + " " + monthNames[monthIndex] + " " + year;
 	}
 	
 	/**

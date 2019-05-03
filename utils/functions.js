@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 module.exports = {
 
@@ -56,6 +56,5 @@ module.exports = {
         // Log in the console
         client.logger.log("User "+user.username+" registered ! ID : "+user.id);
     }
-
-    
-}
+      
+};
