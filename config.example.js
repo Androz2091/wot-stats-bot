@@ -6,5 +6,6 @@ module.exports = {
         footer:"xxxxxxxxxx"
     },
     owner:"xxxxxxxxxx",
-    prefix:"xxxxxxxxxx"
+    prefix:"xxxxxxxxxx",
+    wargaming:"xxxxxxxxxx"
 }
