@@ -25,6 +25,7 @@ module.exports = class {
 			MISSING_BOT_PERMS: (perms) => e.error+" | Il me manque les permissions suivantes pour effectuer cette commande : "+perms,
 			OWNER_ONLY: e.error+" | Seul "+data.owner+" peut effectuer cette commande !",
 			MISSING_PERMS: (perm) => e.error+" | Cette commande nécessite la permission `"+perm+"` !",
+			NOT_LINKED: (prefix) => e.error+" | Vous n'avez actuellement aucun compte lié ! Veuillez en lier un avec `"+prefix+"link [nickname]` !",
 
 			HELP_DESCRIPTION: "Affiche la liste des commandes !",
 			HELP_HEADERS: [
@@ -42,7 +43,11 @@ module.exports = class {
 			LINK_NICKNAME: e.error+" | Veuillez entrer votre pseudo WoT !",
 			LINK_SEARCH: e.loading+" | Recherche du compte...",
 			LINK_ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
-			LINK_SUCCESS: (prefix) => e.success+" | Votre compte WoT a été correctement lié à votre compte Discord ! Pour voir votre profil, tapez `"+prefix+"profil` !"
+			LINK_SUCCESS: (prefix) => e.success+" | Votre compte WoT a été correctement lié à votre compte Discord ! Pour voir votre profil, tapez `"+prefix+"profil` !",
+
+			// unlink
+			UNLINK_DESCRIPTION: "Dissocie votre compte WoT !",
+			UNLINK_SUCCESS: e.success+" | Votre compte n'est maintenant plus lié !"
         }
     }
 
