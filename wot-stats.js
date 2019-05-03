@@ -62,12 +62,24 @@ const client = new Wot();
 
 const init = async () => {
 
-    fs.readdir('./commands', (err, files) => {
-        if(err) client.logger.error(err);
-        files.forEach(file => {
-            if (!file.endsWith(".js")) return;
-            const response = client.loadCommand('./commands/', `${file}`);
-            if (response) client.logger.error(response);
+    // Search for all commands
+    fs.readdir("./commands/", (err, content) => {
+        if(err) console.log(err);
+        if(content.length < 1) return console.log("Please create folder in \"commands\" folder.");
+        var groups = [];
+        content.forEach(element => {
+            if(!element.includes(".")) groups.push(element); // If it's a folder
+        });
+        groups.forEach(folder => {
+            fs.readdir("./commands/"+folder, (e, files) => {
+                let js_files = files.filter(f => f.split(".").pop() === "js");
+                if(js_files.length < 1) return console.log("Please create files in \""+folder+"\" folder.");
+                if(e) console.log(e);
+                js_files.forEach(element => {
+                    const response = client.loadCommand("./commands/"+folder, element);
+                    if (response) client.logger.error(response);
+                });
+            });
         });
     });
 
