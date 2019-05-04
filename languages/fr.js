@@ -20,6 +20,9 @@ module.exports = class {
 			WELCOME:"Bienvenue",
 			PREFIX_INFO: (prefix) => "Mon préfixe sur ce serveur est \`"+prefix+"\` !",
 			NO_CLAN: "Aucun clan",
+			YES:"Oui",
+			NO:"Non",
+			NO_DESCRIPTION:"Pas de description",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "Aucune commande trouvée pour `"+cmd+"` !",
@@ -32,6 +35,9 @@ module.exports = class {
 			ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
 			PLEASE_WAIT: e.loading+" | Veuillez patienter...",
 			ERROR: e.error+" | Une erreur est survenue... Si elle se reproduit, vous pouvez la signaler sur le Discord !",
+			NO_CLAN: e.error+" | Vous n'êtes pas dans un clan !",
+			NO_CLAN_USER: (nickname) => e.error+" | **"+nickname+"** n'est pas dans un clan !",
+			CLAN_NOT_FOUND: (clan) => e.error+" | Aucun clan trouvé pour `"+clan+"` !",
 
 			HELP_DESCRIPTION: "Affiche la liste des commandes !",
 			HELP_HEADERS: [
@@ -45,6 +51,7 @@ module.exports = class {
 			HELP_REMIND: "Rappel : `[]` signifie paramètre obligatoire tandis que `()` signifie paramètre facultatif",
 
 			// link
+			LINK_DESCRIPTION: "Lie votre compte WoT à votre compte Discord !",
 			LINK_ALREADY_LINKED: (prefix) => e.error+" | Vous avez déjà lié un compte WoT ! Tapez `"+prefix+"unlink` puis rééssayez !",
 			LINK_NICKNAME: e.error+" | Veuillez entrer votre pseudo WoT !",
 			LINK_SEARCH: e.loading+" | Recherche du compte...",
@@ -67,7 +74,63 @@ module.exports = class {
 				"WN8",
 				"WN8 - 24h",
 				"WN8 - 30j"
+			],
+
+			// stats
+			STATS_DESCRIPTION: "Affiche les stats d'un joueur WoT !",
+			STATS_SUCCESS: (username) => e.stats+" | Voilà les stats de **"+username+"** :",
+			STATS_HEADERS: [
+				"Pseudo",
+				"Batailles",
+				"Victoires",
+				"Défaites",
+				"Égalités",
+				"Batailles Survécues",
+				"Ratio Batailles Survécues",
+				"Pourcentage de victoires",
+				"WN8",
+				"Total",
+				"Maximum en une partie",
+				"Historique WN8"
+			],
+			STATS_FIELDS: {
+				max: [
+					"Véhicules détruits : ",
+					"Dégâts infligés : "
+				],
+				total: [
+					"Dégâts reçus : ",
+					"Dégâts infligés : ",
+					"Véhicules détruits : ",
+					"Tirs : "
+				],
+				wn8: [
+					"24 heures : ",
+					"7 jours : ",
+					"30 jours : "
+				]
+			},
+
+			// Clan 
+			CLAN_DESCRIPTION: "Affiche des informations sur le clan !",
+			CLAN_SUCCESS: (name) => e.stats+" | Voilà les informations du clan **"+name+"** :",
+			CLAN_HEADERS: [
+				"Nom",
+				"Fondateur",
+				"Créé le",
+				"Membres",
+				"Privé",
+				"WN8",
+				"Description"
+			],
+
+			// clan stats
+			CLANSTATS_DESCRIPTION: "Affiche les statistiques d'un clan !",
+			CLANSTATS_SUCCESS: (name) => e.stats+" | Voilà les stats du clan **"+name+"** :",
+			CLANSTATS_HEADERS: [
+
 			]
+
         }
     }
 
