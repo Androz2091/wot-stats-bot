@@ -41,7 +41,7 @@ class Link extends Command {
                 return client.databases[0].set(message.author.id+".wot", account);
             }).catch(err => {
                 // if no account was found
-                return m.edit(message.language.get("LINK_ACCOUNT_NOT_FOUND", args[0])); // edit the message
+                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0])); // edit the message
             });
         });
         

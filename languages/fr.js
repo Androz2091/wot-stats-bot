@@ -2,9 +2,10 @@ var e = {
 	error:"<:error:573897651330875394>",
 	success:"<:success:573897847439622156>",
 	warn:"<:warn:564131051425890321>",
-	loading:"<a:loading:573925384114929684>"
-}
-var data = {
+	loading:"<a:loading:573925384114929684>",
+	stats:"<:stats:574159072878788608>"
+},
+data = {
 	owner:"ThibaudFvrx ⚓#8291",
 	lang:"fr"
 }
@@ -18,6 +19,7 @@ module.exports = class {
 			// UTILS
 			WELCOME:"Bienvenue",
 			PREFIX_INFO: (prefix) => "Mon préfixe sur ce serveur est \`"+prefix+"\` !",
+			NO_CLAN: "Aucun clan",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "Aucune commande trouvée pour `"+cmd+"` !",
@@ -26,6 +28,10 @@ module.exports = class {
 			OWNER_ONLY: e.error+" | Seul "+data.owner+" peut effectuer cette commande !",
 			MISSING_PERMS: (perm) => e.error+" | Cette commande nécessite la permission `"+perm+"` !",
 			NOT_LINKED: (prefix) => e.error+" | Vous n'avez actuellement aucun compte lié ! Veuillez en lier un avec `"+prefix+"link [nickname]` !",
+			NOT_LINKED_USER: (user) => e.error+" | **"+user.tag+"** n'a pas de compte WoT relié !",
+			ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
+			PLEASE_WAIT: e.loading+" | Veuillez patienter...",
+			ERROR: e.error+" | Une erreur est survenue... Si elle se reproduit, vous pouvez la signaler sur le Discord !",
 
 			HELP_DESCRIPTION: "Affiche la liste des commandes !",
 			HELP_HEADERS: [
@@ -42,12 +48,26 @@ module.exports = class {
 			LINK_ALREADY_LINKED: (prefix) => e.error+" | Vous avez déjà lié un compte WoT ! Tapez `"+prefix+"unlink` puis rééssayez !",
 			LINK_NICKNAME: e.error+" | Veuillez entrer votre pseudo WoT !",
 			LINK_SEARCH: e.loading+" | Recherche du compte...",
-			LINK_ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
 			LINK_SUCCESS: (prefix) => e.success+" | Votre compte WoT a été correctement lié à votre compte Discord ! Pour voir votre profil, tapez `"+prefix+"profil` !",
 
 			// unlink
 			UNLINK_DESCRIPTION: "Dissocie votre compte WoT !",
-			UNLINK_SUCCESS: e.success+" | Votre compte n'est maintenant plus lié !"
+			UNLINK_SUCCESS: e.success+" | Votre compte n'est maintenant plus lié !",
+
+			// profile
+			PROFILE_DESCRIPTION: "Affiche le profil d'un joueur WoT !",
+			PROFILE_SUCCESS: (username) => e.stats+" | Voilà le profil de **"+username+"** :",
+			PROFILE_HEADERS: [
+				"Pseudo",
+				"Date création",
+				"Dernière mise à jour",
+				"Dernière bataille",
+				"Clan",
+				"Pourcentage de victoires",
+				"WN8",
+				"WN8 - 24h",
+				"WN8 - 30j"
+			]
         }
     }
 
@@ -93,7 +113,8 @@ module.exports = class {
         let hour = pdate.getHours();
 		let minute = pdate.getMinutes();
 		
-        return thedate = isLongDate  ? day + " " + monthNames[monthIndex] + " " + year + " à " + hour + "h" + minute : day + " " + monthNames[monthIndex] + " " + year;
+		var thedate = isLongDate  ? day + " " + monthNames[monthIndex] + " " + year + " à " + hour + "h" + minute : day + " " + monthNames[monthIndex] + " " + year;
+		return thedate;
 	}
 	
 	/**

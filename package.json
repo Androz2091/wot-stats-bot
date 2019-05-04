@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Androz2091/WorldOfTanks-Bot#readme",
   "dependencies": {
-    "chalk": "^2.4.2"
+    "chalk": "^2.4.2",
+    "tabletojson": "^1.0.4"
   }
 }
