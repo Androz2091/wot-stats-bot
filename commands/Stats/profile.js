@@ -7,7 +7,7 @@ class Profile extends Command {
         super(client, {
             name: "profile",
             description: (language) => language.get("PROFILE_DESCRIPTION"),
-            usage: "profile (@member)",
+            usage: "profile (@member/wot-nickname)",
             dirname: __dirname,
             enabled: true,
             guildOnly: false,
@@ -36,7 +36,7 @@ class Profile extends Command {
                 }
             } else if(args[0]){
                 // Search all accounts
-                var account = await this.client.functions.searchAccount(args[0], this.client).catch(err => {
+                var account = await client.functions.searchAccount(args[0], client).catch(err => {
                     m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
                 });
                 ID = account.account_id;
@@ -47,8 +47,8 @@ class Profile extends Command {
                 } else {
                     ID = data.wot.account_id;
                 }
-            }
-;
+            };
+
             // Gets the stats of the user
             var stats = await client.functions.getStats(ID, client).catch(err => {
                 return message.channel.send(message.language.get("ERROR"));
