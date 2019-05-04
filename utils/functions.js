@@ -10,7 +10,7 @@ module.exports = {
      * @param {object} guild A Discord guild
      * @param {object} client The Discord client
      * 
-     * @return {object} The guild configuration
+     * @returns {object} The guild configuration
      */
     getGuildData: function(guild, client){
         // try to get the guild configuration
@@ -35,7 +35,7 @@ module.exports = {
      * @param {array} users An array of Discord users
      * @param {object} client The Discord client
      * 
-     * @return {array} The array of users profiles
+     * @returns {array} The array of users profiles
      */
     getUsersData: function(users, client){
         var usersData = [];
@@ -66,7 +66,7 @@ module.exports = {
      * @param {string} nickname The nickname
      * @param {object} client The Discord client
      * 
-     * @return {object} The account found
+     * @returns {object} The account found
      */
     searchAccount: async function(nickname, client){
         return new Promise(async function(resolve, reject) {
@@ -81,12 +81,103 @@ module.exports = {
     },
 
     /**
+     * Send back the found clan with the name
+     * 
+     * @param {sring} name Tha clan name
+     * @param {object} client The Discord client
+     * 
+     * @returns {object} The clan found
+     */
+
+    searchClan: async function(name, client){
+        return new Promise(async function(resolve, reject) {
+            if(!name.match(/^[0-9a-zA-Z \s]+$/)) return reject("Name must contains only alphanumeric characters or spaces");
+            var clans = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/list/?application_id="+client.config.wargaming+"&search="+name);
+            if(clans.length < 1){
+                reject("No account found");
+            } else {
+                resolve(clans[0]);
+            }
+        });
+    },
+
+    /**
+     * Gets the ID of the clan of a player 
+     * 
+     * @param {string} id The ID of the player
+     * @param {object} client The Discord client
+     * 
+     * @returns {object} The ID of the clan of the player 
+     */
+    getClan: async function(id, client){
+        return new Promise(async function(resolve, reject) {
+            // Gets the clan ID 
+            var data = await client.functions.get("https://api.worldoftanks.eu/wot/account/info/?application_id="+client.config.wargaming+"&account_id="+id);
+            if(!data[id].clan_id){
+                return reject("No clan");
+            }
+            resolve({clan_id:data[id].clan_id});
+        });
+    },
+
+    /**
+     * Gets the stats of a clan
+     * 
+     * @param {string} id The id of the clan
+     * @param {object} client The Discord client
+     * 
+     * @returns {object} The stats of the clan
+     */
+    getClanStats: async function(id, client){
+        return new Promise(async function(resolve, reject) {
+            var clanData = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/info/?application_id="+client.config.wargaming+"&clan_id="+id);
+            clanData = clanData[id];
+            resolve(clanData);
+        });
+    },
+
+    /**
+     * Gets clan WN8
+     * 
+     * @param {string} id The ID of the clan
+     * @param {string} name The name of the clan
+     * 
+     * @returns {object} The WN8 stats of the clan
+     */
+    getClanWN8: async function(id, name){
+        return new Promise(function(resolve, reject) {
+
+            // Convert html table to json
+            tabletojson.convertUrl("https://wot-life.com/eu/clan/"+name+"-"+id+"/", function(tablesAsJson) {
+
+                var stats = {
+                    now: parseInt(tablesAsJson[0][tablesAsJson[0].length-1].Total),
+                    color:null
+                };
+
+                // gets the color of the wn8
+                if(stats.now < 300) stats['color'] = '#000000';
+                else if(stats.now > 300 && stats.now < 599) stats['color'] = '#cd3333';
+                else if(stats.now > 600 && stats.now < 899) stats['color'] = '#d77900';
+                else if(stats.now > 900 && stats.now < 1249) stats['color'] = '#d7b600';
+                else if(stats.now > 1250 && stats.now < 1599) stats['color'] = '#6d9521';
+                else if(stats.now > 1600 && stats.now < 1899) stats['color'] = '#4c762e';
+                else if(stats.now > 1900 && stats.now < 2349) stats['color'] = '#4a92b7';
+                else if(stats.now > 2350 && stats.now < 2899) stats['color'] = '#83579d';
+                else if(stats.now > 2899) stats['color'] = '#5a3175';
+                
+                resolve(stats);
+            });
+        });
+    },
+
+    /**
      * Gets the stats of a player
      * 
      * @param {string} id The id of the player
      * @param {object} client The Discord client
      *
-     * @return {object} The stats of the player
+     * @returns {object} The stats of the player
      */
     getStats: async function(id, client, language){
         return new Promise(async function(resolve, reject) {
@@ -109,7 +200,7 @@ module.exports = {
      * @param {string} nickname The nickname of the player
      * @param {object} client The Discord Client
      * 
-     * @return {object} The wn8 stats
+     * @returns {object} The wn8 stats
      */
     getWN8: async function(id, nickname, client){
         return new Promise(function(resolve, reject) {
@@ -147,7 +238,7 @@ module.exports = {
      * @param {number} nb1 The first number
      * @param {number} nb2 The second number
      * 
-     * @return {string} The percentage
+     * @returns {string} The percentage
      */
     percentage: function(nb1, nb2){
         nb1 = parseInt(nb1, 10);
@@ -161,7 +252,7 @@ module.exports = {
      * 
      * @param {string} url The url to fetch
      * 
-     * @return {object} The json
+     * @returns {object} The json
      */
     get: async function(url){
         return new Promise(async function(resolve, reject) {
