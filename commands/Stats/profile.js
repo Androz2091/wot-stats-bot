@@ -11,7 +11,7 @@ class Profile extends Command {
             dirname: __dirname,
             enabled: true,
             guildOnly: false,
-            aliases: [],
+            aliases: ["profil"],
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$profile\n$profile @ThibaudFvrx\n$profile ThibaudFvrx",
