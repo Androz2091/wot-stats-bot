@@ -14,7 +14,7 @@ class Clan extends Command {
             aliases: [],
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$clan\n$clan @ThibaudFvrx\n$clan ThibaudFvrx",
+            examples: "$clan\n$clan @ThibaudFvrx\n$clan Zira",
             owner: false
         });
     }
@@ -66,7 +66,7 @@ class Clan extends Command {
                 .setFooter(utils.embed.footer)
                 .setAuthor(clanStats.name, clanStats.emblems.x195.portal)
                 .setImage(clanStats.emblems.x195.portal)
-                .addField(message.language.get("CLAN_HEADERS")[0], "["+clanStats.name+"](https://fr.wot-life.com/eu/clan/"+clanStats.tag+"-"+clanID+")", true)
+                .addField(message.language.get("CLAN_HEADERS")[0], "["+clanStats.name+"](https://eu.wargaming.net/clans/wot/"+clanID+")", true)
                 .addField(message.language.get("CLAN_HEADERS")[1], "["+clanStats.creator_name+"](https://fr.wot-life.com/eu/player/"+clanStats.creator_name+"-"+clanStats.creator_id+")", true)
                 .addField(message.language.get("CLAN_HEADERS")[2], message.language.printDate(new Date(clanStats.created_at*1000)), true)
                 .addField(message.language.get("CLAN_HEADERS")[3], clanStats.members_count, true)
