@@ -37,7 +37,7 @@ class Profile extends Command {
             } else if(args[0]){
                 // Search all accounts
                 var account = await client.functions.searchAccount(args[0], client).catch(err => {
-                    m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
+                    return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
                 });
                 ID = account.account_id;
             } else if(!args[0]) {

@@ -40,7 +40,7 @@ class Clan extends Command {
             } else if(args[0]){
                 // Search all clans
                 var clanData = await client.functions.searchClan(args[0], client).catch(err => {
-                    m.edit(message.language.get("CLAN_NOT_FOUND", args[0]));
+                    return m.edit(message.language.get("CLAN_NOT_FOUND", args[0]));
                 });
                 clanID = clanData.clan_id;
             } else if(!args[0]) {
