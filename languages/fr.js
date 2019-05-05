@@ -23,6 +23,8 @@ module.exports = class {
 			YES:"Oui",
 			NO:"Non",
 			NO_DESCRIPTION:"Pas de description",
+			WINS:"vict.",
+			NO_RECENT_BATTLE: "Aucune bataille récente",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "Aucune commande trouvée pour `"+cmd+"` !",
@@ -128,7 +130,36 @@ module.exports = class {
 			CLANSTATS_DESCRIPTION: "Affiche les statistiques d'un clan !",
 			CLANSTATS_SUCCESS: (name) => e.stats+" | Voilà les stats du clan **"+name+"** :",
 			CLANSTATS_HEADERS: [
-
+				"Nom",
+				"Véhicules de rang X"
+			],
+			CLANSTATS_RANKS: {
+				"X":"Véhicules de rang X",
+				"VIII":"Véhicules de rang VIII",
+				"VI":"Véhicules de rang VI"
+			},
+			CLANSTATS_TITLES: [
+				"__**Statistiques d'escarmouche du clan :**__",
+				"__**Statistiques des batailles du clan en mode Bastion :**__",
+				"__**WN8 du clan**__"
+			],
+			CLANSTATS_FIELDS: [
+				[
+					"Dernière bataille : ",
+					"Total batailles : ",
+					"Total batailles (28 derniers jours) : ",
+					"Ratio de victoires : ",
+					"Ration de victoires (28 derniers jours) : "
+				],
+				[
+					"Niveau total des structures du Bastion : ",
+					"Niveau du Bastion : ",
+					"Dernière bataille : ",
+					"Total batailles : ",
+					"Total batailles (28 derniers jours) : ",
+					"Ratio de victoires : ",
+					"Ration de victoires (28 derniers jours) : "
+				]
 			]
 
         }
