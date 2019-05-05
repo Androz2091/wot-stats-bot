@@ -132,7 +132,9 @@ module.exports = {
         return new Promise(async function(resolve, reject) {
             var clanData = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/info/?application_id="+client.config.wargaming+"&clan_id="+id);
             clanData = clanData[id];
-            resolve(clanData);
+            var clanStats = await client.functions.get("https://api.worldoftanks.eu/wot/stronghold/claninfo/?application_id=fe6f91aab11d3e89c883bbc79a8d4dfe&clan_id="+id);
+            clanStats = clanStats[id];
+            resolve({...clanData, ...clanStats});
         });
     },
 
@@ -151,7 +153,7 @@ module.exports = {
             tabletojson.convertUrl("https://wot-life.com/eu/clan/"+name+"-"+id+"/", function(tablesAsJson) {
 
                 var stats = {
-                    now: parseInt(tablesAsJson[0][tablesAsJson[0].length-1].Total),
+                    now: parseInt(tablesAsJson[0][1].Total),
                     color:null
                 };
 
