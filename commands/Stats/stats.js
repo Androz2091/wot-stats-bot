@@ -11,7 +11,7 @@ class Stats extends Command {
             dirname: __dirname,
             enabled: true,
             guildOnly: false,
-            aliases: ["profil"],
+            aliases: [],
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$stats\n$stats @ThibaudFvrx\n$stats ThibaudFvrx",
