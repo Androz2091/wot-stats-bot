@@ -235,6 +235,33 @@ module.exports = {
     },
 
     /**
+     * Gets the link of the support Discord
+     * 
+     * @param {object} opt The options for create the invite
+     * @param {object} client The Discord Client
+     * 
+     * @returns {string} The invite URL
+     */
+    getSupportURL: async function(opt, client){
+        return new Promise(async function(resolve, reject) {
+            var guild = client.guilds.get(client.config.supportGuild.ID);
+            if(guild){
+                var channel = guild.channels.filter(ch => ch.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE")).first();
+                if(channel){
+                    var invite = await channel.createInvite(opt || {}).catch(err => {
+                        return reject("An error occurenced");
+                    });
+                    return resolve(invite.url);
+                } else {
+                    return reject("Cannot create invite, missing permission.");
+                }
+            } else {
+                return reject("Cannot get support guild");
+            }
+        });
+    },
+
+    /**
      * Gets the percentage between two numbers
      * 
      * @param {number} nb1 The first number

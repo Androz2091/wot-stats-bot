@@ -160,6 +160,13 @@ module.exports = class {
 					"Ratio de victoires : ",
 					"Ration de victoires (28 derniers jours) : "
 				]
+			],
+
+			// invite
+			INVITE_DESCRIPTION: "Affiche les liens d'invitations du bot !",
+			INVITE_HEADERS: [
+				"Invitation",
+				"Support"
 			]
 
         }
