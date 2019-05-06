@@ -18,7 +18,7 @@ module.exports = class {
 
 			// UTILS
 			WELCOME:"Bienvenue",
-			PREFIX_INFO: (prefix) => "Mon préfixe sur ce serveur est \`"+prefix+"\` !",
+			PREFIX_INFO: (prefix) => "Mon préfixe sur ce serveur est `"+prefix+"` !",
 			NO_CLAN: "Aucun clan",
 			YES:"Oui",
 			NO:"Non",
