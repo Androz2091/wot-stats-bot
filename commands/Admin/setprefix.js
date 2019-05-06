@@ -10,7 +10,7 @@ class SetPrefix extends Command {
             usage: "setprefix [prefix]",
             dirname: __dirname,
             enabled: true,
-            guildOnly: false,
+            guildOnly: true,
             aliases: [],
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
