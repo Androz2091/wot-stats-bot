@@ -53,7 +53,7 @@ class Stats extends Command {
             var stats = await client.functions.getStats(ID, client).catch(err => {
                 return message.channel.send(message.language.get("ERROR"));
             });
-
+            
             var embed = new Discord.RichEmbed()
                 .setColor(stats.wn8.color)
                 .setFooter(utils.embed.footer)
@@ -64,8 +64,8 @@ class Stats extends Command {
                 .addField(message.language.get("STATS_HEADERS")[3], stats.statistics.all.losses, true)
                 .addField(message.language.get("STATS_HEADERS")[4], stats.statistics.all.draws, true)
                 .addField(message.language.get("STATS_HEADERS")[5], stats.statistics.all.survived_battles, true)
-                .addField(message.language.get("STATS_HEADERS")[6], client.functions.percentage(stats.statistics.all.survived_battles, (stats.statistics.all.battles - stats.statistics.all.survived_battles)), true)
-                .addField(message.language.get("STATS_HEADERS")[7], client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.losses), true)
+                .addField(message.language.get("STATS_HEADERS")[6], client.functions.percentage(stats.statistics.all.survived_battles, stats.statistics.all.battles), true)
+                .addField(message.language.get("STATS_HEADERS")[7], client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles), true)
                 .addField(message.language.get("STATS_HEADERS")[8], stats.wn8.now, true)
                 .addField(message.language.get("STATS_HEADERS")[9],
                     message.language.get("STATS_FIELDS").total[0]+stats.statistics.all.damage_received+"\n"+

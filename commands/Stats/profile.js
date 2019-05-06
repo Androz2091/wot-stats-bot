@@ -62,8 +62,8 @@ class Profile extends Command {
                 .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
                 .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)
                 .addField(message.language.get("PROFILE_HEADERS")[3], message.language.printDate(new Date(stats.last_battle_time*1000)), true)
-                .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan : message.language.get("NO_CLAN"), true)
-                .addField(message.language.get("PROFILE_HEADERS")[5], client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.losses), true)
+                .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN"), true)
+                .addField(message.language.get("PROFILE_HEADERS")[5], client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles), true)
                 .addField(message.language.get("PROFILE_HEADERS")[6], stats.wn8.now, true)
                 .addField(message.language.get("PROFILE_HEADERS")[7], stats.wn8['24h'], true)
                 .addField(message.language.get("PROFILE_HEADERS")[8], stats.wn8['30d'], true);
