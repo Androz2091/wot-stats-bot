@@ -24,7 +24,10 @@ module.exports = class {
 			NO:"No",
 			NO_DESCRIPTION:"No description",
 			WINS:"wins",
-			NO_RECENT_BATTLE: "No recent battles",
+            NO_RECENT_BATTLE: "No recent battles",
+			PAGE: "Page",
+			MEMBERS: "Members",
+			TOTAL_SERVERS:"Total servers",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "No commands found for `"+cmd+"` !",
@@ -177,7 +180,11 @@ module.exports = class {
             // Setlang
 			SETLANG_DESCRIPTION: "Change the server language!",
 			SETLANG_VALID_LANGUAGES: e.error+" | Please enter a valid language (`fr` or `en`)!",
-			SETLANG_SUCCESS: ":flag_gb: | Language set to \"English\" !"
+            SETLANG_SUCCESS: ":flag_gb: | Language set to \"English\" !",
+            
+            // Servers list
+			SERVERSLIST_DESCRIPTION: "Displays the list of the servers of the bot!",
+			SERVERSLIST_TIMEOUT: "The message has expired, type the command again!"
 
         }
     }
