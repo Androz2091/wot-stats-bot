@@ -1,10 +1,19 @@
+var Discord = require("discord.js");
+
 module.exports = class {
+
     constructor (client) {
         this.client = client;
     }
 
     async run (message) {
 
+        var clientMentions = [
+            `<@${this.client.user.id}> `,
+            `<@!${this.client.user.id}> `,
+            `<@?${this.client.user.id}> `
+        ];
+        
         // If the messagr author is a bot
         if(message.author.bot){
             return;
@@ -13,6 +22,28 @@ module.exports = class {
         // If the member on a guild is invisible or not cached, fetch them.
         if(message.guild && !message.member){
             await message.guild.fetchMember(message.author.id);
+        }
+
+        // Check if the bot is mentionned
+        var isMentionned = false;
+        clientMentions.forEach(cm => {
+            if(message.content.startsWith(cm) && (message.content.length > cm[0].length)){
+                isMentionned = true;
+            }
+        });
+
+        // if the bot is mentionned
+        if(isMentionned){
+            // Creates new array with users mentions
+            var withoutTheBot = message.mentions.users.array();
+            // Delete first item from the array (the bot)
+            withoutTheBot.shift();
+            // Creates new empty collection
+            var newUsersMentions = new Discord.Collection();
+            // For each user, add it to the ollection
+            withoutTheBot.forEach(u => newUsersMentions.set(u.id, u));
+            // Update usersMentions variable
+            message.mentions.users = newUsersMentions;
         }
 
         // utils object : to easly access to some variables
@@ -70,11 +101,8 @@ module.exports = class {
 
         // Gets the message prefix
         var prefixes = [
-            utils.guildData.prefix,
-            `<@${this.client.user.id}> `,
-            `<@!${this.client.user.id}> `,
-            `<@?${this.client.user.id}> `
-        ];
+            utils.guildData.prefix
+        ].concat(clientMentions);
         var prefix;
         prefixes.forEach(p => {
             if(message.content.startsWith(p)) prefix = p;
