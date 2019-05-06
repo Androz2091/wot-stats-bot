@@ -167,7 +167,12 @@ module.exports = class {
 			INVITE_HEADERS: [
 				"Invitation",
 				"Support"
-			]
+			],
+
+			// Setprefix
+			SETPREFIX_DESCRIPTION: "Change le préfixe du serveur !",
+			SETPREFIX_MISSING_PREFIX: e.error+" | Veuillez entrer un préfixe !",
+			SETPREFIX_SUCCESS: (prefix) => e.success+" | Votre nouveau préfixe est `"+prefix+"` ! Tapez `"+prefix+"help` pour voir la liste des commandes !"
 
         }
     }
