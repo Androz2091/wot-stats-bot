@@ -172,7 +172,12 @@ module.exports = class {
 			// Setprefix
 			SETPREFIX_DESCRIPTION: "Change the server prefix!",
 			SETPREFIX_MISSING_PREFIX: e.error+" | Please enter a prefix!",
-			SETPREFIX_SUCCESS: (prefix) => e.success+" | Your new prefix is `"+prefix+"` ! Type `"+prefix+"help` to see the list of commands!"
+            SETPREFIX_SUCCESS: (prefix) => e.success+" | Your new prefix is `"+prefix+"` ! Type `"+prefix+"help` to see the list of commands!",
+
+            // Setlang
+			SETLANG_DESCRIPTION: "Change the server language!",
+			SETLANG_VALID_LANGUAGES: e.error+" | Please enter a valid language (`fr` or `en`)!",
+			SETLANG_SUCCESS: ":flag_gb: | Language set to \"English\" !"
 
         }
     }
