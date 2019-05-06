@@ -12,7 +12,7 @@ class SetPrefix extends Command {
             enabled: true,
             guildOnly: true,
             aliases: [],
-            permission: false,
+            permission: "MANAGE_GUILD",
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$setprefix !",
             owner: false
