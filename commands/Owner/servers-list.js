@@ -30,7 +30,7 @@ class ServersList extends Command {
             .setColor(utils.embed.color)
             .setFooter(this.client.user.username)
             .setTitle(message.language.get('PAGE')+": "+page+"/"+Math.ceil(this.client.guilds.size/10))
-            .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" "+message.language.get('MEMBERS').toLowerCase()).slice(0, 10).join("\n"));
+            .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(0, 10).join("\n"));
 
         const tdata = await message.channel.send(embed);
         
@@ -59,7 +59,7 @@ class ServersList extends Command {
 
                 // Update the embed with new informations
                 embed.setTitle(message.language.get('PAGE')+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" "+message.language.get('MEMBERS').toLowerCase()).slice(i0, i1).join("\n"));
+                .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
             
                 // Edit the message 
                 tdata.edit(embed);
@@ -79,7 +79,7 @@ class ServersList extends Command {
 
                 // Update the embed with new informations
                 embed.setTitle(message.language.get('PAGE')+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" "+message.language.get('MEMBERS').toLowerCase()).slice(i0, i1).join("\n"));
+                .setDescription(message.language.get('TOTAL_SERVERS')+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b)=>b.memberCount-a.memberCount).map(r=>r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
              
                 // Edit the message 
                 tdata.edit(embed);
