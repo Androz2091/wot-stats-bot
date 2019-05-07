@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const tabletojson = require('tabletojson');
 
+var vInfos = [];
+
 module.exports = {
 
     /**
@@ -132,7 +134,7 @@ module.exports = {
         return new Promise(async function(resolve, reject) {
             var clanData = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/info/?application_id="+client.config.wargaming+"&clan_id="+id);
             clanData = clanData[id];
-            var clanStats = await client.functions.get("https://api.worldoftanks.eu/wot/stronghold/claninfo/?application_id=fe6f91aab11d3e89c883bbc79a8d4dfe&clan_id="+id);
+            var clanStats = await client.functions.get("https://api.worldoftanks.eu/wot/stronghold/claninfo/?application_id="+client.config.wargaming+"&clan_id="+id);
             clanStats = clanStats[id];
             resolve({...clanData, ...clanStats});
         });
@@ -235,28 +237,69 @@ module.exports = {
     },
 
     /**
-     * Gets the link of the support Discord
+     * Gets the list of the vehicules of a player
      * 
+     * @param {id} id the id of the player
+     * @param {object} client The Discord Client
+     * 
+     * @returns {array} An array of the player vehicules
+     */
+    getTanks: async function(id, client){
+        return new Promise(async function(resolve, reject) {
+            var vehicules = await client.functions.get("https://api.worldoftanks.eu/wot/account/tanks/?application_id="+client.config.wargaming+"&account_id="+id);
+            vehicules = vehicules[id];
+            var vehiculesList = await client.functions.getTanksInfos(vehicules, client);
+            resolve(vehiculesList);
+        });
+    },
+    
+    /**
+     * Gets the information for vehicules
+     * 
+     * @param {array} vehicules The vehicules
+     * @param {object} client The Discord Client
+     * 
+     * @returns {array} An array with the vehicules infos
+     */
+    getTanksInfos: async function(vehicules, client){
+        return new Promise(async function(resolve, reject) {
+            vInfos = [];
+            var i = 0;
+            var interval = setInterval(getInfos, 51, client, vehicules);
+
+            async function getInfos(client, vehicules){
+                i++;
+                if(!vehicules[i]){
+                    clearInterval(interval);
+                    return resolve(vInfos);
+                }
+                var v = vehicules[i];
+                var infos = await client.functions.get("https://api.worldoftanks.eu/wot/encyclopedia/vehicleprofile/?application_id="+client.config.wargaming+"&tank_id="+v.tank_id);
+                vInfos.push({...infos[v.tank_id], ...v});
+            }
+                
+        });
+    },
+
+    /**
+     * Gets the link of a Discord server
+     * 
+     * @param {object} guild The Discord server
      * @param {object} opt The options for create the invite
      * @param {object} client The Discord Client
      * 
      * @returns {string} The invite URL
      */
-    getSupportURL: async function(opt, client){
+    getInviteURL: async function(guild, opt, client){
         return new Promise(async function(resolve, reject) {
-            var guild = client.guilds.get(client.config.supportGuild.ID);
-            if(guild){
-                var channel = guild.channels.filter(ch => ch.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE")).first();
-                if(channel){
-                    var invite = await channel.createInvite(opt || {}).catch(err => {
-                        return reject("An error occurenced");
-                    });
-                    return resolve(invite.url);
-                } else {
-                    return reject("Cannot create invite, missing permission.");
-                }
+            var channel = guild.channels.filter(ch => ch.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE")).first();
+            if(channel){
+                var invite = await channel.createInvite(opt || {}).catch(err => {
+                    return reject("An error occurenced");
+                });
+                return resolve(invite.url);
             } else {
-                return reject("Cannot get support guild");
+                return reject("Cannot create invite, missing permission.");
             }
         });
     },
@@ -272,7 +315,7 @@ module.exports = {
     percentage: function(nb1, nb2){
         nb1 = parseInt(nb1, 10);
         nb2 = parseInt(nb2, 10);
-        var result = Math.round(result = (nb2 * 100) / nb1);  
+        var result = Math.round((nb1 * 100) / nb2);  
         return (String(result) + "%");
     },
 
