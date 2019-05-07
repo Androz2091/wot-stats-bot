@@ -20,8 +20,8 @@ Wot Stats is an open source Discord bot developed by Androz2091. If you want to 
 
 #### Stats commands
 
-For each stats command:
-
+> For each stats command:
+>
 > - If you mention a member, it's the data of the account linked to the member that will be displayed
 > - If you enter text, an automatic search for the account/clan will be performed
 > - If you do not enter anything, it's data of your account that will be displayed
@@ -46,6 +46,11 @@ For each stats command:
 ### Upcoming features
 
 No features to come, send us your suggestions!
+
+## Add the bot
+
+To add the bot to your Discord server, just click [here](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot)!
+if you want to use different permissions click [here](https://finitereality.github.io/permissions-calculator/?v=0).
 
 ## Support
 
