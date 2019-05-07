@@ -54,6 +54,7 @@ class Help extends Command {
                     categories.push(cmd.help.category);
                 }
             });
+            categories.sort();
 
             // for each categroy, create a string and then add a field to the embed
             categories.forEach(cat => {
