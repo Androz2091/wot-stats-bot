@@ -1,11 +1,15 @@
 module.exports = {
     token:"xxxxxxxxxx",
-    defaultLanguage:"xxxxxxxxxx",
+    defaultLanguage:"fr",
     embed:{
-        color:"xxxxxxxxxx",
-        footer:"xxxxxxxxxx"
+        color:"#FF0000",
+        footer:"World of Tanks Stats | Open source"
     },
     owner:"xxxxxxxxxx",
-    prefix:"xxxxxxxxxx",
-    wargaming:"xxxxxxxxxx"
+    prefix:"w!",
+    wargaming:"xxxxxxxxxx",
+    supportGuild: {
+        ID:"xxxxxxxxxx",
+        suggestions:"xxxxxxxxxx"
+    }
 }
