@@ -194,7 +194,24 @@ module.exports = class {
 			// suggest
 			SUGGEST_DESCRIPTION: "Soumettez une suggestion !",
 			SUGGEST_MISSING_SUGGESTION: e.error+" | Vous devez entrer une suggestion !",
-			SUGGEST_SUCCESS: e.success+" | Votre suggestion vient d'être envoyée aux administrateurs !"
+			SUGGEST_SUCCESS: e.success+" | Votre suggestion vient d'être envoyée aux administrateurs !",
+
+			// infos 
+			INFOS_DESCRIPTION: "Affiche les stats du bot !",
+			INFOS_HEADERS: [
+				"Stats de ",
+				" est un bot open source développé par `Androz#2091` !",
+				":bar_chart: • __Statistiques__",
+				":gear: • __Version__",
+				":computer: • __RAM__",
+				":sun_with_face: • __En ligne__",
+				":link: • __Liens__"
+			],
+			INFOS_FIELDS: (data, guilds, users) => [
+				"`Serveurs: "+guilds+"`\n`Utilisateurs: "+users+"`",
+				"Depuis "+data,
+				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
+			]
 
         }
     }
