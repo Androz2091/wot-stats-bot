@@ -22,9 +22,9 @@ Wot Stats is an open source Discord bot developed by Androz2091. If you want to 
 
 For each stats command:
 
-- If you mention a member, it's the data of the account linked to the member that will be displayed
-- If you enter text, an automatic search for the account/clan will be performed
-- If you do not enter anything, it's data of your account that will be displayed
+> - If you mention a member, it's the data of the account linked to the member that will be displayed
+> - If you enter text, an automatic search for the account/clan will be performed
+> - If you do not enter anything, it's data of your account that will be displayed
 
 - `profile` : Displays a player's profile
 - `stats` : Displays a player's statistics
