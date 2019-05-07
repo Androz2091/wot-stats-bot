@@ -15,7 +15,7 @@ class SetPrefix extends Command {
             permission: "MANAGE_GUILD",
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$setprefix !",
-            owner: false
+            adminOnly: false
         });
     }
 

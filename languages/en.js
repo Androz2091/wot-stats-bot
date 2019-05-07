@@ -33,7 +33,7 @@ module.exports = class {
 			COMMAND_NOT_FOUND: (cmd) => "No commands found for `"+cmd+"` !",
 			DM_COMMAND_UNAVAILABLE: e.error+" | This command is not available in private messages. Join a server to run it!",
 			MISSING_BOT_PERMS: (perms) => e.error+" | I am missing the following permissions to perform this command: "+perms,
-			OWNER_ONLY: e.error+" | Only "+data.owner+" can execute this command!",
+			OWNER_ONLY: e.error+" | Only bots administrators can execute this command!",
 			MISSING_PERMS: (perm) => e.error+" | This command requires permission `"+perm+"` !",
 			NOT_LINKED: (prefix) => e.error+" | You currently have no linked accounts! Please link one with `"+prefix+"link [nickname]` !",
 			NOT_LINKED_USER: (user) => e.error+" | **"+user.tag+"** has no WoT account linked!",

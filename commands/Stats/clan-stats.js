@@ -15,7 +15,7 @@ class ClanStats extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$clan-stats\n$clan-stats @ThibaudFvrx\n$clan-stats Zira",
-            owner: false
+            adminOnly: false
         });
     }
 

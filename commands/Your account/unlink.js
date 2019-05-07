@@ -15,7 +15,7 @@ class Unlink extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$unlink",
-            owner: false
+            adminOnly: false
         });
     }
 

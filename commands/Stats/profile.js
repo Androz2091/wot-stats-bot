@@ -15,7 +15,7 @@ class Profile extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$profile\n$profile @ThibaudFvrx\n$profile ThibaudFvrx",
-            owner: false
+            adminOnly: false
         });
     }
 

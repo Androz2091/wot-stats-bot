@@ -15,7 +15,7 @@ class Link extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$link xxWotPlayerxx__",
-            owner: false
+            adminOnly: false
         });
     }
 

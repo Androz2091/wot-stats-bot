@@ -15,7 +15,7 @@ class Stats extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$stats\n$stats @ThibaudFvrx\n$stats ThibaudFvrx",
-            owner: false
+            adminOnly: false
         });
     }
 

@@ -15,7 +15,7 @@ class Invite extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$invite",
-            owner: false
+            adminOnly: false
         });
     }
 
@@ -23,7 +23,7 @@ class Invite extends Command {
         var embed = new Discord.RichEmbed()
             .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL)
             .addField(message.language.get("INVITE_HEADERS")[0], await this.client.generateInvite(2146958847))
-            .addField(message.language.get("INVITE_HEADERS")[1], await this.client.functions.getSupportURL({maxAge:0, reason:"invite command"}, this.client))
+            .addField(message.language.get("INVITE_HEADERS")[1], await this.client.functions.getInviteURL(this.client.guilds.get(this.client.config.supportGuild.ID), {maxAge:0}, this.client))
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer);
 

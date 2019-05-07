@@ -15,7 +15,7 @@ class Setlang extends Command {
             permission: "MANAGE_GUILD",
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$setlang fr\n$setlang en",
-            owner: false
+            adminOnly: false
         });
     }
 

@@ -15,7 +15,7 @@ class Clan extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$clan\n$clan @ThibaudFvrx\n$clan Zira",
-            owner: false
+            adminOnly: false
         });
     }
 

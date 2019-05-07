@@ -15,7 +15,7 @@ class Suggest extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$suggest A new command",
-            owner: false
+            adminOnly: false
         });
     }
 

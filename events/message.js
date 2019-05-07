@@ -134,8 +134,8 @@ module.exports = class {
         }
 
         // if only the owner can execute the command
-        if(cmd.conf.owner && message.author.id !== this.client.config.owner){
-            return message.channel.send(message.language.get('OWNER_ONLY'));
+        if(cmd.conf.adminOnly && !this.client.config.admins.includes(message.author.id)){
+            return message.channel.send(message.language.get('ADMIN_ONLY'));
         }
 
         // check user permission

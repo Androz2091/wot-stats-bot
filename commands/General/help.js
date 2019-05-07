@@ -15,7 +15,7 @@ class Help extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$help\n$help link",
-            owner: false
+            adminOnly: false
         });
     }
 
