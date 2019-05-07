@@ -184,7 +184,12 @@ module.exports = class {
 
 			// Servers list
 			SERVERSLIST_DESCRIPTION: "Affiche la liste des serveurs du bot !",
-			SERVERSLIST_TIMEOUT: "Le message a expiré, tapez de nouveau la commande !"
+			SERVERSLIST_TIMEOUT: "Le message a expiré, tapez de nouveau la commande !",
+			
+			// getinvite
+			GETINVITE_DESCRIPTION: "Génère une invitation vers le Discord",
+			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | Aucun serveur trouvé avec `"+id+"` !",
+			GETINVITE_MISSING_ID: e.error+" | Vous devez entrer une ID de serveur !"
 
         }
     }
