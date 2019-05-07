@@ -42,6 +42,7 @@ Wot Stats is an open source Discord bot developed by Androz2091. If you want to 
 - `help` : Displays the list of commands and their description
 - `invite` : Displays the bot's invitation links (support server and link to add the bot)
 - `suggest` : Submits the suggestion to the server administrators
+- `infos` : Displays the bot's statistics
 
 ### Upcoming features
 
@@ -49,8 +50,8 @@ No features to come, send us your suggestions!
 
 ## Add the bot
 
-To add the bot to your Discord server, just click [here](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot)!
-if you want to use different permissions click [here](https://finitereality.github.io/permissions-calculator/?v=0).
+To add the bot to your Discord server, just click [here](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot)!  
+If you want to use different permissions click [here](https://finitereality.github.io/permissions-calculator/?v=0).
 
 ## Support
 
