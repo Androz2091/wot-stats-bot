@@ -15,7 +15,7 @@ class getInvite extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$getinvite 467749941658517514",
-            owner: true
+            adminOnly: true
         });
     }
 

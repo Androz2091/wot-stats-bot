@@ -15,7 +15,7 @@ class ServersList extends Command {
             permission: false,
             botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
             examples: "$servers-list",
-            owner: true
+            adminOnly: true
         });
     }
 
