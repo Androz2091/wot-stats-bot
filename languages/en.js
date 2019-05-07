@@ -196,6 +196,22 @@ module.exports = class {
 			SUGGEST_MISSING_SUGGESTION: e.error+" | You must enter a suggestion!",
 			SUGGEST_SUCCESS: e.success+" | Your suggestion has just been sent to the administrators!",
 
+			// infos 
+			INFOS_DESCRIPTION: "Display the stats of the bot!",
+			INFOS_HEADERS: [
+				"Stats of ",
+				" is an open source bot developed by `Androz#2091` !",
+				":bar_chart: • __Statistics__",
+				":gear: • __Version__",
+				":computer: • __RAM__",
+				":sun_with_face: • __Online__",
+				":link: • __Links__"
+			],
+			INFOS_FIELDS: (data, guilds, users) => [
+				"`Servers: "+guilds+"`\n`Users: "+users+"`",
+				"From "+data,
+				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
+			]
         }
     }
 
