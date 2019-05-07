@@ -189,7 +189,12 @@ module.exports = class {
             // getinvite
 			GETINVITE_DESCRIPTION: "Generates an invitation to the Discord",
 			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | No servers found with `"+id+"`!",
-			GETINVITE_MISSING_ID: e.error+" | You must enter a server ID!",
+            GETINVITE_MISSING_ID: e.error+" | You must enter a server ID!",
+
+            // suggest
+            SUGGEST_DESCRIPTION: "Submit a suggestion",
+			SUGGEST_MISSING_SUGGESTION: e.error+" | You must enter a suggestion!",
+			SUGGEST_SUCCESS: e.success+" | Your suggestion has just been sent to the administrators!",
 
         }
     }
