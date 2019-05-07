@@ -9,7 +9,7 @@ module.exports = class Command {
         permission = false,
         botpermissions = new Array(),
         examples = false,
-        owner = false,
+        adminOnly = false,
         dirname = false
     })
     {
@@ -19,7 +19,7 @@ module.exports = class Command {
             category = folders[folders.length - 1];
         };
         this.client = client;
-        this.conf = { enabled, guildOnly, aliases, permission, botpermissions, owner};
+        this.conf = { enabled, guildOnly, aliases, permission, botpermissions, adminOnly};
         this.help = { name, description, usage, examples, category };
     };
 };
