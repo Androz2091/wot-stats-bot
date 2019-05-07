@@ -187,12 +187,12 @@ module.exports = class {
 			SERVERSLIST_TIMEOUT: "Le message a expiré, tapez de nouveau la commande !",
 			
 			// getinvite
-			GETINVITE_DESCRIPTION: "Génère une invitation vers le Discord",
+			GETINVITE_DESCRIPTION: "Génère une invitation vers le Discord !",
 			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | Aucun serveur trouvé avec `"+id+"` !",
 			GETINVITE_MISSING_ID: e.error+" | Vous devez entrer une ID de serveur !",
 
 			// suggest
-			SUGGEST_DESCRIPTION: "Soumettez une suggestion",
+			SUGGEST_DESCRIPTION: "Soumettez une suggestion !",
 			SUGGEST_MISSING_SUGGESTION: e.error+" | Vous devez entrer une suggestion !",
 			SUGGEST_SUCCESS: e.success+" | Votre suggestion vient d'être envoyée aux administrateurs !"
 
