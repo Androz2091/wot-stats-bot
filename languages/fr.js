@@ -1,10 +1,4 @@
-var e = {
-	error:"<:error:573897651330875394>",
-	success:"<:success:573897847439622156>",
-	warn:"<:warn:564131051425890321>",
-	loading:"<a:loading:573925384114929684>",
-	stats:"<:stats:574159072878788608>"
-},
+var e = require("../config.js").emojis,
 data = {
 	owner:"ThibaudFvrx ⚓#8291",
 	lang:"fr"
@@ -28,6 +22,7 @@ module.exports = class {
 			PAGE: "Page",
 			MEMBERS: "Membres",
 			TOTAL_SERVERS:"Total serveurs",
+			NO_TANKS: (tier) => e.error+" | Aucun tanks de tier `"+tier+"` à afficher !",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "Aucune commande trouvée pour `"+cmd+"` !",
@@ -211,7 +206,16 @@ module.exports = class {
 				"`Serveurs: "+guilds+"`\n`Utilisateurs: "+users+"`",
 				"Depuis "+data,
 				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
-			]
+			],
+
+			// tanks
+			TANKS_DESCRIPTION: "Affiche les tanks d'un joueur !",
+			TANKS_FIELDS: [
+				"Batailles : ",
+				"Marque d'excellence : "
+			],
+			TANKS_CHOOSE_TIER: "Veuillez choisir le tier des tanks à afficher !",
+			TANKS_TIMEOUT:"Le message a expiré, tapez de nouveau la commande !"
 
         }
     }

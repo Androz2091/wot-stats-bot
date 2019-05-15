@@ -1,10 +1,4 @@
-var e = {
-	error:"<:error:573897651330875394>",
-	success:"<:success:573897847439622156>",
-	warn:"<:warn:564131051425890321>",
-	loading:"<a:loading:573925384114929684>",
-	stats:"<:stats:574159072878788608>"
-},
+var e = require("../config.js").emojis,
 data = {
 	owner:"ThibaudFvrx ⚓#8291",
 	lang:"en"
