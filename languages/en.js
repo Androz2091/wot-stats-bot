@@ -205,7 +205,18 @@ module.exports = class {
 				"`Servers: "+guilds+"`\n`Users: "+users+"`",
 				"From "+data,
 				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
-			]
+			],
+
+			// tanks
+			TANKS_DESCRIPTION: "Displays a player's tanks!",
+			TANKS_FIELDS: [
+				"Battles: ",
+				"Mark of mastery:",
+				"Nation: "
+			],
+			TANKS_CHOOSE_TIER: "Please choose the tier of the tanks to display!",
+			TANKS_TIMEOUT:"The message has expired, type the command again!"
+
         }
     }
 

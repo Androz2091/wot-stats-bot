@@ -274,7 +274,7 @@ module.exports = {
                     return resolve(vInfos);
                 }
                 var v = vehicules[i];
-                var infos = await client.functions.get("https://api.worldoftanks.eu/wot/encyclopedia/vehicleprofile/?application_id="+client.config.wargaming+"&tank_id="+v.tank_id);
+                var infos = await client.functions.get("https://api.worldoftanks.ru/wot/encyclopedia/vehicles/?application_id="+client.config.wargaming+"&tank_id="+v.tank_id);
                 vInfos.push({...infos[v.tank_id], ...v});
             }
                 

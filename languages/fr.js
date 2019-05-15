@@ -22,7 +22,7 @@ module.exports = class {
 			PAGE: "Page",
 			MEMBERS: "Membres",
 			TOTAL_SERVERS:"Total serveurs",
-			NO_TANKS: (tier) => e.error+" | Aucun tanks de tier `"+tier+"` à afficher !",
+			NO_TANKS: (tier) => "Aucun tanks de tier `"+tier+"` à afficher !",
 
 			// ERROR MESSAGE
 			COMMAND_NOT_FOUND: (cmd) => "Aucune commande trouvée pour `"+cmd+"` !",
@@ -212,7 +212,8 @@ module.exports = class {
 			TANKS_DESCRIPTION: "Affiche les tanks d'un joueur !",
 			TANKS_FIELDS: [
 				"Batailles : ",
-				"Marque d'excellence : "
+				"Marque d'excellence : ",
+				"Nation : "
 			],
 			TANKS_CHOOSE_TIER: "Veuillez choisir le tier des tanks à afficher !",
 			TANKS_TIMEOUT:"Le message a expiré, tapez de nouveau la commande !"
