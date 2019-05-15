@@ -42,7 +42,7 @@ class ServersList extends Command {
 
         var timeOut = setTimeout(function(){
             data_res.stop();
-        }, 10000);
+        }, 60000);
 
         data_res.on('collect', async(reaction) => {
 
