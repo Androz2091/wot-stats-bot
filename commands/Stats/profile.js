@@ -54,6 +54,8 @@ class Profile extends Command {
                 return message.channel.send(message.language.get("ERROR"));
             });
 
+            console.log(stats);
+
             var embed = new Discord.RichEmbed()
                 .setColor(stats.wn8.color)
                 .setFooter(utils.embed.footer)
@@ -61,9 +63,9 @@ class Profile extends Command {
                 .addField(message.language.get("PROFILE_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+ID+")", true)
                 .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
                 .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)
-                .addField(message.language.get("PROFILE_HEADERS")[3], message.language.printDate(new Date(stats.last_battle_time*1000)), true)
-                .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN"), true)
-                .addField(message.language.get("PROFILE_HEADERS")[5], client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles), true)
+                .addField(message.language.get("PROFILE_HEADERS")[3], (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
+                .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
+                .addField(message.language.get("PROFILE_HEADERS")[5], (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
                 .addField(message.language.get("PROFILE_HEADERS")[6], stats.wn8.now, true)
                 .addField(message.language.get("PROFILE_HEADERS")[7], stats.wn8['24h'], true)
                 .addField(message.language.get("PROFILE_HEADERS")[8], stats.wn8['30d'], true);
