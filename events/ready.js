@@ -8,29 +8,22 @@ module.exports = class {
 
     async run () {
 
+        var client = this.client;
+
         // Logs some informations using the logger file
-        this.client.logger.log("Loading a total of "+this.client.commands.size+" command(s).", "log");
-        this.client.logger.log(this.client.user.tag+", ready to serve "+this.client.users.size+" users in "+this.client.guilds.size+" servers.", "ready");
+        this.client.logger.log("Loading a total of "+client.commands.size+" command(s).", "log");
+        this.client.logger.log(client.user.tag+", ready to serve "+client.users.size+" users in "+client.guilds.size+" servers.", "ready");
         
         // Update the game every 20s
         var games = [
             {
-                name:"vous donner des stats WoT !",
-                type:"PLAYING"
-            },
-            {
-                name:"w!help | www.wot-stats-bot.fr",
-                type:"PLAYING"
-            },
-            {
-                name:this.client.guilds.size+" serveurs | "+this.client.users.size+" membres !",
+                name:"w!help on ${servs} servers",
                 type:"PLAYING"
             }
         ];
-        var client = this.client;
         var i = 0;
         setInterval(function(){
-            client.user.setActivity(games[i].name, {type: games[i].type});
+            client.user.setActivity(games[i].name.replace("${servs}", client.guilds.size).replace("${members}", client.users.size), {type: games[i].type});
             if(games[parseInt(i + 1, 10)]){
                 i++;
             }
