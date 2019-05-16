@@ -72,8 +72,8 @@ module.exports = {
      */
     searchAccount: async function(nickname, client){
         return new Promise(async function(resolve, reject) {
-            if(!nickname.match(/^[0-9a-zA-Z\s]+$/)) return reject("Nickname must contains only alphanumeric characters");
-            var nicknames = await client.functions.get("https://api.worldoftanks.eu/wot/account/list/?application_id="+client.config.wargaming+"&search="+nickname);
+            if(!nickname.match(/^[0-9a-zA-Z\s_]+$/)) return reject("Nickname must contains only alphanumeric characters");
+            var nicknames = await client.functions.get("https://api.worldoftanks.eu/wot/account/list/?application_id="+client.config.wargaming+"&search="+encodeURIComponent(nickname));
             if(nicknames.length < 1){
                 reject("No account found");
             } else {
