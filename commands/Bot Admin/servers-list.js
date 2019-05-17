@@ -46,61 +46,50 @@ class ServersList extends Command {
 
         reactCollector.on("collect", async(reaction) => {
 
-            if(reaction._emoji.name === "⬅") {
-
-                // Updates variables
-                i0 = i0-10;
-                i1 = i1-10;
-                page = page-1;
-                
-                // if there is no guild to display, delete the message
-                if(i0 < 0){
-                    return await reaction.remove(message.author.id);
-                }
-                if(!i0 || !i1){
-                    return await reaction.remove(message.author.id);
-                }
-
-                // Update the embed with new informations
-                embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
-            
-                // Edit the message 
-                tdata.edit(embed);
-            
-            }
-
-            if(reaction._emoji.name === "➡"){
-
-                // Updates variables
-                i0 = i0+10;
-                i1 = i1+10;
-                page = page+1;
-
-                // if there is no guild to display, delete the message
-                if(i1 > this.client.guilds.size + 10){
-                    return await reaction.remove(message.author.id);
-                }
-                if(!i0 || !i1){
-                    return await reaction.remove(message.author.id);
-                }
-
-                // Update the embed with new informations
-                embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
-             
-                // Edit the message 
-                tdata.edit(embed);
-
-            }
-
-            if(reaction._emoji.name === "❌"){
-                reactCollector.stop();
-            }
-
             // Remove the reaction when the user react to the message
             await reaction.remove(message.author.id);
 
+            switch(reaction._emoji.name){
+                case "⬅" : 
+                    // Updates variables
+                    i0 = i0-10;
+                    i1 = i1-10;
+                    page = page-1;
+                    
+                    // if there is no guild to display, delete the message
+                    if(i0 < 0 || !i0 || !i1){
+                        break;
+                    } else {
+                        // Update the embed with new informations
+                        embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
+                        .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
+
+                        // Edit the message 
+                        tdata.edit(embed);
+                        break;
+                    }
+                case "➡" :
+                    // Updates variables
+                    i0 = i0+10;
+                    i1 = i1+10;
+                    page = page+1;
+
+                    // if there is no guild to display, delete the message
+                    if(i1 > this.client.guilds.size + 10 || !i0 || !i1){
+                        break;
+                    } else {
+                        // Update the embed with new informations
+                        embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
+                        .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
+
+                        // Edit the message 
+                        tdata.edit(embed);
+                        break;
+                    }
+                case "❌" :
+                    reactCollector.stop();
+                    break;
+            }
         });
         
         reactCollector.on("end", () => {
@@ -111,6 +100,6 @@ class ServersList extends Command {
         });
     }
 
-};
+}
 
 module.exports = ServersList;
