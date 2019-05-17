@@ -39,8 +39,8 @@ class Clan extends Command {
                 }
             } else if(args[0]){
                 // Search all clans
-                var clanData = await client.functions.searchClan(args[0], client).catch(err => {
-                    return m.edit(message.language.get("CLAN_NOT_FOUND", args[0]));
+                var clanData = await client.functions.searchClan(args.join(' '), client).catch(err => {
+                    return m.edit(message.language.get("CLAN_NOT_FOUND", args.join(' ')));
                 });
                 clanID = clanData.clan_id;
             } else if(!args[0]) {
@@ -58,8 +58,6 @@ class Clan extends Command {
             // Gets the stats of the clan
             var clanStats = await client.functions.getClanStats(clanID, client);
             var clanWN8 = await client.functions.getClanWN8(clanID, clanStats.tag);
-            
-            console.log(clanStats);
 
             var embed = new Discord.RichEmbed()
                 .setColor(clanWN8.color)

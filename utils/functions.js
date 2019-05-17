@@ -93,7 +93,7 @@ module.exports = {
 
     searchClan: async function(name, client){
         return new Promise(async function(resolve, reject) {
-            if(!name.match(/^[0-9a-zA-Z \s]+$/)) return reject("Name must contains only alphanumeric characters or spaces");
+            if(!name.match(/^[0-9a-zA-Z\s_]+$/)) return reject("Name must contains only alphanumeric characters or spaces");
             var clans = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/list/?application_id="+client.config.wargaming+"&search="+name);
             if(clans.length < 1){
                 reject("No account found");

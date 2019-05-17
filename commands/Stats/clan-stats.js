@@ -39,8 +39,8 @@ class ClanStats extends Command {
                 }
             } else if(args[0]){
                 // Search all clans
-                var clanData = await client.functions.searchClan(args[0], client).catch(err => {
-                    return m.edit(message.language.get("CLAN_NOT_FOUND", args[0]));
+                var clanData = await client.functions.searchClan(args.join(' '), client).catch(err => {
+                    return m.edit(message.language.get("CLAN_NOT_FOUND", args.join(' ')));
                 });
                 clanID = clanData.clan_id;
             } else if(!args[0]) {
