@@ -83,6 +83,8 @@ module.exports = class {
             utils.cmd = cmd;
             // log in the console
             this.client.logger.log(message.author.username + " ("+message.author.id+") ran command "+cmd.help.name+" in DM", "cmd");
+            var embed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" ran command **"+cmd+"** in **Direct Messages**");
+            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(embed);
             // Run the command
             return cmd.run(message, args, utils);
         }
@@ -147,8 +149,10 @@ module.exports = class {
 
         utils.cmd = cmd;
 
-        // log in the console
+        // send logs
         this.client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
+        var embed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" ran command **"+cmd+"** in **"+message.guild.name+"**");
+        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(embed);
 
         // run the command
         cmd.run(message, args, utils);
