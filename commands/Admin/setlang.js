@@ -22,7 +22,9 @@ class Setlang extends Command {
     async run (message, args, utils) {
         
         var lang = args[0];
-        if(!lang || (lang !== "en" && lang !== "fr")) return message.channel.send(message.language.get("SETLANG_VALID_LANGUAGES"));
+        if(!lang || (lang !== "en" && lang !== "fr")){
+            return message.channel.send(message.language.get("SETLANG_VALID_LANGUAGES"));
+        }
 
         var tlang = new(require("../../languages/"+lang+".js"));
 

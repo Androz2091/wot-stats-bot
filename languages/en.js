@@ -241,7 +241,7 @@ module.exports = class {
 	 * Send the language of the file
 	 */
 	getLang(){
-		return lang;
+		return data.lang;
 	}
 
 	/**
@@ -285,4 +285,4 @@ module.exports = class {
 		return h + " hour(s) " + m + " minute(s) " + s + " second(s)";
 	}
 
-}
+};

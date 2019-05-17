@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
-const tabletojson = require('tabletojson');
+const tabletojson = require("tabletojson");
 
 var vInfos = [];
 
@@ -14,7 +14,7 @@ module.exports = {
      * 
      * @returns {object} The guild configuration
      */
-    getGuildData: function(guild, client){
+    getGuildData(guild, client){
         // try to get the guild configuration
         var guildData = client.databases[1].get(guild.id);
         // if a configuration was found
@@ -39,9 +39,9 @@ module.exports = {
      * 
      * @returns {array} The array of users profiles
      */
-    getUsersData: function(users, client){
+    getUsersData(users, client){
         var usersData = [];
-        users.forEach(user => {
+        users.forEach((user) => {
             // Try to get the profile of the user
             var userData = client.databases[0].get(user.id);
             // if the profile was found
@@ -50,7 +50,7 @@ module.exports = {
             } else {
                 // else creates a new account for the user
                 client.databases[0].set(user.id, {
-                    wot:'unknow', // The wot nickname
+                    wot:"unknow", // The wot nickname
                     registeredAt:Date.now(),
                     id:user.id
                 });
@@ -70,9 +70,11 @@ module.exports = {
      * 
      * @returns {object} The account found
      */
-    searchAccount: async function(nickname, client){
+    async searchAccount(nickname, client){
         return new Promise(async function(resolve, reject) {
-            if(!nickname.match(/^[0-9a-zA-Z\s_]+$/)) return reject("Nickname must contains only alphanumeric characters");
+            if(!nickname.match(/^[0-9a-zA-Z\s_]+$/)){
+                return reject("Nickname must contains only alphanumeric characters");
+            }
             var nicknames = await client.functions.get("https://api.worldoftanks.eu/wot/account/list/?application_id="+client.config.wargaming+"&search="+encodeURIComponent(nickname));
             if(nicknames.length < 1){
                 reject("No account found");
@@ -91,9 +93,11 @@ module.exports = {
      * @returns {object} The clan found
      */
 
-    searchClan: async function(name, client){
+    async searchClan(name, client){
         return new Promise(async function(resolve, reject) {
-            if(!name.match(/^[0-9a-zA-Z\s_]+$/)) return reject("Name must contains only alphanumeric characters or spaces");
+            if(!name.match(/^[0-9a-zA-Z\s_]+$/)){
+                return reject("Name must contains only alphanumeric characters or spaces");
+            }
             var clans = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/list/?application_id="+client.config.wargaming+"&search="+name);
             if(clans.length < 1){
                 reject("No account found");
@@ -111,7 +115,7 @@ module.exports = {
      * 
      * @returns {object} The ID of the clan of the player 
      */
-    getClan: async function(id, client){
+    async getClan(id, client){
         return new Promise(async function(resolve, reject) {
             // Gets the clan ID 
             var data = await client.functions.get("https://api.worldoftanks.eu/wot/account/info/?application_id="+client.config.wargaming+"&account_id="+id);
@@ -130,7 +134,7 @@ module.exports = {
      * 
      * @returns {object} The stats of the clan
      */
-    getClanStats: async function(id, client){
+    async getClanStats(id, client){
         return new Promise(async function(resolve, reject) {
             var clanData = await client.functions.get("https://api.worldoftanks.eu/wgn/clans/info/?application_id="+client.config.wargaming+"&clan_id="+id);
             clanData = clanData[id];
@@ -148,27 +152,45 @@ module.exports = {
      * 
      * @returns {object} The WN8 stats of the clan
      */
-    getClanWN8: async function(id, name){
+    async getClanWN8(id, name){
         return new Promise(function(resolve, reject) {
 
             // Convert html table to json
             tabletojson.convertUrl("https://wot-life.com/eu/clan/"+name+"-"+id+"/", function(tablesAsJson) {
 
                 var stats = {
-                    now: parseInt(tablesAsJson[0][1].Total),
+                    now: parseInt(tablesAsJson[0][1].Total, 10),
                     color:null
                 };
 
                 // gets the color of the wn8
-                if(stats.now < 300) stats['color'] = '#000000';
-                else if(stats.now > 300 && stats.now < 599) stats['color'] = '#cd3333';
-                else if(stats.now > 600 && stats.now < 899) stats['color'] = '#d77900';
-                else if(stats.now > 900 && stats.now < 1249) stats['color'] = '#d7b600';
-                else if(stats.now > 1250 && stats.now < 1599) stats['color'] = '#6d9521';
-                else if(stats.now > 1600 && stats.now < 1899) stats['color'] = '#4c762e';
-                else if(stats.now > 1900 && stats.now < 2349) stats['color'] = '#4a92b7';
-                else if(stats.now > 2350 && stats.now < 2899) stats['color'] = '#83579d';
-                else if(stats.now > 2899) stats['color'] = '#5a3175';
+                if(stats.now < 300){
+                    stats["color"] = "#000000";
+                }
+                else if(stats.now > 300 && stats.now < 599){
+                    stats["color"] = "#cd3333";
+                }
+                else if(stats.now > 600 && stats.now < 899){
+                    stats["color"] = "#d77900";
+                }
+                else if(stats.now > 900 && stats.now < 1249){
+                    stats["color"] = "#d7b600";
+                }
+                else if(stats.now > 1250 && stats.now < 1599){
+                    stats["color"] = "#6d9521";
+                }
+                else if(stats.now > 1600 && stats.now < 1899){
+                    stats["color"] = "#4c762e";
+                }
+                else if(stats.now > 1900 && stats.now < 2349){
+                    stats["color"] = "#4a92b7";
+                }
+                else if(stats.now > 2350 && stats.now < 2899){
+                    stats["color"] = "#83579d";
+                }
+                else if(stats.now > 2899){
+                    stats["color"] = "#5a3175";
+                }
                 
                 resolve(stats);
             });
@@ -183,14 +205,14 @@ module.exports = {
      *
      * @returns {object} The stats of the player
      */
-    getStats: async function(id, client, language){
+    async getStats(id, client, language){
         return new Promise(async function(resolve, reject) {
             var stats = null;
             var data = await client.functions.get("https://api.worldoftanks.eu/wot/account/info/?application_id="+client.config.wargaming+"&account_id="+id);
             stats = data[id];
             if(stats.clan_id){
-                var data = await client.functions.get("https://api.worldoftanks.eu/wot/stronghold/claninfo/?application_id="+client.config.wargaming+"&clan_id="+stats.clan_id);
-                stats.clan = data[stats.clan_id];
+                var tdata = await client.functions.get("https://api.worldoftanks.eu/wot/stronghold/claninfo/?application_id="+client.config.wargaming+"&clan_id="+stats.clan_id);
+                stats.clan = tdata[stats.clan_id];
             }
             stats.wn8 = await client.functions.getWN8(id, stats.nickname, client);
             resolve(stats);
@@ -206,30 +228,48 @@ module.exports = {
      * 
      * @returns {object} The wn8 stats
      */
-    getWN8: async function(id, nickname, client){
+    async getWN8(id, nickname, client){
         return new Promise(function(resolve, reject) {
 
             // Convert html table to json
             tabletojson.convertUrl("https://wot-life.com/eu/player/"+nickname+"-"+id+"/", function(tablesAsJson) {
 
                 var stats = {
-                    now: parseInt(tablesAsJson[0][tablesAsJson[0].length-1].WN8),
-                    '24h': parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 24 hours"]),
-                    '7d': parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 7 days"]),
-                    '30d': parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 30 days"]),
+                    now: parseInt(tablesAsJson[0][tablesAsJson[0].length-1].WN8, 10),
+                    "24h": parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 24 hours"], 10),
+                    "7d": parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 7 days"], 10),
+                    "30d": parseInt(tablesAsJson[0][tablesAsJson[0].length-1]["Past 30 days"], 10),
                     color:null
                 };
 
                 // gets the color of the wn8
-                if(stats.now < 300) stats['color'] = '#000000';
-                else if(stats.now > 300 && stats.now < 599) stats['color'] = '#cd3333';
-                else if(stats.now > 600 && stats.now < 899) stats['color'] = '#d77900';
-                else if(stats.now > 900 && stats.now < 1249) stats['color'] = '#d7b600';
-                else if(stats.now > 1250 && stats.now < 1599) stats['color'] = '#6d9521';
-                else if(stats.now > 1600 && stats.now < 1899) stats['color'] = '#4c762e';
-                else if(stats.now > 1900 && stats.now < 2349) stats['color'] = '#4a92b7';
-                else if(stats.now > 2350 && stats.now < 2899) stats['color'] = '#83579d';
-                else if(stats.now > 2899) stats['color'] = '#5a3175';
+                if(stats.now < 300){
+                    stats["color"] = "#000000";
+                }
+                else if(stats.now > 300 && stats.now < 599){
+                    stats["color"] = "#cd3333";
+                }
+                else if(stats.now > 600 && stats.now < 899){
+                    stats["color"] = "#d77900";
+                }
+                else if(stats.now > 900 && stats.now < 1249){
+                    stats["color"] = "#d7b600";
+                }
+                else if(stats.now > 1250 && stats.now < 1599){
+                    stats["color"] = "#6d9521";
+                }
+                else if(stats.now > 1600 && stats.now < 1899){
+                    stats["color"] = "#4c762e";
+                }
+                else if(stats.now > 1900 && stats.now < 2349){
+                    stats["color"] = "#4a92b7";
+                }
+                else if(stats.now > 2350 && stats.now < 2899){
+                    stats["color"] = "#83579d";
+                }
+                else if(stats.now > 2899){
+                    stats["color"] = "#5a3175";
+                }
 
                 resolve(stats);
             });
@@ -244,7 +284,7 @@ module.exports = {
      * 
      * @returns {array} An array of the player vehicules
      */
-    getTanks: async function(id, client){
+    async getTanks(id, client){
         return new Promise(async function(resolve, reject) {
             var vehicules = await client.functions.get("https://api.worldoftanks.eu/wot/account/tanks/?application_id="+client.config.wargaming+"&account_id="+id);
             vehicules = vehicules[id];
@@ -261,7 +301,7 @@ module.exports = {
      * 
      * @returns {array} An array with the vehicules infos
      */
-    getTanksInfos: async function(vehicules, client){
+    async getTanksInfos(vehicules, client){
         return new Promise(async function(resolve, reject) {
             vInfos = [];
             var i = 0;
@@ -290,7 +330,7 @@ module.exports = {
      * 
      * @returns {string} The invite URL
      */
-    getInviteURL: async function(guild, opt, client){
+    async getInviteURL(guild, opt, client){
         return new Promise(async function(resolve, reject) {
             var channel = guild.channels.filter(ch => ch.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE")).first();
             if(channel){
@@ -312,7 +352,7 @@ module.exports = {
      * 
      * @returns {string} The percentage
      */
-    percentage: function(nb1, nb2){
+    percentage(nb1, nb2){
         nb1 = parseInt(nb1, 10);
         nb2 = parseInt(nb2, 10);
         var result = Math.round((nb1 * 100) / nb2);  
@@ -326,11 +366,13 @@ module.exports = {
      * 
      * @returns {object} The json
      */
-    get: async function(url){
+    async get(url){
         return new Promise(async function(resolve, reject) {
             var res = await fetch(encodeURI(url));
             var json = await res.json();
-            if(!json) return reject("No value returned");
+            if(!json){
+                return reject("No value returned");
+            }
             resolve(json.data);
         });
     }

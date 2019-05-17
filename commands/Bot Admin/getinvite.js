@@ -22,22 +22,25 @@ class getInvite extends Command {
     async run (message, args, utils) {
 
         var ID = args[0];
-        if(!ID) return message.channel.send(message.language.get("GETINVITE_MISSING_ID"));
+        if(!ID){
+            return message.channel.send(message.language.get("GETINVITE_MISSING_ID"));
+        }
 
         // try to get the guild
         var guild = this.client.guilds.get(ID);
         // if the guild isn't found
-        if(!guild) return message.channel.send(message.language.get("GETINVITE_GUILD_NOT_FOUND", ID));
+        if(!guild){
+            return message.channel.send(message.language.get("GETINVITE_GUILD_NOT_FOUND", ID));
+        }
 
-        this.client.functions.getInviteURL(guild, {maxAge:0}).then(invite => {
+        this.client.functions.getInviteURL(guild, {maxAge:0}).then((invite) => {
             message.delete();
             return message.author.send(invite);
-        }).catch(err => {
+        }).catch((err) => {
             return message.channel.send(message.language.get("AN_ERROR_OCCURENCED"));
         });
-        
     }
 
-}
+};
 
 module.exports = getInvite;

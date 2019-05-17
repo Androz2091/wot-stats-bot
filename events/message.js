@@ -26,7 +26,7 @@ module.exports = class {
 
         // Check if the bot is mentionned
         var isMentionned = false;
-        clientMentions.forEach(cm => {
+        clientMentions.forEach((cm) => {
             if(message.content.startsWith(cm) && (message.content.length > cm[0].length)){
                 isMentionned = true;
             }
@@ -41,7 +41,7 @@ module.exports = class {
             // Creates new empty collection
             var newUsersMentions = new Discord.Collection();
             // For each user, add it to the ollection
-            withoutTheBot.forEach(u => newUsersMentions.set(u.id, u));
+            withoutTheBot.forEach((u) => newUsersMentions.set(u.id, u));
             // Update usersMentions variable
             message.mentions.users = newUsersMentions;
         }
@@ -54,7 +54,7 @@ module.exports = class {
             },
             guildData:{
                 lang:this.client.config.defaultLanguage,
-                prefix:''
+                prefix:""
             }
         };
 
@@ -83,8 +83,7 @@ module.exports = class {
             utils.cmd = cmd;
             // log in the console
             this.client.logger.log(message.author.username + " ("+message.author.id+") ran command "+cmd.help.name+" in DM", "cmd");
-            var embed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" ran command **"+cmd+"** in **Direct Messages**");
-            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(embed);
+            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" ran command **"+cmd.help.name+"** in **Direct Messages**"));
             // Run the command
             return cmd.run(message, args, utils);
         }
@@ -96,9 +95,8 @@ module.exports = class {
         message.language = new(require("../languages/"+utils.guildData.lang+".js"));
 
         // Checks if the bot was mentioned, with no message after it, returns the prefix.
-        let prefixMention = new RegExp(`^<@!?${this.client.user.id}>( |)$`);
-        if(message.content.match(prefixMention)){
-            return message.reply(message.language.get('PREFIX_INFO', utils.guildData.prefix));
+        if(message.content.indexOf(clientMentions) > -1){
+            return message.reply(message.language.get("PREFIX_INFO", utils.guildData.prefix));
         }
 
         // Gets the message prefix
@@ -106,8 +104,10 @@ module.exports = class {
             utils.guildData.prefix
         ].concat(clientMentions);
         var prefix;
-        prefixes.forEach(p => {
-            if(message.content.startsWith(p)) prefix = p;
+        prefixes.forEach((p)=> {
+            if(message.content.startsWith(p)){
+                prefix = p;
+            }
         });
         if(!prefix){
             return;
@@ -122,22 +122,24 @@ module.exports = class {
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
 
         // If no command found, return;
-        if (!cmd) return;
+        if (!cmd){
+            return;
+        }
 
         // Check bot permissions
         var neededPermission = [];
-        cmd.conf.botpermissions.forEach(perm => { 
+        cmd.conf.botpermissions.forEach((perm) => { 
             if(!message.channel.permissionsFor(message.guild.me).has(perm)){
                 neededPermission.push(perm); 
             }
         });
         if(neededPermission.length > 0){
-            return message.channel.send(message.language.get('MISSING_BOT_PERMS', neededPermission.map(p => p).join(', ')));
+            return message.channel.send(message.language.get("MISSING_BOT_PERMS", neededPermission.map(p => p).join(", ")));
         }
 
         // if only the owner can execute the command
         if(cmd.conf.adminOnly && !this.client.config.admins.includes(message.author.id)){
-            return message.channel.send(message.language.get('ADMIN_ONLY'));
+            return message.channel.send(message.language.get("ADMIN_ONLY"));
         }
 
         // check user permission
@@ -151,11 +153,10 @@ module.exports = class {
 
         // send logs
         this.client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
-        var embed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" ran command **"+cmd+"** in **"+message.guild.name+"**");
-        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(embed);
+        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" ran command **"+cmd.help.name+"** in **"+message.guild.name+"**"));
 
         // run the command
         cmd.run(message, args, utils);
 
     }
-}
+};

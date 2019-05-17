@@ -29,24 +29,25 @@ class Link extends Command {
         }
 
         // if no nickname is provided
-        if(!args[0]) return message.channel.send(message.language.get("LINK_NICKNAME"));
+        if(!args[0]){
+            return message.channel.send(message.language.get("LINK_NICKNAME"));
+        }
 
         // Send a waiting message
-        message.channel.send(message.language.get("LINK_SEARCH")).then(m => {
+        message.channel.send(message.language.get("LINK_SEARCH")).then((m) => {
             // Search all accounts
-            this.client.functions.searchAccount(args[0], this.client).then(account => {
+            this.client.functions.searchAccount(args[0], this.client).then((account) => {
                 // if an account was found
                 m.edit(message.language.get("LINK_SUCCESS", utils.guildData.prefix)); // edit the message
                 // Updates database
                 return client.databases[0].set(message.author.id+".wot", account);
-            }).catch(err => {
+            }).catch((err) => {
                 // if no account was found
                 return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0])); // edit the message
             });
         });
-        
     }
-
-}
+    
+};
 
 module.exports = Link;

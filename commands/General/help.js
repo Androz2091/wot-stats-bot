@@ -26,52 +26,52 @@ class Help extends Command {
             var command = args[0];
             let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
             if(cmd){
-                var embed = new Discord.RichEmbed()
+                var commandEmbed = new Discord.RichEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL)
                     .addField(message.language.get("HELP_HEADERS")[0], cmd.help.category, true)
-                    .addField(message.language.get("HELP_HEADERS")[1], cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map(a => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
+                    .addField(message.language.get("HELP_HEADERS")[1], cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
                     .addField(message.language.get("HELP_HEADERS")[2], utils.guildData.prefix+cmd.help.usage, true)
                     .addField(message.language.get("HELP_HEADERS")[3], cmd.help.examples.replace(/[$_]/g, utils.guildData.prefix), true)
                     .addField(message.language.get("HELP_HEADERS")[4], cmd.help.description(message.language))
                     .setColor(utils.embed.color)
                     .setFooter(utils.embed.footer);
-                return message.channel.send(embed);
+                return message.channel.send(commandEmbed);
             } else {
                 return message.channel.send(message.language.get("COMMAND_NOT_FOUND", command));
             }
         } else {
-            var embed = new Discord.RichEmbed()
+            var commandsEmbed = new Discord.RichEmbed()
                 .setAuthor(message.language.get("WELCOME")+", "+message.author.tag, message.author.displayAvatarURL)
                 .setDescription(message.language.get("HELP_REMIND"))
                 .setColor(utils.embed.color)
-                .setFooter(utils.embed.footer)
+                .setFooter(utils.embed.footer);
             
             // Gets an array of all categories
             var categories = [];
-            this.client.commands.forEach(cmd => {
+            this.client.commands.forEach((cmd) => {
                 if(!categories.includes(cmd.help.category)){
-                    if(cmd.help.category === 'Bot Admin' && !this.client.config.admins.includes(message.author.id)) return;
+                    if(cmd.help.category === "Bot Admin" && !this.client.config.admins.includes(message.author.id)){
+                        return;
+                    }
                     categories.push(cmd.help.category);
                 }
             });
             categories.sort();
 
             // for each categroy, create a string and then add a field to the embed
-            categories.forEach(cat => {
-                var category = '';
-                var commands = this.client.commands.filter(cmd => cmd.help.category === cat);
-                commands.forEach(cmd => {
+            categories.forEach((cat) => {
+                var category = "";
+                var commands = this.client.commands.filter((cmd) => cmd.help.category === cat);
+                commands.forEach((cmd) => {
                     category += "**"+utils.guildData.prefix+cmd.help.usage+"** - "+cmd.help.description(message.language)+"\n";
                 });
-                embed.addField(cat, category);
+                commandsEmbed.addField(cat, category);
             });
 
-            message.channel.send(embed);
-
+            message.channel.send(commandsEmbed);
         }
-        
     }
 
-}
+};
 
 module.exports = Help;

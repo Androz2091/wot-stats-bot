@@ -23,34 +23,32 @@ class Stats extends Command {
         
         var client = this.client;
 
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async m => {
+        message.channel.send(message.language.get("PLEASE_WAIT")).then(async (m) => {
 
             var ID;
 
             if(message.mentions.users.first()){
-                var data = utils.usersData[1];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[1].wot === "unknow"){
                     return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
                 } else {
-                    ID = data.wot.account_id;
+                    ID = utils.usersData[1].wot.account_id;
                 }
             } else if(args[0]){
                 // Search all accounts
-                var account = await client.functions.searchAccount(args[0], client).catch(err => {
+                var account = await client.functions.searchAccount(args[0], client).catch((err) => {
                     return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
                 });
                 ID = account.account_id;
             } else if(!args[0]) {
-                var data = utils.usersData[0];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[0].wot === "unknow"){
                     return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
                 } else {
-                    ID = data.wot.account_id;
+                    ID = utils.usersData[0].wot.account_id;
                 }
-            };
+            }
 
             // Gets the stats of the user
-            var stats = await client.functions.getStats(ID, client).catch(err => {
+            var stats = await client.functions.getStats(ID, client).catch((err) => {
                 return message.channel.send(message.language.get("ERROR"));
             });
             

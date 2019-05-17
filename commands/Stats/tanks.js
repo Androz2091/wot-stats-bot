@@ -23,39 +23,37 @@ class Tanks extends Command {
         
         var client = this.client;
 
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async m => {
+        message.channel.send(message.language.get("PLEASE_WAIT")).then(async (m) => {
 
             var ID;
 
             if(message.mentions.users.first()){
-                var data = utils.usersData[1];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[1].wot === 'unknow'){
                     return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
                 } else {
-                    ID = data.wot.account_id;
+                    ID = utils.usersData[1].wot.account_id;
                 }
             } else if(args[0]){
                 // Search all accounts
-                var account = await client.functions.searchAccount(args[0], client).catch(err => {
+                var account = await client.functions.searchAccount(args[0], client).catch((err) => {
                     return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
                 });
                 ID = account.account_id;
             } else if(!args[0]) {
-                var data = utils.usersData[0];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[0].wot === "unknow"){
                     return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
                 } else {
-                    ID = data.wot.account_id;
+                    ID = utils.usersData[0].wot.account_id;
                 }
             };
 
             // Gets the stats of the user
-            var stats = await client.functions.getStats(ID, client).catch(err => {
+            var stats = await client.functions.getStats(ID, client).catch((err) => {
                 return message.channel.send(message.language.get("ERROR"));
             });
 
             // Gets the tanks of the user
-            var tanks = await client.functions.getTanks(ID, client).catch(err => {
+            var tanks = await client.functions.getTanks(ID, client).catch((err) => {
                 return message.channel.send(message.language.get("ERROR"));
             });
             
@@ -86,45 +84,36 @@ class Tanks extends Command {
                 rCollector.stop();
             }, 60000);
             
-            rCollector.on('end', (data, reason) => {
+            rCollector.on("end", (data, reason) => {
                 msg.clearReactions();
-                if(reason !== "okay"){
-                    embed.setTitle('').setDescription(message.language.get("TANKS_TIMEOUT"));
+                if(reason !== "OK"){
+                    embed.setTitle("").setDescription(message.language.get("TANKS_TIMEOUT"));
                     msg.edit(embed);
                 }
             });
 
-            rCollector.on('collect', async (reaction) => {
+            rCollector.on("collect", async (reaction) => {
 
                 var users = await reaction.fetchUsers();
                 if(!users.get(client.user.id)){
                     return;
                 }
                 
-                sendTanks(reaction._emoji.name);
-                rCollector.stop("okay");
+                rCollector.stop("OK");
 
-            });
-
-
-            var tiers = {
-                "1⃣":1,
-                "2⃣":2,
-                "3⃣":3,
-                "4⃣":4,
-                "5⃣":5,
-                "6⃣":6,
-                "7⃣":7,
-                "8⃣":8,
-                "9⃣":9,
-                "🔟":10
-            };
-
-            var types = {
-                "heavyTanks":client.emojis
-            };
-
-            function sendTanks(tier){
+                var tiers = {
+                    "1⃣":1,
+                    "2⃣":2,
+                    "3⃣":3,
+                    "4⃣":4,
+                    "5⃣":5,
+                    "6⃣":6,
+                    "7⃣":7,
+                    "8⃣":8,
+                    "9⃣":9,
+                    "🔟":10
+                };
+                var tier = reaction._emoji.name;
                 var star = client.emojis.find(e => e.name === "star");
                 var toDisplay = tanks.filter(t => t.tier === tiers[tier]).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
                 if(toDisplay.length < 1){
@@ -137,16 +126,15 @@ class Tanks extends Command {
                             message.language.get("TANKS_FIELDS")[1]+tank.mark_of_mastery+"\n"+
                             message.language.get("TANKS_FIELDS")[2]+tank.nation,
                             true
-                        )
+                        );
                     });
-                    embed.setDescription('');
+                    embed.setDescription("");
                 }
                 msg.edit(embed);
-            }
-            
+            });
         });
     }
 
-}
+};
 
 module.exports = Tanks;

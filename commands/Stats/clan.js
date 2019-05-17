@@ -23,37 +23,35 @@ class Clan extends Command {
         
         var client = this.client;
 
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async m => {
+        message.channel.send(message.language.get("PLEASE_WAIT")).then(async (m) => {
 
             var clanID;
 
             if(message.mentions.users.first()){
-                var data = utils.usersData[1];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[1].wot === 'unknow'){
                     return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
                 } else {
-                    var clanData = await client.functions.getClan(data.wot.account_id, client).catch(err => {
+                    var clanData = await client.functions.getClan(utils.usersData[1].wot.account_id, client).catch((err) => {
                         return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
                     });
                     clanID = clanData.clan_id;
                 }
             } else if(args[0]){
                 // Search all clans
-                var clanData = await client.functions.searchClan(args.join(' '), client).catch(err => {
-                    return m.edit(message.language.get("CLAN_NOT_FOUND", args.join(' ')));
+                var clanData = await client.functions.searchClan(args.join(" "), client).catch((err) => {
+                    return m.edit(message.language.get("CLAN_NOT_FOUND", args.join(" ")));
                 });
                 clanID = clanData.clan_id;
             } else if(!args[0]) {
-                var data = utils.usersData[0];
-                if(data.wot === 'unknow'){
+                if(utils.usersData[0].wot === "unknow"){
                     return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
                 } else {
-                    clanData = await client.functions.getClan(data.wot.account_id, client).catch(err => {
+                    clanData = await client.functions.getClan(utils.usersData[0].wot.account_id, client).catch((err) => {
                         return m.edit(message.language.get("NO_CLAN"));
                     });
                     clanID = clanData.clan_id;
                 }
-            };
+            }
 
             // Gets the stats of the clan
             var clanStats = await client.functions.getClanStats(clanID, client);
@@ -70,9 +68,11 @@ class Clan extends Command {
                 .addField(message.language.get("CLAN_HEADERS")[3], clanStats.members_count, true)
                 .addField(message.language.get("CLAN_HEADERS")[4], (!clanStats.private) ? message.language.get("NO") : message.language.get("YES"), true)
                 .addField(message.language.get("CLAN_HEADERS")[5], clanWN8.now, true)
-                .addField(message.language.get("CLAN_HEADERS")[6], clanStats.description || message.language.get("NO_DESCRIPTION"), true);
+                .addField(message.language.get("CLAN_HEADERS")[6], clanStats.description || message.language.get("NO_DESCRIPTION"), true);
 
-            if(clanStats.motto) embed.setDescription(clanStats.motto);
+            if(clanStats.motto){
+                embed.setDescription(clanStats.motto);
+            }
             
             m.edit(message.language.get("CLAN_SUCCESS", clanStats.name), embed);
         });
