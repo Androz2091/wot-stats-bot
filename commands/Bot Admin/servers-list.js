@@ -54,20 +54,17 @@ class ServersList extends Command {
                 page = page-1;
                 
                 // if there is no guild to display, delete the message
-                if(i0 < 0){
+                if(i0 < 0 || !i0 || !i1){
                     return await reaction.remove(message.author.id);
-                }
-                if(!i0 || !i1){
-                    return await reaction.remove(message.author.id);
+                } else {
+                    // Update the embed with new informations
+                    embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
+                    .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
+
+                    // Edit the message 
+                    tdata.edit(embed);
                 }
 
-                // Update the embed with new informations
-                embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
-            
-                // Edit the message 
-                tdata.edit(embed);
-            
             }
 
             if(reaction._emoji.name === "➡"){
@@ -78,20 +75,17 @@ class ServersList extends Command {
                 page = page+1;
 
                 // if there is no guild to display, delete the message
-                if(i1 > this.client.guilds.size + 10){
+                if(i1 > this.client.guilds.size + 10 || !i0 || !i1){
                     return await reaction.remove(message.author.id);
-                }
-                if(!i0 || !i1){
-                    return await reaction.remove(message.author.id);
-                }
+                } else {
+                    // Update the embed with new informations
+                    embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
+                    .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
 
-                // Update the embed with new informations
-                embed.setTitle(message.language.get("PAGE")+": "+page+"/"+Math.round(this.client.guilds.size/10))
-                .setDescription(message.language.get("TOTAL_SERVERS")+" : "+this.client.guilds.size+"\n\n"+this.client.guilds.sort((a,b) => b.memberCount-a.memberCount).map((r) => r).map((r, i) => "**"+i + 1+"** - "+r.name.toString()+" | "+r.memberCount+" :busts_in_silhouette: | `"+r.id+"`").slice(i0, i1).join("\n"));
-             
-                // Edit the message 
-                tdata.edit(embed);
-
+                    // Edit the message 
+                    tdata.edit(embed);
+                }
+                
             }
 
             if(reaction._emoji.name === "❌"){
@@ -111,6 +105,6 @@ class ServersList extends Command {
         });
     }
 
-};
+}
 
 module.exports = ServersList;
