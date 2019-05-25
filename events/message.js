@@ -83,7 +83,8 @@ module.exports = class {
             utils.cmd = cmd;
             // log in the console
             this.client.logger.log(message.author.username + " ("+message.author.id+") ran command "+cmd.help.name+" in DM", "cmd");
-            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" ran command **"+cmd.help.name+"** in **Direct Messages**"));
+            var DMembed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** en **Messages privés**");
+            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(DMembed);
             // Run the command
             return cmd.run(message, args, utils);
         }
@@ -153,7 +154,7 @@ module.exports = class {
 
         // send logs
         this.client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
-        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" ran command **"+cmd.help.name+"** in **"+message.guild.name+"**"));
+        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
 
         // run the command
         cmd.run(message, args, utils);
