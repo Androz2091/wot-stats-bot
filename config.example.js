@@ -10,7 +10,7 @@ module.exports = {
     wargaming:"xxxxxxxxxx", // Your wargaming API key (https://eu.wargaming.net/id/signin)
     supportGuild: {
         ID:"xxxxxxxxxx", // The ID of your support guild
-        suggestions:"xxxxxxxxxx", // The channel ID for suggestions 
+        suggestions:"xxxxxxxxxx", // The channel ID for suggestions
         serversLogs:"xxxxxxxxxx", // The channel ID for servers logs (new guilds)
         commandsLogs:"xxxxxxxxxx" // The channel ID for commands logs
     },
@@ -21,4 +21,4 @@ module.exports = {
         warn:"<:warn:575370981225398292>",
         stats:"<:stats:575371695746187314>"
     }
-}
+};
