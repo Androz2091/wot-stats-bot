@@ -13,6 +13,11 @@ module.exports = class {
         // Logs some informations using the logger file
         this.client.logger.log("Loading a total of "+client.commands.size+" command(s).", "log");
         this.client.logger.log(client.user.tag+", ready to serve "+client.users.size+" users in "+client.guilds.size+" servers.", "ready");
+
+        // Post DBL stats
+        const DBL = require("dblapi.js");
+        const dbl = new DBL(this.client.config.dbl, this.client);
+        dbl.postStats(this.client.guilds.size);
         
         // Update the game every 20s
         var games = [
