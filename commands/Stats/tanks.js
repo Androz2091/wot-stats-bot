@@ -67,18 +67,16 @@ class Tanks extends Command {
             var msg = await m.edit(embed);
             var rCollector = msg.createReactionCollector((reaction, user) => user.id === message.author.id);
 
-            var n = ["\u0030\u20E3","\u0031\u20E3","\u0032\u20E3","\u0033\u20E3","\u0034\u20E3","\u0035\u20E3", "\u0036\u20E3","\u0037\u20E3","\u0038\u20E3","\u0039\u20E3","\uD83D\uDD1F"];
-
-            await msg.react(n[1]);
-            await msg.react(n[2]);
-            await msg.react(n[3]);
-            await msg.react(n[4]);
-            await msg.react(n[5]);
-            await msg.react(n[6]);
-            await msg.react(n[7]);
-            await msg.react(n[8]);
-            await msg.react(n[9]);
-            await msg.react(n[10]);
+            await msg.react(client.emojis.find((e) => e.name === "E1"));
+            await msg.react(client.emojis.find((e) => e.name === "E2"));
+            await msg.react(client.emojis.find((e) => e.name === "E3"));
+            await msg.react(client.emojis.find((e) => e.name === "E4"));
+            await msg.react(client.emojis.find((e) => e.name === "E5"));
+            await msg.react(client.emojis.find((e) => e.name === "E6"));
+            await msg.react(client.emojis.find((e) => e.name === "E7"));
+            await msg.react(client.emojis.find((e) => e.name === "E8"));
+            await msg.react(client.emojis.find((e) => e.name === "E9"));
+            await msg.react(client.emojis.find((e) => e.name === "E10"));
 
             var timeOut = setTimeout(function(){
                 rCollector.stop();
@@ -101,21 +99,9 @@ class Tanks extends Command {
                 
                 rCollector.stop("OK");
 
-                var tiers = {
-                    "1⃣":1,
-                    "2⃣":2,
-                    "3⃣":3,
-                    "4⃣":4,
-                    "5⃣":5,
-                    "6⃣":6,
-                    "7⃣":7,
-                    "8⃣":8,
-                    "9⃣":9,
-                    "🔟":10
-                };
                 var tier = reaction._emoji.name;
                 var star = client.emojis.find(e => e.name === "star");
-                var toDisplay = tanks.filter(t => t.tier === tiers[tier]).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
+                var toDisplay = tanks.filter(t => t.tier === parseInt(tier.substr(1, tier.length), 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
                 if(toDisplay.length < 1){
                     embed.setDescription(message.language.get("NO_TANKS", tier));
                 } else {
