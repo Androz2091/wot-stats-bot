@@ -6,8 +6,8 @@ fs = require("fs"),
 klaw = require("klaw"),
 path = require("path"),
 readdir = promisify(require("fs").readdir),
-quickdb = require("quick.db");
-quickdb.init("./data/wot.sqlite");
+Quickdb = require("quick.db");
+Quickdb.init("./data/wot.sqlite");
 
 // Creates new class
 class Wot extends Client {
@@ -21,8 +21,8 @@ class Wot extends Client {
         this.wait = require("util").promisify(setTimeout); // client.wait(1000) - Wait 1 second
         this.functions = require("./utils/functions.js"); // Load the functions file
         this.databases = [ // Create tables (quick.db)
-            new quickdb.table("users"),
-            new quickdb.table("guilds")
+            new Quickdb.Table("users"),
+            new Quickdb.Table("guilds")
         ]
     };
 
