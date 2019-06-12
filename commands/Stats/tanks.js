@@ -99,9 +99,9 @@ class Tanks extends Command {
                 
                 rCollector.stop("OK");
 
-                var tier = reaction._emoji.name;
+                var tier = reaction._emoji.name.substr(1, reaction._emoji.name.length);
                 var star = client.emojis.find(e => e.name === "star");
-                var toDisplay = tanks.filter(t => t.tier === parseInt(tier.substr(1, tier.length), 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
+                var toDisplay = tanks.filter(t => t.tier === parseInt(tier, 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
                 if(toDisplay.length < 1){
                     embed.setDescription(message.language.get("NO_TANKS", tier));
                 } else {
