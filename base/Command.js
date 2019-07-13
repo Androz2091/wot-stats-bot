@@ -17,9 +17,9 @@ module.exports = class Command {
         if(dirname){
             var folders = dirname.split('/');
             category = folders[folders.length - 1];
-        };
+        }
         this.client = client;
         this.conf = { enabled, guildOnly, aliases, permission, botpermissions, adminOnly};
         this.help = { name, description, usage, examples, category };
-    };
+    }
 };
