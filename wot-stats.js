@@ -7,7 +7,7 @@ klaw = require("klaw"),
 path = require("path"),
 readdir = promisify(require("fs").readdir),
 Quickdb = require("quick.db");
-Quickdb.init("./data/wot.sqlite");
+Quickdb.init("data/wot.sqlite");
 
 // Creates new class
 class Wot extends Client {
