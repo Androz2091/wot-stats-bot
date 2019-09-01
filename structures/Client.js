@@ -1,7 +1,7 @@
 const { Client, Collection } = require("discord.js"),
 path = require("path"),
 Quickdb = require("quick.db");
-Quickdb.init("../wot.sqlite");
+Quickdb.init("./wot.sqlite");
 
 // Creates new class
 class Wot extends Client {
@@ -62,9 +62,6 @@ class Wot extends Client {
         const permOrder = this.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
         while (permOrder.length) {
             const currentLevel = permOrder.shift();
-            if(message.guild && currentLevel.guildOnly) {
-                continue;
-            }
             if(currentLevel.check(message)) {
                 permlvl = currentLevel.level;
                 break;
