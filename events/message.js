@@ -72,7 +72,6 @@ module.exports = class {
         client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
         client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
 
-        if(message.author.id !== "422820341791064085") return message.channel.send("Sorry the bot is not available for the next 20 minutes. Please wait and retry again.");
         // run the command
         cmd.run(message, args, utils);
 
