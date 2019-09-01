@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class Unlink extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "unlink",
+            // Displayed in the help command
             description: (language) => language.get("UNLINK_DESCRIPTION"),
-            usage: "unlink",
+            usage: (language) => language.get("UNLINK_USAGE"),
+            examples: (languages) => languages.get("UNLINK_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: false,
+            // The command aliases
             aliases: [],
-            permission: false,
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$unlink",
-            adminOnly: false
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "User",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 
@@ -26,7 +33,7 @@ class Unlink extends Command {
             return message.channel.send(message.language.get("NOT_LINKED"));
         }
 
-        // Updates database
+        // Updates datastructures
         this.client.databases[0].set(message.author.id+".wot", "unknow");
 
         // Send a success message

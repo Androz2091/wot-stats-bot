@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class Suggest extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "suggest",
+            // Displayed in the help command
             description: (language) => language.get("SUGGEST_DESCRIPTION"),
-            usage: "suggest [suggestion]",
+            usage: (language) => language.get("SUGGEST_USAGE"),
+            examples: (languages) => languages.get("SUGGEST_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: false,
-            aliases: [],
-            permission: false,
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$suggest A new command",
-            adminOnly: false
+            // The command aliases
+            aliases: [ "sugg", "suggestion" ],
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "User",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 

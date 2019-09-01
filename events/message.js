@@ -7,155 +7,72 @@ module.exports = class {
     }
 
     async run (message) {
-
-        var clientMentions = [
-            `<@${this.client.user.id}> `,
-            `<@!${this.client.user.id}> `,
-            `<@?${this.client.user.id}> `
-        ];
+    
+        let client = this.client;
         
-        // If the messagr author is a bot
-        if(message.author.bot){
-            return;
-        }
-
-        // If the member on a guild is invisible or not cached, fetch them.
-        if(message.guild && !message.member){
-            await message.guild.fetchMember(message.author.id);
-        }
-
-        // Check if the bot is mentionned
-        var isMentionned = false;
-        clientMentions.forEach((cm) => {
-            if(message.content.startsWith(cm) && (message.content.length > cm[0].length)){
-                isMentionned = true;
-            }
-        });
-
-        // if the bot is mentionned
-        if(isMentionned){
-            // Creates new array with users mentions
-            var withoutTheBot = message.mentions.users.array();
-            // Delete first item from the array (the bot)
-            withoutTheBot.shift();
-            // Creates new empty collection
-            var newUsersMentions = new Discord.Collection();
-            // For each user, add it to the ollection
-            withoutTheBot.forEach((u) => newUsersMentions.set(u.id, u));
-            // Update usersMentions variable
-            message.mentions.users = newUsersMentions;
-        }
+        if(message.author.bot || !message.guild) return;
+        if(message.guild && !message.member) await message.guild.fetchMember(message.author.id);
 
         // utils object : to easly access to some variables
-        var utils = { 
-            embed:{
-                color:this.client.config.embed.color,
-                footer:this.client.config.embed.footer
+        const utils = {
+            embed: {
+                color: this.client.config.embed.color,
+                footer: this.client.config.embed.footer
             },
             guildData:{
-                lang:this.client.config.defaultLanguage,
-                prefix:""
+                lang: this.client.config.defaultLanguage,
+                prefix: ""
             }
         };
 
         // Creates a profile for each users (the message author and the users mentionned)
         var users = [message.author].concat(message.mentions.users.array());
         utils.usersData = this.client.functions.getUsersData(users, this.client);
-        
-        // if the message comes from direct messages
-        if(message.channel.type === "dm"){
-            // gets the default language
-            message.language = new(require("../languages/"+this.client.config.defaultLanguage+".js"));
-            // Gets the args of the message 
-            let args = message.content.trim().split(/ +/g);
-            // Gets the command
-            let command = args.shift().toLowerCase();
-            // Search the command in the commands and aliases collections
-            let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
-            // if the command wasn't found
-            if(!cmd){
-                return message.channel.send(message.language.get("COMMAND_NOT_FOUND", command));
-            }
-            // if the command is unavailable via dm
-            if(cmd.conf.guildOnly){
-                return message.channel.send(message.language.get("DM_COMMAND_UNAVAILABLE"));
-            }
-            utils.cmd = cmd;
-            // log in the console
-            this.client.logger.log(message.author.username + " ("+message.author.id+") ran command "+cmd.help.name+" in DM", "cmd");
-            var DMembed = new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#9370DB").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** en **Messages privés**");
-            this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(DMembed);
-            // Run the command
-            return cmd.run(message, args, utils);
-        }
-
-        // Gets the guild data
         utils.guildData = this.client.functions.getGuildData(message.guild, this.client);
 
-        // gets the language of the guild
-        message.language = new(require("../languages/"+utils.guildData.lang+".js"));
+        let Language = require("../languages/"+utils.guildData.lang+".js");
+        message.language = new Language();
 
         // Checks if the bot was mentioned, with no message after it, returns the prefix.
-        if(message.content.indexOf(clientMentions) > -1){
+        if(message.content.indexOf(`<@${client.user.id}>`) > -1){
             return message.reply(message.language.get("PREFIX_INFO", utils.guildData.prefix));
         }
 
-        // Gets the message prefix
-        var prefixes = [
-            utils.guildData.prefix
-        ].concat(clientMentions);
-        var prefix;
-        prefixes.forEach((p)=> {
-            if(message.content.startsWith(p)){
-                prefix = p;
-            }
-        });
-        if(!prefix){
-            return;
-        }
-
-        // If the message content is "w!stats @Androz", the args will be : [ "pay", "@Androz" ]
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
-        // The command will be : "stats" and the args : [ "@Androz" ]
+        const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
-        // Gets the command
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
-
-        // If no command found, return;
-        if (!cmd){
-            return;
-        }
+        if(!cmd) return;
 
         // Check bot permissions
-        var neededPermission = [];
-        cmd.conf.botpermissions.forEach((perm) => { 
+        const neededPermissions = [];
+        cmd.conf.clientPermissions.forEach((perm) => { 
             if(!message.channel.permissionsFor(message.guild.me).has(perm)){
-                neededPermission.push(perm); 
+                neededPermissions.push(perm); 
             }
         });
-        if(neededPermission.length > 0){
-            return message.channel.send(message.language.get("MISSING_BOT_PERMS", neededPermission.map(p => p).join(", ")));
+        if(neededPermissions.length > 0){
+            return message.channel.send(message.language.get("MISSING_BOT_PERMS", neededPermissions.map((p) => p).join(", ")));
         }
 
-        // if only the owner can execute the command
-        if(cmd.conf.adminOnly && !this.client.config.admins.includes(message.author.id)){
-            return message.channel.send(message.language.get("ADMIN_ONLY"));
+        /* Command disabled */
+        if(!cmd.conf.enabled){
+            return message.channel.send(message.language.get("COMMAND_DISABLED"));
         }
 
-        // check user permission
-        if(cmd.conf.permission){
-            if(!message.channel.permissionsFor(message.member).has(cmd.conf.permission)){
-                return message.channel.send(message.language.get('MISSING_PERMS', cmd.conf.permission));
-            }
+        /* User permissions */
+        const permLevel = await client.getLevel(message);
+        if(permLevel < client.levelCache[cmd.conf.permLevel]){
+            return message.channel.send(message.language.get("MISSING_PERMS", cmd.conf.permLevel));
         }
 
         utils.cmd = cmd;
 
         // send logs
-        this.client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
-        this.client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
+        client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
+        client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
 
+        if(message.author.id !== "422820341791064085") return message.channel.send("Sorry the bot is not available for the next 20 minutes. Please wait and retry again.");
         // run the command
         cmd.run(message, args, utils);
 

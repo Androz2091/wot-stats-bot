@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class Stats extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "stats",
+            // Displayed in the help command
             description: (language) => language.get("STATS_DESCRIPTION"),
-            usage: "stats (@member/wot-nickname)",
+            usage: (language) => language.get("STATS_USAGE"),
+            examples: (languages) => languages.get("STATS_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: false,
+            // The command aliases
             aliases: [],
-            permission: false,
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$stats\n$stats @ThibaudFvrx\n$stats ThibaudFvrx",
-            adminOnly: false
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "User",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 

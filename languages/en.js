@@ -24,7 +24,12 @@ module.exports = class {
 			MEMBERS: "Members",
 			TOTAL_SERVERS:"Total servers",
 
-			// ERROR MESSAGE
+			/* DEFAULT MESSAGES */
+			NO_DESCRIPTION_PROVIDED: "No description provided",
+			NO_USAGE_PROVIDED: "No usage provided",
+			NO_EXAMPLES_PROVIDED: "No examples provided",
+
+			/* ERRORS */
 			COMMAND_NOT_FOUND: (cmd) => "No commands found for `"+cmd+"` !",
 			DM_COMMAND_UNAVAILABLE: e.error+" | This command is not available in private messages. Join a server to run it!",
 			MISSING_BOT_PERMS: (perms) => e.error+" | I am missing the following permissions to perform this command: "+perms,
@@ -39,7 +44,13 @@ module.exports = class {
 			NO_CLAN_USER: (nickname) => e.error+" | **"+nickname+"** is not in a clan!",
 			CLAN_NOT_FOUND: (clan) => e.error+" | No clans found for `"+clan+"` !",
 
+			/* HELP COMMAND */
+
+			// Utils
 			HELP_DESCRIPTION: "Displays the list of commands!",
+			HELP_USAGE: "help [command]",
+			HELP_EXAMPLES: "$help stats",
+			// Content
 			HELP_HEADERS: [
 				"Category",
 				"Alias",
@@ -50,19 +61,34 @@ module.exports = class {
 			HELP_NO_ALIASES: "No aliases.",
 			HELP_REMIND: "Reminder: `[]` means mandatory parameter while `()` means optional parameter",
 
-			// link
+			/* LINK COMMAND */
+
+			// Utils
 			LINK_DESCRIPTION: "Link your WoT account to your Discord account!",
+			LINK_USAGE: "link [nickname]",
+			LINK_EXAMPLES: "$link ThibaudFvrx",
+			// Errors
 			LINK_ALREADY_LINKED: (prefix) => e.error+" | You have already linked a WoT account! Type `"+prefix+"unlink` and try again!",
 			LINK_NICKNAME: e.error+" | Please enter your WoT nickname!",
 			LINK_SEARCH: e.loading+" | Account search....",
 			LINK_SUCCESS: (prefix) => e.success+" | Your WoT account has been correctly linked to your Discord account! To see your profile, type `"+prefix+"profile` !",
 
-			// unlink
+			/* UNLINK COMMAND */
+
+			// Utils
 			UNLINK_DESCRIPTION: "Dissociate your WoT account!",
+			UNLINK_USAGE: "unlink",
+			UNLINK_EXAMPLES: "$unlink",
+			// Content
 			UNLINK_SUCCESS: e.success+" | Your account is no longer linked!",
 
-			// profile
+			/* PROFILE COMMAND */
+
+			// Utils
 			PROFILE_DESCRIPTION: "Shows the profile of a WoT player!",
+			PROFILE_USAGE: "profile [@member/nickname]",
+			PROFILE_EXAMPLES: "$profile ThibaudFvrx",
+			// Success
 			PROFILE_SUCCESS: (username) => e.stats+" | This is the profile of **"+username+"** :",
 			PROFILE_HEADERS: [
 				"Nickname",
@@ -76,8 +102,13 @@ module.exports = class {
 				"WN8 - 30d"
 			],
 
-			// stats
+			/* STATS COMMAND */
+
+			// Utils
 			STATS_DESCRIPTION: "Displays the stats of a WoT player!",
+			STATS_USAGE: "stats [@member/nickname]",
+			STATS_EXAMPLES: "$stats ThibaudFvrx",
+			// Content
 			STATS_SUCCESS: (username) => e.stats+" | These are the stats of **"+username+"** :",
 			STATS_HEADERS: [
 				"Nickname",
@@ -111,8 +142,13 @@ module.exports = class {
 				]
 			},
 
-			// Clan 
+			/* CLAN COMMAND */
+
+			// Utils
 			CLAN_DESCRIPTION: "Displays information about the clan!",
+			CLAN_USAGE: "clan [nom]",
+			CLAN_EXAMPLES: "$clan LeClan",
+			// Content
 			CLAN_SUCCESS: (name) => e.stats+" | Here is the information for the clan **"+name+"** :",
 			CLAN_HEADERS: [
 				"Name",
@@ -124,8 +160,13 @@ module.exports = class {
 				"Description"
 			],
 
-			// clan stats
+			/* CLANSTATS COMMAND */
+
+			// Utils
 			CLANSTATS_DESCRIPTION: "Displays the statistics of a clan!",
+			CLANSTATS_USAGE: "clan-stats [name]",
+			CLANSTATS_EXAMPLES: "$clanstats TheClan",
+			// Content
 			CLANSTATS_SUCCESS: (name) => e.stats+" | Here are the statistics for the clan **"+name+"** :",
 			CLANSTATS_HEADERS: [
 				"Name",
@@ -160,39 +201,77 @@ module.exports = class {
 				]
 			],
 
-			// invite
+			/* INVITE COMMAND */
+
+			// Utils
 			INVITE_DESCRIPTION: "Displays the bot's invitation links!",
+			INVITE_USAGE: "invite",
+			INVITE_EXAMPLES: "$invite",
+			// Content
 			INVITE_HEADERS: [
 				"Invitation",
 				"Support"
 			],
 
-			// Setprefix
-			SETPREFIX_DESCRIPTION: "Change the server prefix!",
-			SETPREFIX_MISSING_PREFIX: e.error+" | Please enter a prefix!",
-            SETPREFIX_SUCCESS: (prefix) => e.success+" | Your new prefix is `"+prefix+"` ! Type `"+prefix+"help` to see the list of commands!",
+			/* SETPREFIX COMMAND */
 
-            // Setlang
+			// Utils
+			SETPREFIX_DESCRIPTION: "Change the server prefix!",
+			SETPREFIX_USAGE: "setprefix [prefix]",
+			SETPREFIX_EXAMPLES: "$setprefix !",
+			// Errors
+			SETPREFIX_MISSING_PREFIX: e.error+" | Please enter a prefix!",
+			// Content
+			SETPREFIX_SUCCESS: (prefix) => e.success+" | Your new prefix is `"+prefix+"` ! Type `"+prefix+"help` to see the list of commands!",
+
+            /* SETLANG COMMAND */
+
+			// Utils
 			SETLANG_DESCRIPTION: "Change the server language!",
+			SETLANG_USAGE: "setlang [lang]",
+			SETLANG_EXAMPLES: "$setlang fr",
+			// Errors
 			SETLANG_VALID_LANGUAGES: e.error+" | Please enter a valid language (`fr` or `en`)!",
-            SETLANG_SUCCESS: ":flag_gb: | Language set to \"English\" !",
+			// Success
+			SETLANG_SUCCESS: ":flag_gb: | Language set to \"English\" !",
             
-            // Servers list
+            /* SERVERSLIST COMMAND */
+
+			// Utils
 			SERVERSLIST_DESCRIPTION: "Displays the list of the servers of the bot!",
-            SERVERSLIST_TIMEOUT: "The message has expired, type the command again!",
+			SERVERSLIST_USAGE: "serverslist",
+			SERVERSLIST_EXAMPLES: "$serverslist",
+			// Content
+			SERVERSLIST_TIMEOUT: "The message has expired, type the command again!",
             
-            // getinvite
+            /* GETINVITE COMMAND */
+
+			// Utils
 			GETINVITE_DESCRIPTION: "Generates an invitation to the Discord!",
+			GETINVITE_USAGE: "getinvite [ID]",
+			GETINVITE_EXAMPLES: "$getinvite 457888575111954434",
+			// Errors
 			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | No servers found with `"+id+"`!",
             GETINVITE_MISSING_ID: e.error+" | You must enter a server ID!",
 
-            // suggest
+            /* SUGGEST COMMAND */
+
+			// Utils
             SUGGEST_DESCRIPTION: "Submit a suggestion!",
+			SUGGEST_USAGE: "suggest [suggestion]",
+			SUGGEST_EXAMPLES: "$suggest A new command: this command will...",
+			// Errors
 			SUGGEST_MISSING_SUGGESTION: e.error+" | You must enter a suggestion!",
+			// Success
 			SUGGEST_SUCCESS: e.success+" | Your suggestion has just been sent to the administrators!",
 
-			// infos 
+			/* INFOS COMMAND */
+
+			// Utils
 			INFOS_DESCRIPTION: "Display the stats of the bot!",
+			INFOS_USAGE: "infos",
+			INFOS_EXAMPLES: "$infos",
+			// Content
 			INFOS_HEADERS: [
 				"Stats of ",
 				" is an open source bot developed by `Androz#2091` !",
@@ -208,8 +287,13 @@ module.exports = class {
 				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
 			],
 
-			// tanks
+			/* TANKS COMMAND */
+
+			// Utils
 			TANKS_DESCRIPTION: "Displays a player's tanks!",
+			TANKS_USAGE: "tanks [@member/nickname]",
+			TANKS_EXAMPLES: "$tanks ThibaudFvrx",
+			// Content
 			TANKS_FIELDS: [
 				"Battles: ",
 				"Mark of mastery:",

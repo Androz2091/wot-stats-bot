@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class ClanStats extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "clan-stats",
+            // Displayed in the help command
             description: (language) => language.get("CLANSTATS_DESCRIPTION"),
-            usage: "clan-stats (@member/clan-name)",
+            usage: (language) => language.get("CLANSTATS_USAGE"),
+            examples: (languages) => languages.get("CLANSTATS_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: false,
-            aliases: [],
-            permission: false,
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$clan-stats\n$clan-stats @ThibaudFvrx\n$clan-stats Zira",
-            adminOnly: false
+            // The command aliases
+            aliases: [ "clanstats" ],
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "User",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 

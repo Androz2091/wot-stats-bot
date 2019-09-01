@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class Link extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "link",
+            // Displayed in the help command
             description: (language) => language.get("LINK_DESCRIPTION"),
-            usage: "link [nickname]",
+            usage: (language) => language.get("LINK_USAGE"),
+            examples: (languages) => languages.get("LINK_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: false,
+            // The command aliases
             aliases: [],
-            permission: false,
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$link xxWotPlayerxx__",
-            adminOnly: false
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "User",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 
@@ -39,9 +46,10 @@ class Link extends Command {
             this.client.functions.searchAccount(args[0], this.client).then((account) => {
                 // if an account was found
                 m.edit(message.language.get("LINK_SUCCESS", utils.guildData.prefix)); // edit the message
-                // Updates database
+                // Updates datastructures
                 return client.databases[0].set(message.author.id+".wot", account);
             }).catch((err) => {
+                console.log(err)
                 // if no account was found
                 return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0])); // edit the message
             });

@@ -1,21 +1,28 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 class Setlang extends Command {
 
     constructor (client) {
         super(client, {
+            // The name of the command
             name: "setlang",
+            // Displayed in the help command
             description: (language) => language.get("SETLANG_DESCRIPTION"),
-            usage: "setlang [fr/en]",
+            usage: (language) => language.get("SETLANG_USAGE"),
+            examples: (languages) => languages.get("SETLANG_EXAMPLES"),
+            // The name of the command folder, to detect the category
             dirname: __dirname,
+            // Whether the command is enabled
             enabled: true,
-            guildOnly: true,
+            // The command aliases
             aliases: [],
-            permission: "MANAGE_GUILD",
-            botpermissions: [ "SEND_MESSAGES", "EMBED_LINKS" ],
-            examples: "$setlang fr\n$setlang en",
-            adminOnly: false
+            // The required permissions (for the bot) to execute the command
+            clientPermissions: [ "EMBED_LINKS" ],
+            // The level required to execute the command
+            permLevel: "Admin",
+            // The command cooldown
+            cooldown: 2000
         });
     }
 
