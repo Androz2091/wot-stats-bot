@@ -38,7 +38,8 @@ module.exports = class {
             return message.reply(message.language.get("PREFIX_INFO", utils.guildData.prefix));
         }
 
-        const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
+        if(!message.content.startsWith(utils.guildData.prefix)) return;
+        const args = message.content.slice(utils.guildData.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
