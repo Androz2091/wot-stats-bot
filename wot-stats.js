@@ -39,6 +39,9 @@ const init = async () => {
 		client.levelCache[thisLevel.name] = thisLevel.level;
     }
 
+    const Wargamer = require("./includes/Wargamer");
+    client.Wargamer = new Wargamer(client.config.wargaming);
+
     client.login(client.config.token); // Log to the discord api
 
 };
