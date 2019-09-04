@@ -1,0 +1,33 @@
+[
+    {
+        "name": "eu",
+        "baseURL": "https://api.worldoftanks.eu",
+        "aliases": [
+            "europe"
+        ],
+        "iconURL": "https://i.goopics.net/k0XYL.png"
+    },
+    {
+        "name": "ru",
+        "baseURL": "https://api.worldoftanks.ru",
+        "aliases": [
+            "russia"
+        ],
+        "iconURL": "https://i.goopics.net/w5Zmm.png"
+    },
+    {
+        "name": "na",
+        "baseURL": "https://api.worldoftanks.com",
+        "aliases": [
+            "north-america",
+            "america"
+        ],
+        "iconURL": "https://i.goopics.net/Ner5y.png"
+    },
+    {
+        "name": "asia",
+        "baseURL": "https://api.worldoftanks.asia",
+        "aliases": [],
+        "iconURL": "https://i.goopics.net/dOVoJ.png"
+    }
+]
