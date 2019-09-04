@@ -28,53 +28,51 @@ class Profile extends Command {
 
     async run (message, args, utils) {
         
-        var client = this.client;
+        let client = this.client;
 
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async m => {
+        let m = await message.channel.send(message.language.get("PLEASE_WAIT"));
 
-            var ID;
+        let userData;
 
-            if(message.mentions.users.first()){
-                if(utils.usersData[1].wot === 'unknow'){
-                    return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
-                } else {
-                    ID = utils.usersData[1].wot.account_id;
-                }
-            } else if(args[0]){
-                // Search all accounts
-                var account = await client.functions.searchAccount(args[0], client).catch((err) => {
-                    return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
-                });
-                ID = account.account_id;
-            } else if(!args[0]) {
-                if(utils.usersData[0].wot === 'unknow'){
-                    return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
-                } else {
-                    ID = utils.usersData[0].wot.account_id;
-                }
+        if(message.mentions.users.first()){
+            if(utils.usersData[1].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
+            } else {
+                userData = utils.usersData[1].wot;
             }
-
-            // Gets the stats of the user
-            var stats = await client.functions.getStats(ID, client).catch((err) => {
-                return message.channel.send(message.language.get("ERROR"));
+        } else if(args[0]){
+            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
+            if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
+            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
             });
+        } else if(!args[0]){
+            if(utils.usersData[0].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
+            } else {
+                userData = utils.usersData[0].wot;
+            }
+        }
 
-            var embed = new Discord.RichEmbed()
-                .setColor(stats.wn8.color)
-                .setFooter(utils.embed.footer)
-                .setAuthor(stats.nickname, client.user.displayAvatarURL)
-                .addField(message.language.get("PROFILE_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+ID+")", true)
-                .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
-                .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)
-                .addField(message.language.get("PROFILE_HEADERS")[3], (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
-                .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
-                .addField(message.language.get("PROFILE_HEADERS")[5], (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
-                .addField(message.language.get("PROFILE_HEADERS")[6], stats.wn8.now, true)
-                .addField(message.language.get("PROFILE_HEADERS")[7], stats.wn8["24h"], true)
-                .addField(message.language.get("PROFILE_HEADERS")[8], stats.wn8["30d"], true);
+        if(!userData) return;
+        let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true);
 
-            m.edit(message.language.get("PROFILE_SUCCESS", stats.nickname), embed);
-        });
+        let embed = new Discord.RichEmbed()
+            .setColor(stats.wn8.color)
+            .setFooter(utils.embed.footer, stats.realmData.iconURL)
+            .setAuthor(stats.nickname, client.user.displayAvatarURL)
+            .addField(message.language.get("PROFILE_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
+            .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
+            .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)
+            .addField(message.language.get("PROFILE_HEADERS")[3], (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
+            .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
+            .addField(message.language.get("PROFILE_HEADERS")[5], (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
+            .addField(message.language.get("PROFILE_HEADERS")[6], stats.wn8.now, true)
+            .addField(message.language.get("PROFILE_HEADERS")[7], stats.wn8["24h"], true)
+            .addField(message.language.get("PROFILE_HEADERS")[8], stats.wn8["30d"], true);
+
+        m.edit(message.language.get("PROFILE_SUCCESS", stats.nickname), embed);
     }
 
 }
