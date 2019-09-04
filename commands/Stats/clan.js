@@ -27,62 +27,65 @@ class Clan extends Command {
     }
 
     async run (message, args, utils) {
+
+        let client = this.client;
+
+        let m = await message.channel.send(message.language.get("PLEASE_WAIT"));
+
+        let clanData;
+
+        if(message.mentions.users.first()){
+            if(utils.usersData[1].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
+            } else {
+                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.userData[1].wot.realm, ID: utils.userData[1].wot.ID }, false);
+                if(!userStats.clan_id){
+                    return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
+                }
+                clanData = { realm: utils.usersData[1].wot.realm, ID: userStats.clan_id };
+            }
+        } else if(args[0]){
+            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
+            if(!args[1]) return m.edit(message.language.get("VALID_CLAN"));
+            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+                return m.edit(message.language.get("CLAN_NOT_FOUND", args.slice(1).join(" ")));
+            });
+        } else if(!args[0]){
+            if(utils.usersData[0].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
+            } else {
+                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.usersData[0].wot.realm, ID: utils.usersData[0].wot.ID }, false);
+                if(!userStats.clan_id){
+                    return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
+                }
+                clanData = { realm: utils.usersData[0].wot.realm, ID: userStats.clan_id };
+            }
+        }
+
+        if(!clanData) return;
+
+        // Gets the stats of the clan
+        let clanStats = await client.Wargamer.getClanStats({ realm: clanData.realm, ID: clanData.ID });
+
+        let embed = new Discord.RichEmbed()
+            .setColor(clanStats.wn8.color)
+            .setFooter(utils.embed.footer, clanStats.realmData.iconURL)
+            .setAuthor(clanStats.name, clanStats.emblems.x195.portal)
+            .setImage(clanStats.emblems.x195.portal)
+            .addField(message.language.get("CLAN_HEADERS")[0], "["+clanStats.name+"](https://eu.wargaming.net/clans/wot/"+clanData.ID+")", true)
+            .addField(message.language.get("CLAN_HEADERS")[1], "["+clanStats.creator_name+"](https://fr.wot-life.com/eu/player/"+clanStats.creator_name+"-"+clanStats.creator_id+")", true)
+            .addField(message.language.get("CLAN_HEADERS")[2], message.language.printDate(new Date(clanStats.created_at*1000)), true)
+            .addField(message.language.get("CLAN_HEADERS")[3], clanStats.members_count, true)
+            .addField(message.language.get("CLAN_HEADERS")[4], (!clanStats.private) ? message.language.get("NO") : message.language.get("YES"), true)
+            .addField(message.language.get("CLAN_HEADERS")[5], clanStats.wn8.now, true)
+            .addField(message.language.get("CLAN_HEADERS")[6], clanStats.description || message.language.get("NO_DESCRIPTION"), true);
+
+        if(clanStats.motto){
+            embed.setDescription(clanStats.motto);
+        }
         
-        var client = this.client;
-
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async (m) => {
-
-            var clanID;
-
-            if(message.mentions.users.first()){
-                if(utils.usersData[1].wot === 'unknow'){
-                    return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
-                } else {
-                    var clanData = await client.functions.getClan(utils.usersData[1].wot.account_id, client).catch((err) => {
-                        return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
-                    });
-                    clanID = clanData.clan_id;
-                }
-            } else if(args[0]){
-                // Search all clans
-                var clanData = await client.functions.searchClan(args.join(" "), client).catch((err) => {
-                    return m.edit(message.language.get("CLAN_NOT_FOUND", args.join(" ")));
-                });
-                clanID = clanData.clan_id;
-            } else if(!args[0]) {
-                if(utils.usersData[0].wot === "unknow"){
-                    return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
-                } else {
-                    clanData = await client.functions.getClan(utils.usersData[0].wot.account_id, client).catch((err) => {
-                        return m.edit(message.language.get("NO_CLAN"));
-                    });
-                    clanID = clanData.clan_id;
-                }
-            }
-
-            // Gets the stats of the clan
-            var clanStats = await client.functions.getClanStats(clanID, client);
-            var clanWN8 = await client.functions.getClanWN8(clanID, clanStats.tag);
-
-            var embed = new Discord.RichEmbed()
-                .setColor(clanWN8.color)
-                .setFooter(utils.embed.footer)
-                .setAuthor(clanStats.name, clanStats.emblems.x195.portal)
-                .setImage(clanStats.emblems.x195.portal)
-                .addField(message.language.get("CLAN_HEADERS")[0], "["+clanStats.name+"](https://eu.wargaming.net/clans/wot/"+clanID+")", true)
-                .addField(message.language.get("CLAN_HEADERS")[1], "["+clanStats.creator_name+"](https://fr.wot-life.com/eu/player/"+clanStats.creator_name+"-"+clanStats.creator_id+")", true)
-                .addField(message.language.get("CLAN_HEADERS")[2], message.language.printDate(new Date(clanStats.created_at*1000)), true)
-                .addField(message.language.get("CLAN_HEADERS")[3], clanStats.members_count, true)
-                .addField(message.language.get("CLAN_HEADERS")[4], (!clanStats.private) ? message.language.get("NO") : message.language.get("YES"), true)
-                .addField(message.language.get("CLAN_HEADERS")[5], clanWN8.now, true)
-                .addField(message.language.get("CLAN_HEADERS")[6], clanStats.description || message.language.get("NO_DESCRIPTION"), true);
-
-            if(clanStats.motto){
-                embed.setDescription(clanStats.motto);
-            }
-            
-            m.edit(message.language.get("CLAN_SUCCESS", clanStats.name), embed);
-        });
+        m.edit(message.language.get("CLAN_SUCCESS", clanStats.name), embed);
     }
 
 }
