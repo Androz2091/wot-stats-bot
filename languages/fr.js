@@ -38,7 +38,7 @@ module.exports = class {
 			MISSING_BOT_PERMS: (perms) => e.error+" | Il me manque les permissions suivantes pour effectuer cette commande : "+perms,
 			ADMIN_ONLY: e.error+" | Seuls les administrateurs du bots peuvent effectuer cette commande !",
 			MISSING_PERMS: (perm) => e.error+" | Cette commande nécessite la permission `"+perm+"` !",
-			NOT_LINKED: (prefix) => e.error+" | Vous n'avez actuellement aucun compte lié ! Veuillez en lier un avec `"+prefix+"link [nickname]` !",
+			NOT_LINKED: (prefix) => e.error+" | Vous n'avez actuellement aucun compte lié ! Veuillez en lier un avec `"+prefix+"link [serveur] [pseudo]` !",
 			NOT_LINKED_USER: (user) => e.error+" | **"+user.tag+"** n'a pas de compte WoT relié !",
 			ACCOUNT_NOT_FOUND: (nickname) => e.error+" | Aucun compte trouvé pour `"+nickname+"` !",
 			PLEASE_WAIT: e.loading+" | Veuillez patienter...",
@@ -46,6 +46,7 @@ module.exports = class {
 			NO_CLAN: e.error+" | Vous n'êtes pas dans un clan !",
 			NO_CLAN_USER: (nickname) => e.error+" | **"+nickname+"** n'est pas dans un clan !",
 			CLAN_NOT_FOUND: (clan) => e.error+" | Aucun clan trouvé pour `"+clan+"` !",
+			VALID_NICKNAME: e.error+" | Veuillez entrer un pseudo Wot !",
 
 			/* HELP COMMAND */
 
@@ -68,11 +69,13 @@ module.exports = class {
 
 			// Utils
 			LINK_DESCRIPTION: "Lie votre compte WoT à votre compte Discord !",
-			LINK_USAGE: "link [pseudo]",
-			LINK_EXAMPLES: "$link ThibaudFvrx",
+			LINK_USAGE: "link [na/asia/eu/ru] [pseudo]",
+			LINK_EXAMPLES: "$link eu ThibaudFvrx",
 			// Errors
 			LINK_ALREADY_LINKED: (prefix) => e.error+" | Vous avez déjà lié un compte WoT ! Tapez `"+prefix+"unlink` puis rééssayez !",
 			LINK_NICKNAME: e.error+" | Veuillez entrer votre pseudo WoT !",
+			LINK_REALM: e.error+" | Vous devez entrer un serveur ! Voilà la liste des serveurs: `asia`, `eu` (europe), `na` (amérique du nord), `ru` (russie) !",
+			LINK_BAD_REALM: (realm) => e.error+" | `"+realm+"` n'est pas un serveur valide ! Voilà la liste des serveurs: `asia`, `eu` (europe), `na` (amérique du nord), `ru` (russie) !",
 			// Success
 			LINK_SEARCH: e.loading+" | Recherche du compte...",
 			LINK_SUCCESS: (prefix) => e.success+" | Votre compte WoT a été correctement lié à votre compte Discord ! Pour voir votre profil, tapez `"+prefix+"profil` !",
@@ -257,6 +260,13 @@ module.exports = class {
 			// Errors
 			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | Aucun serveur trouvé avec `"+id+"` !",
 			GETINVITE_MISSING_ID: e.error+" | Vous devez entrer une ID de serveur !",
+
+			/* EVAL COMMAND */
+
+			// Utils
+			EVAL_DESCRIPTION: "Exécute le code",
+			EVAL_USAGE: "eval [code]",
+			EVAL_EXAMPLES: "$eval message.channel.send('Coucou');",
 
 			/* SUGGEST COMMAND */
 

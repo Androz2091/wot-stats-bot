@@ -23,6 +23,7 @@ module.exports = class {
 			PAGE: "Page",
 			MEMBERS: "Members",
 			TOTAL_SERVERS:"Total servers",
+			NO_TANKS: (tier) => "No tanks of `"+tier+"` tier to display!",
 
 			/* DEFAULT MESSAGES */
 			NO_DESCRIPTION_PROVIDED: "No description provided",
@@ -35,7 +36,7 @@ module.exports = class {
 			MISSING_BOT_PERMS: (perms) => e.error+" | I am missing the following permissions to perform this command: "+perms,
 			ADMIN_ONLY: e.error+" | Only bots administrators can execute this command!",
 			MISSING_PERMS: (perm) => e.error+" | This command requires permission `"+perm+"` !",
-			NOT_LINKED: (prefix) => e.error+" | You currently have no linked accounts! Please link one with `"+prefix+"link [nickname]` !",
+			NOT_LINKED: (prefix) => e.error+" | You currently have no linked accounts! Please link one with `"+prefix+"link [server] [nickname]` !",
 			NOT_LINKED_USER: (user) => e.error+" | **"+user.tag+"** has no WoT account linked!",
 			ACCOUNT_NOT_FOUND: (nickname) => e.error+" | No accounts found for `"+nickname+"` !",
 			PLEASE_WAIT: e.loading+" | Please wait...",
@@ -65,11 +66,14 @@ module.exports = class {
 
 			// Utils
 			LINK_DESCRIPTION: "Link your WoT account to your Discord account!",
-			LINK_USAGE: "link [nickname]",
-			LINK_EXAMPLES: "$link ThibaudFvrx",
+			LINK_USAGE: "link [na/asia/eu/ru] [nickname]",
+			LINK_EXAMPLES: "$link eu ThibaudFvrx",
 			// Errors
 			LINK_ALREADY_LINKED: (prefix) => e.error+" | You have already linked a WoT account! Type `"+prefix+"unlink` and try again!",
 			LINK_NICKNAME: e.error+" | Please enter your WoT nickname!",
+			LINK_REALM: e.error+" | You must specify a server! Here's the list of servers: `asia`, `eu` (europe), `na` (north america), `ru` (russia)!",
+			LINK_BAD_REALM: (realm) => e.error+" | `"+realm+"` is not a valid server! Here's the list of servers: `asia`, `eu` (europe), `na` (north america), `ru` (russia)!",
+			// Success
 			LINK_SEARCH: e.loading+" | Account search....",
 			LINK_SUCCESS: (prefix) => e.success+" | Your WoT account has been correctly linked to your Discord account! To see your profile, type `"+prefix+"profile` !",
 
@@ -253,6 +257,13 @@ module.exports = class {
 			// Errors
 			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | No servers found with `"+id+"`!",
             GETINVITE_MISSING_ID: e.error+" | You must enter a server ID!",
+
+			/* EVAL COMMAND */
+
+			// Utils
+			EVAL_DESCRIPTION: "Executes the code",
+			EVAL_USAGE: "eval [code]",
+			EVAL_EXAMPLES: "$eval message.channel.send('Hey');",
 
             /* SUGGEST COMMAND */
 
