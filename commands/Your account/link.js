@@ -28,32 +28,36 @@ class Link extends Command {
 
     async run (message, args, utils) {
         
-        var client = this.client;
+        let client = this.client;
 
         // if an account is already linked
         if(utils.usersData[0].wot !== "unknow"){
             return message.channel.send(message.language.get("LINK_ALREADY_LINKED", utils.guildData.prefix));
         }
 
-        // if no nickname is provided
+        // if no realm is provided
         if(!args[0]){
+            return message.channel.send(message.language.get("LINK_REALM"));
+        }
+        let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+        if(!realm){
+            return message.channel.send(message.language.get("LINK_BAD_REALM", args[0]));
+        }
+
+        // if no nickname is provided
+        if(!args[1]){
             return message.channel.send(message.language.get("LINK_NICKNAME"));
         }
 
-        // Send a waiting message
-        message.channel.send(message.language.get("LINK_SEARCH")).then((m) => {
-            // Search all accounts
-            this.client.functions.searchAccount(args[0], this.client).then((account) => {
-                // if an account was found
-                m.edit(message.language.get("LINK_SUCCESS", utils.guildData.prefix)); // edit the message
-                // Updates datastructures
-                return client.databases[0].set(message.author.id+".wot", account);
-            }).catch((err) => {
-                console.log(err)
-                // if no account was found
-                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0])); // edit the message
-            });
+        let m = await message.channel.send(message.language.get("LINK_SEARCH"));
+        
+        client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).then((player) => {
+            m.edit(message.language.get("LINK_SUCCESS", utils.guildData.prefix));
+            return client.databases[0].set(message.author.id+".wot", player);
+        }).catch((err) => {
+            return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
         });
+
     }
     
 };
