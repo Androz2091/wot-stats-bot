@@ -11,13 +11,13 @@ class Wot extends Client {
         this.config = require("../config.js"); // Load the config file
         this.commands = new Collection(); // Creates new commands collection
         this.aliases = new Collection(); // Creates new command aliases collection
-        this.logger = require("../utils/logger.js"); // Load the logger file
+        this.logger = require("../includes/logger.js"); // Load the logger file
         this.wait = require("util").promisify(setTimeout); // client.wait(1000) - Wait 1 second
-        this.functions = require("../utils/functions.js"); // Load the functions file
+        this.functions = require("../includes/functions.js"); // Load the functions file
         this.databases = [ // Create tables (quick.db)
             new Quickdb.Table("users"),
             new Quickdb.Table("guilds")
-        ]
+        ];
     };
 
     // This function is used to load a command and add it to the collection
