@@ -61,30 +61,7 @@ module.exports = {
         // Log in the console
         client.logger.log("User "+user.username+" registered ! ID : "+user.id);
     },
-
-    /**
-     * Gets the link of a Discord server
-     * 
-     * @param {object} guild The Discord server
-     * @param {object} opt The options for create the invite
-     * @param {object} client The Discord Client
-     * 
-     * @returns {string} The invite URL
-     */
-    async getInviteURL(guild, opt, client){
-        return new Promise(async function(resolve, reject) {
-            var channel = guild.channels.filter(ch => ch.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE")).first();
-            if(channel){
-                var invite = await channel.createInvite(opt || {}).catch(err => {
-                    return reject("An error occurenced");
-                });
-                return resolve(invite.url);
-            } else {
-                return reject("Cannot create invite, missing permission.");
-            }
-        });
-    },
-
+    
     /**
      * Gets the percentage between two numbers
      * 

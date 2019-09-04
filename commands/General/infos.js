@@ -50,7 +50,7 @@ class Infos extends Command {
                 message.language.get("INFOS_FIELDS", message.language.convertMs(this.client.uptime))[1]
             )
             .addField(message.language.get("INFOS_HEADERS", this.client)[6],
-                message.language.get("INFOS_FIELDS", await this.client.functions.getInviteURL(this.client.guilds.get(this.client.config.supportGuild.ID), {maxAge:0}, this.client))[2]
+                message.language.get("INFOS_FIELDS", "https://discord.gg/Vu4tb4t")[2]
             );
 
 

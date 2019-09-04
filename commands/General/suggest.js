@@ -43,8 +43,8 @@ class Suggest extends Command {
             .setFooter(utils.embed.footer)
             .setTimestamp();
         channel.send(suggEmbed).then(async (msg) => {
-            await msg.react(Discord.Util.parseEmoji(this.client.emojis.success).id);
-            await msg.react(Discord.Util.parseEmoji(this.client.emojis.error).id);
+            await msg.react(Discord.Util.parseEmoji(this.client.config.emojis.success).id);
+            await msg.react(Discord.Util.parseEmoji(this.client.config.emojis.error).id);
             message.channel.send(message.language.get("SUGGEST_SUCCESS"));
         });
     }

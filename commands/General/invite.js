@@ -30,7 +30,7 @@ class Invite extends Command {
         var embed = new Discord.RichEmbed()
             .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL)
             .addField(message.language.get("INVITE_HEADERS")[0], await this.client.generateInvite(2146958847))
-            .addField(message.language.get("INVITE_HEADERS")[1], await this.client.functions.getInviteURL(this.client.guilds.get(this.client.config.supportGuild.ID), {maxAge:0}, this.client))
+            .addField(message.language.get("INVITE_HEADERS")[1], "https://discord.gg/Vu4tb4t")
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer);
 

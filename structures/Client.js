@@ -18,6 +18,7 @@ class Wot extends Client {
             new Quickdb.Table("users"),
             new Quickdb.Table("guilds")
         ];
+        this.realms = require("../includes/realms.json");
     };
 
     // This function is used to load a command and add it to the collection

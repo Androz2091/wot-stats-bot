@@ -168,7 +168,7 @@ class Wargamer {
             const realmData = (options ? realms.find((r) => r.name === options.realm || r.aliases.includes(options.realm)) : realms[0]);
             let tanks = await _this.get(`${realmData.baseURL}/wot/account/tanks/?account_id=${options.ID}&application_id=${_this.apiKey}`);
             tanks = tanks[options.ID];
-            let tanksList = await _this._getTanksInfos.call(_this, tanks);
+            let tanksList = await _this._getTanksInfos.call(_this, tanks, realmData.baseURL);
             resolve(tanksList);
         });
     }
@@ -178,7 +178,7 @@ class Wargamer {
      * @param {array} tanks The tanks to fetch
      * @returns {Promise<Array>}
      */
-    async _getTanksInfos(tanks){
+    async _getTanksInfos(tanks, baseURL){
         let _this = this;
         return new Promise(async function(resolve, reject) {
             const tanksInfos = [];
@@ -191,7 +191,7 @@ class Wargamer {
                     return resolve(tanksInfos);
                 }
                 let t = tanks[i];
-                let infos = await _this.get(`https://api.worldoftanks.eu/wot/encyclopedia/vehicles/?application_id=${_this.apiKey}&tank_id=${t.tank_id}`);
+                let infos = await _this.get(`${baseURL}/wot/encyclopedia/vehicles/?application_id=${_this.apiKey}&tank_id=${t.tank_id}`);
                 tanksInfos.push({...infos[t.tank_id], ...t});
             }
                 
