@@ -1,6 +1,12 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
+const asyncForEach = async (array, callback) => {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
+}
+
 class Tanks extends Command {
 
     constructor (client) {
@@ -28,103 +34,82 @@ class Tanks extends Command {
 
     async run (message, args, utils) {
         
-        var client = this.client;
+        let client = this.client;
 
-        message.channel.send(message.language.get("PLEASE_WAIT")).then(async (m) => {
+        let m = await message.channel.send(message.language.get("PLEASE_WAIT"));
 
-            var ID;
+        let userData;
 
-            if(message.mentions.users.first()){
-                if(utils.usersData[1].wot === 'unknow'){
-                    return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
-                } else {
-                    ID = utils.usersData[1].wot.account_id;
-                }
-            } else if(args[0]){
-                // Search all accounts
-                var account = await client.functions.searchAccount(args[0], client).catch((err) => {
-                    return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args[0]));
-                });
-                ID = account.account_id;
-            } else if(!args[0]) {
-                if(utils.usersData[0].wot === "unknow"){
-                    return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
-                } else {
-                    ID = utils.usersData[0].wot.account_id;
-                }
-            };
-
-            // Gets the stats of the user
-            var stats = await client.functions.getStats(ID, client).catch((err) => {
-                return message.channel.send(message.language.get("ERROR"));
+        if(message.mentions.users.first()){
+            if(utils.usersData[1].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
+            } else {
+                userData = utils.usersData[1].wot;
+            }
+        } else if(args[0]){
+            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
+            if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
+            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
             });
+        } else if(!args[0]){
+            if(utils.usersData[0].wot === "unknow"){
+                return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
+            } else {
+                userData = utils.usersData[0].wot;
+            }
+        }
 
-            // Gets the tanks of the user
-            var tanks = await client.functions.getTanks(ID, client).catch((err) => {
-                return message.channel.send(message.language.get("ERROR"));
-            });
-            
+        if(!userData) return;
+        let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true);
+        let tanks = stats.tanks;
 
-           var embed = new Discord.RichEmbed()
-                .setColor(stats.wn8.color)
-                .setFooter(utils.embed.footer)
-                .setAuthor(stats.nickname, client.user.displayAvatarURL)
-                .setDescription(message.language.get("TANKS_CHOOSE_TIER"));
-            
-            var msg = await m.edit(embed);
-            var rCollector = msg.createReactionCollector((reaction, user) => user.id === message.author.id);
+        let embed = new Discord.RichEmbed()
+            .setColor(stats.wn8.color)
+            .setFooter(utils.embed.footer, stats.realmData.iconURL)
+            .setAuthor(stats.nickname, client.user.displayAvatarURL)
+            .setDescription(message.language.get("TANKS_CHOOSE_TIER"));
+        
+        let msg = await m.edit(embed);
+        let rCollector = msg.createReactionCollector((reaction, user) => user.id === message.author.id, { time: 60000 });
+        
+        await asyncForEach(client.config.emojis.numbers, async (emoji) => {
+            await msg.react(Discord.Util.parseEmoji(emoji).id);
+        });
 
-            await msg.react(client.emojis.find((e) => e.name === "E1"));
-            await msg.react(client.emojis.find((e) => e.name === "E2"));
-            await msg.react(client.emojis.find((e) => e.name === "E3"));
-            await msg.react(client.emojis.find((e) => e.name === "E4"));
-            await msg.react(client.emojis.find((e) => e.name === "E5"));
-            await msg.react(client.emojis.find((e) => e.name === "E6"));
-            await msg.react(client.emojis.find((e) => e.name === "E7"));
-            await msg.react(client.emojis.find((e) => e.name === "E8"));
-            await msg.react(client.emojis.find((e) => e.name === "E9"));
-            await msg.react(client.emojis.find((e) => e.name === "E10"));
-
-            var timeOut = setTimeout(function(){
-                rCollector.stop();
-            }, 60000);
-            
-            rCollector.on("end", (data, reason) => {
-                msg.clearReactions();
-                if(reason !== "OK"){
-                    embed.setTitle("").setDescription(message.language.get("TANKS_TIMEOUT"));
-                    msg.edit(embed);
-                }
-            });
-
-            rCollector.on("collect", async (reaction) => {
-
-                var users = await reaction.fetchUsers();
-                if(!users.get(client.user.id)){
-                    return;
-                }
-                
-                rCollector.stop("OK");
-
-                var tier = reaction._emoji.name.substr(1, reaction._emoji.name.length);
-                var star = client.emojis.find(e => e.name === "star");
-                var toDisplay = tanks.filter(t => t.tier === parseInt(tier, 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
-                if(toDisplay.length < 1){
-                    embed.setDescription(message.language.get("NO_TANKS", tier));
-                } else {
-                    toDisplay.forEach(tank => {
-                        var title = (tank.is_premium ? star+" "+tank.short_name : tank.short_name);
-                        embed.addField(title,
-                            message.language.get("TANKS_FIELDS")[0]+tank.statistics.battles+"\n"+
-                            message.language.get("TANKS_FIELDS")[1]+tank.mark_of_mastery+"\n"+
-                            message.language.get("TANKS_FIELDS")[2]+tank.nation,
-                            true
-                        );
-                    });
-                    embed.setDescription("");
-                }
+        rCollector.on("end", (data, reason) => {
+            msg.clearReactions();
+            if(reason !== "OK"){
+                embed.setTitle("").setDescription(message.language.get("TANKS_TIMEOUT"));
                 msg.edit(embed);
-            });
+            }
+        });
+
+        rCollector.on("collect", async (reaction) => {
+
+            let users = await reaction.fetchUsers();
+            if(!users.get(client.user.id)) return;
+            
+            rCollector.stop("OK");
+
+            var tier = reaction._emoji.name.substr(4, reaction._emoji.name.length);
+            var toDisplay = tanks.filter(t => t.tier === parseInt(tier, 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
+            if(toDisplay.length < 1){
+                embed.setDescription(message.language.get("NO_TANKS", tier));
+            } else {
+                toDisplay.forEach(tank => {
+                    var title = (tank.is_premium ? client.config.emojis.star+" "+tank.short_name : tank.short_name);
+                    embed.addField(title,
+                        message.language.get("TANKS_FIELDS")[0]+tank.statistics.battles+"\n"+
+                        message.language.get("TANKS_FIELDS")[1]+tank.mark_of_mastery+"\n"+
+                        message.language.get("TANKS_FIELDS")[2]+tank.nation,
+                        true
+                    );
+                });
+                embed.setDescription("");
+            }
+            msg.edit(embed);
         });
     }
 
