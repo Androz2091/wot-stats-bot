@@ -38,24 +38,24 @@ class Clan extends Command {
             if(utils.usersData[1].wot === "unknow"){
                 return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
             } else {
-                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.userData[1].wot.realm, ID: utils.userData[1].wot.ID }, false);
+                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.userData[1].wot.realm, ID: utils.userData[1].wot.ID }, false, false);
                 if(!userStats.clan_id){
                     return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
                 }
                 clanData = { realm: utils.usersData[1].wot.realm, ID: userStats.clan_id };
             }
         } else if(args[0]){
-            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+            let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
             if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
             if(!args[1]) return m.edit(message.language.get("VALID_CLAN"));
-            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
                 return m.edit(message.language.get("CLAN_NOT_FOUND", args.slice(1).join(" ")));
             });
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
                 return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
             } else {
-                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.usersData[0].wot.realm, ID: utils.usersData[0].wot.ID }, false);
+                let userStats = await client.Wargamer.getPlayerStats({ realm: utils.usersData[0].wot.realm, ID: utils.usersData[0].wot.ID }, false, false);
                 if(!userStats.clan_id){
                     return m.edit(message.language.get("NO_CLAN_USER", message.mentions.users.first().tag));
                 }
