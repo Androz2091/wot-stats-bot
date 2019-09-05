@@ -47,10 +47,10 @@ class Tanks extends Command {
                 userData = utils.usersData[1].wot;
             }
         } else if(args[0]){
-            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
-            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
+            let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
+            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0].toLowerCase()));
             if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
-            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
                 return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
             });
         } else if(!args[0]){
@@ -62,7 +62,7 @@ class Tanks extends Command {
         }
 
         if(!userData) return;
-        let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true);
+        let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true, true);
         let tanks = stats.tanks;
 
         let embed = new Discord.RichEmbed()
