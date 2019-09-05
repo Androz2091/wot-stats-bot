@@ -45,10 +45,10 @@ class ClanStats extends Command {
                 clanData = { realm: utils.usersData[1].wot.realm, ID: userStats.clan_id };
             }
         } else if(args[0]){
-            let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
+            let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
             if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
             if(!args[1]) return m.edit(message.language.get("VALID_CLAN"));
-            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0] }).catch((err) => {
+            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
                 return m.edit(message.language.get("CLAN_NOT_FOUND", args.slice(1).join(" ")));
             });
         } else if(!args[0]){
@@ -69,7 +69,7 @@ class ClanStats extends Command {
 
         let embed = new Discord.RichEmbed()
             .setColor(clanStats.wn8.color)
-            .setFooter(utils.embed.footer)
+            .setFooter(utils.embed.footer, clanStats.realmData.iconURL)
             .setAuthor(clanStats.name, clanStats.emblems.x195.portal)
             .addField(message.language.get("CLANSTATS_HEADERS")[0], "["+clanStats.name+"](https://eu.wargaming.net/clans/wot/"+clanData.clan_id+"/)\n\n"+message.language.get("CLANSTATS_TITLES")[0], true);
 
