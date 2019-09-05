@@ -38,10 +38,11 @@ class Wargamer {
      * @param {object} options
      * @param {string} options.realm The realm server of the player
      * @param {string} options.ID The id of the player to fetch
-     * @param {boolean} largeStats Whether to fetch large stats
+     * @param {boolean} fetchWN8 Whether to fetch WN8 score
+     * @param {boolean} fetchTanks Whether to fetch tanks infos
      * @returns {Promise<object>}
      */
-    async getPlayerStats(options, largeStats){
+    async getPlayerStats(options, fetchWN8, fetchTanks){
         let _this = this;
         return new Promise(async function(resolve, reject){
             const realmData = (options ? realms.find((r) => r.name === options.realm || r.aliases.includes(options.realm)) : realms[0]);
@@ -51,8 +52,10 @@ class Wargamer {
                 let clanData = await _this.get(`${realmData.baseURL}/wot/stronghold/claninfo/?clan_id=${playerData.clan_id}&application_id=${_this.apiKey}`);
                 playerData.clan = clanData[playerData.clan_id];
             }
-            if(largeStats){
+            if(fetchWN8){
                 playerData.wn8 = await _this.getPlayerWn8({ realm: realmData.name, ID: options.ID, nickname: playerData.nickname });
+            }
+            if(fetchTanks){
                 playerData.tanks = await _this.getPlayerTanks.call(_this, { realm: realmData.name, ID: options.ID });
             }
             resolve({...playerData, ...{ realmData }});
