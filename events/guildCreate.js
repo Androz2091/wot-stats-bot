@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = class {
     constructor (client) {
       this.client = client;
@@ -5,13 +7,15 @@ module.exports = class {
     
     async run (guild) {
         
-        // Loads discord lib
-        var Discord = require("discord.js");
-        
+        let usersCount = guild.members.filter((m) => !m.user.bot).size,
+        botsCount = guild.members.filter((m) => m.user.bot).size;
+
         // Sends log embed in the logs channel
-        var embed = new Discord.RichEmbed().setAuthor(guild.name, guild.iconURL).setColor("#32CD32").setDescription("J'ai rejoint **"+guild.name+"**, avec **"+guild.members.filter((m) => !m.user.bot).size+"** membres (et "+guild.members.filter((m) => m.user.bot).size+" bots)");
-        this.client.config.supportGuild.serversLogs.forEach((channelID) => {
-            this.client.channels.get(channelID).send(embed);
-        });
+        let embed = new Discord.RichEmbed()
+            .setAuthor(guild.name, guild.iconURL)
+            .setColor("#32CD32")
+            .setDescription("J'ai rejoint **"+guild.name+"**, avec **"+usersCount+"** membres (et "+botsCount+" bots)");
+        let channel = this.client.channels.get(this.client.config.supportGuild.serversLogs);
+        channel.send(embed);
     }
 };
