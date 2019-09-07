@@ -1,7 +1,5 @@
 # WoT-Bot
 
-A Discord bot that displays your World Of Tanks stats developed by Androz!
-
 ## Features
 
 Wot Stats is an open source Discord bot developed by [Androz2091](https://github.com/Androz2091) to simply display the statistics of World of Tanks players on Discord!
