@@ -8,7 +8,7 @@ module.exports = class {
 
     async run () {
 
-        var client = this.client;
+        let client = this.client;
 
         // Logs some informations using the logger file
         this.client.logger.log("Loading a total of "+client.commands.size+" command(s).", "log");
@@ -20,21 +20,18 @@ module.exports = class {
         dbl.postStats(this.client.guilds.size);
         
         // Update the game every 20s
-        var games = [
-            {
-                name:"w!help on ${servs} servers",
-                type:"PLAYING"
-            }
+        const games = [
+            { name: "w!help on ${servs} servers", type: "PLAYING" }
         ];
-        var i = 0;
+        let i = 0;
         setInterval(function(){
             client.user.setActivity(games[i].name.replace("${servs}", client.guilds.size).replace("${members}", client.users.size), {type: games[i].type});
-            if(games[parseInt(i + 1, 10)]){
-                i++;
-            }
-            else{
-                i = 0;
-            }
+            if(games[parseInt(i + 1, 10)]) i++
+            else i = 0;
         }, 20000);
+
+        // Load API
+        const api = require("../includes/api");
+        api.load(client);
     }
 };

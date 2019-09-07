@@ -76,5 +76,8 @@ module.exports = class {
         // run the command
         cmd.run(message, args, utils);
 
+        if(!client.databases[2].get("commands")) client.databases[2].set("commands", []);
+        client.databases[2].push("commands", {name:cmd.help.name,date:Date.now()});
+
     }
 };

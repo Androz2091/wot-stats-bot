@@ -16,7 +16,8 @@ class Wot extends Client {
         this.functions = require("../includes/functions.js"); // Load the functions file
         this.databases = [ // Create tables (quick.db)
             new Quickdb.Table("users"),
-            new Quickdb.Table("guilds")
+            new Quickdb.Table("guilds"),
+            new Quickdb.Table("commands")
         ];
         this.realms = require("../includes/realms.json");
     };
