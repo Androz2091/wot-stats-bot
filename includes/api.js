@@ -38,6 +38,19 @@ module.exports.load = (client) => {
         });
     });
 
+    app.get("/commandsList", (req, res) => {
+        res.send({
+            status: "success",
+            commandsList: client.commands.filter((c) => c.help.category !== "Bot Admin").map((c) => {
+                return {
+                    category: c.help.category,
+                    name: c.help.name,
+                    description: c.help.description(new(require("../languages/"+client.config.defaultLanguage)))
+                };
+            }).sort((a, b) => a.category - b.category)
+        });
+    });
+
     app.get("/", (req, res) => {
         res.send({
             status: "success",
