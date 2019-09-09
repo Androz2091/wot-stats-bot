@@ -4,16 +4,20 @@ app = express();
 module.exports.load = (client) => {
 
     app.get("/guildsCount", (req, res) => {
-        res.send({
-            status: "success",
-            guildsCount: client.guilds.size
+        client.shard.fetchClientValues("guilds.size").then((results) => {
+            res.send({
+                status: "success",
+                guildsCount: results.reduce((prev, guildsCount) => prev + guildsCount)
+            });
         });
     });
 
     app.get("/usersCount", (req, res) => {
-        res.send({
-            status: "success",
-            usersCount: client.users.size
+        client.shard.fetchClientValues("users.size").then((results) => {
+            res.send({
+                status: "success",
+                usersCount: results.reduce((prev, usersCount) => prev + usersCount)
+            });
         });
     });
 

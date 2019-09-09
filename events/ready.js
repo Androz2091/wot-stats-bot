@@ -24,11 +24,15 @@ module.exports = class {
             { name: "w!help on ${servs} servers", type: "PLAYING" }
         ];
         let i = 0;
-        setInterval(function(){
-            client.user.setActivity(games[i].name.replace("${servs}", client.guilds.size).replace("${members}", client.users.size), {type: games[i].type});
-            if(games[parseInt(i + 1, 10)]) i++
-            else i = 0;
-        }, 20000);
+        const updateActivity = () => {
+            client.shard.fetchClientValues("guilds.size").then((results) => {
+                let count = results.reduce((prev, guildCount) => prev + guildCount, 0);
+                client.user.setActivity(games[i].name.replace("${servs}", count), { type: games[i].type });
+                if(games[parseInt(i + 1, 10)]) i++
+                else i = 0;
+            });
+        };
+        setInterval(updateActivity, 25000);
 
         if(client.shard.id === 0){
             // Load API
