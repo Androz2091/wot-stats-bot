@@ -11,7 +11,7 @@ module.exports = class {
         let client = this.client;
 
         // Logs some informations using the logger file
-        this.client.logger.log("Loading a total of "+client.commands.size+" command(s).", "log");
+        this.client.logger.log("Loading a total of "+client.commands.size+" command(s). 👌", "log");
         this.client.logger.log(client.user.tag+", ready to serve "+client.users.size+" users in "+client.guilds.size+" servers.", "ready");
 
         // Post DBL stats
@@ -30,8 +30,10 @@ module.exports = class {
             else i = 0;
         }, 20000);
 
-        // Load API
-        const api = require("../includes/api");
-        api.load(client);
+        if(client.shard.id === 0){
+            // Load API
+            const api = require("../includes/api");
+            api.load(client);
+        }
     }
 };

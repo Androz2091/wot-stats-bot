@@ -71,7 +71,19 @@ module.exports = class {
 
         // send logs
         client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
-        client.channels.get(this.client.config.supportGuild.commandsLogs).send(new Discord.RichEmbed().setAuthor(message.author.tag, message.author.displayAvatarURL).setColor("#DDA0DD").setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
+        let embed = JSON.stringify(new Discord.RichEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setColor("#DDA0DD")
+            .setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
+
+        client.shard.broadcastEval(`
+            let embed = JSON.parse('${embed}');
+            let channel = this.channels.get(this.config.supportGuild.commandsLogs);
+            if(channel){
+                channel.send({ embed });
+                true;
+            } else false;
+        `);
 
         // run the command
         cmd.run(message, args, utils);
