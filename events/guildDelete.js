@@ -12,11 +12,18 @@ module.exports = class {
         botsCount = guild.members.filter((m) => m.user.bot).size;
 
         // Sends log embed in the logs channel
-        let embed = new Discord.RichEmbed()
+        let embed = JSON.stringify(new Discord.RichEmbed()
             .setAuthor(guild.name, guild.iconURL)
             .setColor("#B22222")
-            .setDescription("Quelqu'un m'a expulsé de **"+guild.name+"** avec **"+usersCount+"** membres (et "+botsCount+" bots)");
-        let channel = this.client.channels.get(this.client.config.supportGuild.serversLogs);
-        channel.send(embed);
+            .setDescription("Quelqu'un m'a expulsé de **"+guild.name+"** avec **"+usersCount+"** membres (et "+botsCount+" bots)"));
+
+        client.shard.broadcastEval(`
+            let embed = JSON.parse('${embed}');
+            let channel = this.channels.get(this.config.supportGuild.serversLogs);
+            if(channel){
+                channel.send({ embed });
+                true;
+            } else false;
+        `);
     }
 };
