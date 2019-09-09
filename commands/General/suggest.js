@@ -29,24 +29,30 @@ class Suggest extends Command {
     async run (message, args, utils) {
 
         // Gets the suggestion
-        var suggestion = args.join(" ");
+        let suggestion = args.join(" ");
         if(!suggestion){
             return message.channel.send(message.language.get("SUGGEST_MISSING_SUGGESTION"));
         }
 
-        var channel = this.client.channels.get(this.client.config.supportGuild.suggestions);
-
-        var suggEmbed = new Discord.RichEmbed()
+        let suggEmbed = JSON.stringify(new Discord.RichEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(suggestion)
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer)
-            .setTimestamp();
-        channel.send(suggEmbed).then(async (msg) => {
-            await msg.react(Discord.Util.parseEmoji(this.client.config.emojis.success).id);
-            await msg.react(Discord.Util.parseEmoji(this.client.config.emojis.error).id);
-            message.channel.send(message.language.get("SUGGEST_SUCCESS"));
-        });
+            .setTimestamp());
+        this.client.shard.broadcastEval(`
+            let Discord = require("discord.js");
+            let embed = JSON.parse('${suggEmbed}');
+            let channel = this.channels.get(this.config.supportGuild.suggestions);
+            if(channel){
+                channel.send({ embed }).then(async (m) => {
+                    await m.react(Discord.Util.parseEmoji(this.config.emojis.success).id);
+                    await m.react(Discord.Util.parseEmoji(this.config.emojis.error).id);
+                });
+                true;
+            } else false;
+        `);
+        message.channel.send(message.language.get("SUGGEST_SUCCESS"));
     }
 
 };
