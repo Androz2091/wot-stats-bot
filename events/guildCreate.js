@@ -14,7 +14,7 @@ module.exports = class {
         let embed = JSON.stringify(new Discord.RichEmbed()
             .setAuthor(guild.name, guild.iconURL)
             .setColor("#32CD32")
-            .setDescription("J'ai rejoint **"+guild.name+"**, avec **"+usersCount+"** membres (et "+botsCount+" bots)"));
+            .setDescription("**"+guild.name+"**, avec **"+usersCount+"** membres et "+botsCount+" bots"));
         
         this.client.shard.broadcastEval(`
             let embed = JSON.parse('${embed}');

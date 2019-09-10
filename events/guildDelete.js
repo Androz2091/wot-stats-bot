@@ -15,9 +15,9 @@ module.exports = class {
         let embed = JSON.stringify(new Discord.RichEmbed()
             .setAuthor(guild.name, guild.iconURL)
             .setColor("#B22222")
-            .setDescription("Quelqu'un m'a expulsé de **"+guild.name+"** avec **"+usersCount+"** membres (et "+botsCount+" bots)"));
+            .setDescription("**"+guild.name+"** avec **"+usersCount+"** membres et "+botsCount+" bots"));
 
-        this.client.shard.broadcastEval(`
+        client.shard.broadcastEval(`
             let embed = JSON.parse('${embed}');
             let channel = this.channels.get(this.config.supportGuild.serversLogs);
             if(channel){
