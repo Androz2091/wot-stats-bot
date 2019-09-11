@@ -28,30 +28,41 @@ class Infos extends Command {
 
     async run (message, args, utils) {
 
-        var stats_headers = message.language.get("INFOS_HEADERS", this.client);
+        const infosHeaders = message.language.get("INFOS_HEADERS", this.client);
 
-        var embed = new Discord.RichEmbed()
+        let guildsCounts = await this.client.shard.fetchClientValues("guilds.size");
+        let guildsCount = guildsCounts.reduce((p, count) => p+count);
+        
+        let results = await this.client.shard.broadcastEval(`
+            [
+                Math.round((process.memoryUsage().heapUsed / 1024 / 1024)),
+                this.guilds.size,
+                this.shard.id,
+                Math.round(this.ping)
+            ]
+        `);
+
+        let embed = new Discord.RichEmbed()
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer)
-            .setAuthor(message.language.get("INFOS_HEADERS")[0]+this.client.user.tag)
+            .setAuthor(infosHeaders[0]+this.client.user.tag)
 
-            .setDescription(this.client.user.username+message.language.get("INFOS_HEADERS")[1])
+            .setDescription(this.client.user.username+message.language.get("INFOS_HEADERS")[1])        
 
-            .addField(message.language.get("INFOS_HEADERS", this.client)[2], 
-                message.language.get("INFOS_FIELDS", null, this.client.guilds.size, this.client.users.size)[0]
+            .addField(infosHeaders[2], 
+                message.language.get("INFOS_FIELDS", null, guildsCount, this.client.users.size)[0]
             , true)
-            .addField(message.language.get("INFOS_HEADERS", this.client)[3], 
+            .addField(infosHeaders[3], 
                 "`Discord.js: v"+Discord.version+"`\n`Nodejs: v"+process.versions.node+"`"
             , true)
-            .addField(message.language.get("INFOS_HEADERS", this.client)[4], 
-                "`"+(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)+"MB`"
-            ,true)
-            .addField(message.language.get("INFOS_HEADERS", this.client)[5], 
-                message.language.get("INFOS_FIELDS", message.language.convertMs(this.client.uptime))[1]
-            )
-            .addField(message.language.get("INFOS_HEADERS", this.client)[6],
+            .addField(infosHeaders[6],
                 message.language.get("INFOS_FIELDS", "https://discord.gg/Vu4tb4t")[2]
-            );
+            )
+            .addBlankField();
+            let emojis = this.client.config.emojis;
+            results.forEach((shard) => {
+                embed.addField((shard[2] === this.client.shard.id ? emojis.online : emojis.dnd)+" Shard #"+shard[2], message.language.get("FORMAT_SHARD", shard), true);
+            });
 
 
             message.channel.send(embed);
