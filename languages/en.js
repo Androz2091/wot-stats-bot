@@ -297,6 +297,7 @@ module.exports = class {
 				"From "+data,
 				"[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support]("+data+")"
 			],
+			FORMAT_SHARD: (d) => `\`${d[0]}\` mb ram\n\`${d[1]}\` servers\n\`${d[3]}\` ms`,
 
 			/* TANKS COMMAND */
 
