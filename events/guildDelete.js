@@ -17,7 +17,7 @@ module.exports = class {
             .setColor("#B22222")
             .setDescription("**"+guild.name+"** avec **"+usersCount+"** membres et "+botsCount+" bots"));
 
-        client.shard.broadcastEval(`
+        this.client.shard.broadcastEval(`
             let embed = JSON.parse('${embed}');
             let channel = this.channels.get(this.config.supportGuild.serversLogs);
             if(channel){
