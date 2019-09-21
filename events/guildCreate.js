@@ -11,7 +11,7 @@ module.exports = class {
         botsCount = guild.members.filter((m) => m.user.bot).size;
 
         // Sends log embed in the logs channel
-        let embed = JSON.stringify(new Discord.RichEmbed()
+        let embed = JSON.stringify(new Discord.MessageEmbed()
             .setAuthor(guild.name, guild.iconURL)
             .setColor("#32CD32")
             .setDescription("**"+guild.name+"**, avec **"+usersCount+"** membres et "+botsCount+" bots"));

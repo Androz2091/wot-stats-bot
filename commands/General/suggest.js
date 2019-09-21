@@ -34,7 +34,7 @@ class Suggest extends Command {
             return message.channel.send(message.language.get("SUGGEST_MISSING_SUGGESTION"));
         }
 
-        let suggEmbed = JSON.stringify(new Discord.RichEmbed()
+        let suggEmbed = JSON.stringify(new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(suggestion)
             .setColor(utils.embed.color)

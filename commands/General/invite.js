@@ -27,7 +27,7 @@ class Invite extends Command {
     }
 
     async run (message, args, utils) {
-        var embed = new Discord.RichEmbed()
+        var embed = new Discord.MessageEmbed()
             .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL)
             .addField(message.language.get("INVITE_HEADERS")[0], await this.client.generateInvite(2146958847))
             .addField(message.language.get("INVITE_HEADERS")[1], "https://discord.gg/Vu4tb4t")

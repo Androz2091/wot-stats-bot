@@ -58,7 +58,7 @@ class Profile extends Command {
         if(!userData) return;
         let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true, false);
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
             .setAuthor(stats.nickname, client.user.displayAvatarURL)

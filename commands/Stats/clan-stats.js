@@ -67,7 +67,7 @@ class ClanStats extends Command {
         // Gets the stats of the clan
         let clanStats = await client.Wargamer.getClanStats({ realm: clanData.realm, ID: clanData.ID });
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setColor(clanStats.wn8.color)
             .setFooter(utils.embed.footer, clanStats.realmData.iconURL)
             .setAuthor(clanStats.name, clanStats.emblems.x195.portal)

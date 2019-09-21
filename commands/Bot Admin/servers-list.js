@@ -32,7 +32,7 @@ class ServersList extends Command {
         var i1 = 10;
         var page = 1;
 
-        var embed = new Discord.RichEmbed()
+        var embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setColor(utils.embed.color)
             .setFooter(this.client.user.username)

@@ -64,31 +64,34 @@ class Tanks extends Command {
         if(!userData) return;
         let stats = await client.Wargamer.getPlayerStats({ realm: userData.realm, ID: userData.ID }, true, true);
         let tanks = stats.tanks;
+        let ended = false;
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
             .setAuthor(stats.nickname, client.user.displayAvatarURL)
             .setDescription(message.language.get("TANKS_CHOOSE_TIER"));
         
-        let msg = await m.edit(embed);
+        let msg = await m.edit(null, { embed });
         let rCollector = msg.createReactionCollector((reaction, user) => user.id === message.author.id, { time: 60000 });
         
-        await asyncForEach(client.config.emojis.numbers, async (emoji) => {
-            await msg.react(Discord.Util.parseEmoji(emoji).id);
+        asyncForEach(client.config.emojis.numbers, async (emoji) => {
+            let emojiData = Discord.Util.parseEmoji(emoji);
+            if(!ended) await msg.react(`${emojiData.name}:${emojiData.id}`);
         });
 
         rCollector.on("end", (data, reason) => {
-            msg.clearReactions();
+            ended = true;
+            msg.reactions.removeAll();
             if(reason !== "OK"){
                 embed.setTitle("").setDescription(message.language.get("TANKS_TIMEOUT"));
-                msg.edit(embed);
+                msg.edit(null, { embed });
             }
         });
 
         rCollector.on("collect", async (reaction) => {
 
-            let users = await reaction.fetchUsers();
+            let users = await reaction.users.fetch();
             if(!users.get(client.user.id)) return;
             
             rCollector.stop("OK");
@@ -109,7 +112,7 @@ class Tanks extends Command {
                 });
                 embed.setDescription("");
             }
-            msg.edit(embed);
+            msg.edit(null, { embed });
         });
     }
 

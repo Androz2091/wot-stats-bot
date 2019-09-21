@@ -32,17 +32,19 @@ class Infos extends Command {
 
         let guildsCounts = await this.client.shard.fetchClientValues("guilds.size");
         let guildsCount = guildsCounts.reduce((p, count) => p+count);
+        let usersCounts = await this.client.shard.fetchClientValues("users.size");
+        let usersCount = usersCounts.reduce((p, count) => p+count);
         
         let results = await this.client.shard.broadcastEval(`
             [
                 Math.round((process.memoryUsage().heapUsed / 1024 / 1024)),
                 this.guilds.size,
-                this.shard.id,
-                Math.round(this.ping)
+                this.shard.ids[0],
+                Math.round(this.ws.ping)
             ]
         `);
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer)
             .setAuthor(infosHeaders[0]+this.client.user.tag)
@@ -50,7 +52,7 @@ class Infos extends Command {
             .setDescription(this.client.user.username+message.language.get("INFOS_HEADERS")[1])        
 
             .addField(infosHeaders[2], 
-                message.language.get("INFOS_FIELDS", null, guildsCount, this.client.users.size)[0]
+                message.language.get("INFOS_FIELDS", null, guildsCount, usersCount)[0]
             , true)
             .addField(infosHeaders[3], 
                 "`Discord.js: v"+Discord.version+"`\n`Nodejs: v"+process.versions.node+"`"
@@ -61,7 +63,8 @@ class Infos extends Command {
             .addBlankField();
             let emojis = this.client.config.emojis;
             results.forEach((shard) => {
-                embed.addField((shard[2] === this.client.shard.id ? emojis.online : emojis.dnd)+" Shard #"+shard[2], message.language.get("FORMAT_SHARD", shard), true);
+                let title = this.client.shard.ids.includes(shard[2]) ? emojis.online+" Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : emojis.dnd+" Shard #"+(shard[2]+1);
+                embed.addField(title, message.language.get("FORMAT_SHARD", shard), true);
             });
 
 

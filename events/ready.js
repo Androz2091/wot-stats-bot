@@ -37,7 +37,7 @@ module.exports = class {
         };
         setInterval(updateActivity, 25000);
 
-        if(client.shard.id === 0){
+        if(client.shard.ids.includes(0)){
             // Load API
             const api = require("../includes/api");
             api.load(client);

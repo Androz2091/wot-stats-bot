@@ -24,6 +24,7 @@ module.exports = class {
 			MEMBERS: "Membres",
 			TOTAL_SERVERS:"Total serveurs",
 			NO_TANKS: (tier) => "Aucun tanks de tier `"+tier+"` à afficher !",
+			CURRENT: "Actuel",
 
 			/* DEFAULT MESSAGES */
 			NO_DESCRIPTION_PROVIDED: "Aucune description fournie",
