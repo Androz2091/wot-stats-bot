@@ -61,7 +61,7 @@ class Profile extends Command {
         let embed = new Discord.MessageEmbed()
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
-            .setAuthor(stats.nickname, client.user.displayAvatarURL)
+            .setAuthor(stats.nickname, client.user.displayAvatarURL())
             .addField(message.language.get("PROFILE_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
             .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
             .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)

@@ -13,7 +13,7 @@ module.exports = class {
 
         // Sends log embed in the logs channel
         let embed = JSON.stringify(new Discord.MessageEmbed()
-            .setAuthor(guild.name, guild.iconURL)
+            .setAuthor(guild.name, guild.iconURL())
             .setColor("#B22222")
             .setDescription("**"+guild.name+"** avec **"+usersCount+"** membres et "+botsCount+" bots"));
 

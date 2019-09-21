@@ -35,7 +35,7 @@ class Suggest extends Command {
         }
 
         let suggEmbed = JSON.stringify(new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription(suggestion)
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer)

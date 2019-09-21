@@ -69,7 +69,7 @@ class Tanks extends Command {
         let embed = new Discord.MessageEmbed()
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
-            .setAuthor(stats.nickname, client.user.displayAvatarURL)
+            .setAuthor(stats.nickname, client.user.displayAvatarURL())
             .setDescription(message.language.get("TANKS_CHOOSE_TIER"));
         
         let msg = await m.edit(null, { embed });

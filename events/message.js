@@ -72,7 +72,7 @@ module.exports = class {
         // send logs
         client.logger.log(message.author.username+ " ("+message.author.id+") ran command "+cmd.help.name, "cmd");
         let embed = JSON.stringify(new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setColor("#DDA0DD")
             .setDescription(message.author.username+" a effectué la commande **"+cmd.help.name+"** sur **"+message.guild.name+"**"));
         embed = embed.replace(new RegExp("'"), "\\'");

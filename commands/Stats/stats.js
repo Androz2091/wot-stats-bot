@@ -61,7 +61,7 @@ class Stats extends Command {
         let embed = new Discord.MessageEmbed()
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
-            .setAuthor(stats.nickname, client.user.displayAvatarURL)
+            .setAuthor(stats.nickname, client.user.displayAvatarURL())
             .addField(message.language.get("STATS_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
             .addField(message.language.get("STATS_HEADERS")[1], stats.statistics.all.battles, true)
             .addField(message.language.get("STATS_HEADERS")[2], stats.statistics.all.wins, true)

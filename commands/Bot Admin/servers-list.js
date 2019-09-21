@@ -33,7 +33,7 @@ class ServersList extends Command {
         var page = 1;
 
         var embed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setColor(utils.embed.color)
             .setFooter(this.client.user.username)
             .setTitle(message.language.get("PAGE")+": "+page+"/"+Math.ceil(this.client.guilds.size/10))

@@ -33,7 +33,7 @@ class Help extends Command {
             let cmd = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
             if(cmd){
                 var commandEmbed = new Discord.MessageEmbed()
-                    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .addField(message.language.get("HELP_HEADERS")[0], cmd.help.category, true)
                     .addField(message.language.get("HELP_HEADERS")[1], cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
                     .addField(message.language.get("HELP_HEADERS")[2], utils.guildData.prefix+cmd.help.usage(message.language), true)
@@ -47,7 +47,7 @@ class Help extends Command {
             }
         } else {
             let commandsEmbed = new Discord.MessageEmbed()
-            .setAuthor(message.language.get("WELCOME")+", "+message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.language.get("WELCOME")+", "+message.author.tag, message.author.displayAvatarURL())
             .setDescription(message.language.get("HELP_REMIND"))
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer);
