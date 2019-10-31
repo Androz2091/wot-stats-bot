@@ -75,8 +75,8 @@ module.exports.load = (client) => {
         });
     });
 
-    app.listen(3000, () => {
-        console.log("API is running on port 3000");
+    app.listen(3500, () => {
+        console.log("API is running on port 3500");
     });
 
 }
