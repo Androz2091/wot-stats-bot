@@ -17,7 +17,7 @@ module.exports = class {
         // Post DBL stats
         const DBL = require("dblapi.js");
         const dbl = new DBL(this.client.config.dbl, this.client);
-        dbl.postStats(this.client.guilds.size, this.client.shard.id, this.client.shard.count);
+        dbl.postStats(this.client.guilds.cache.size, this.client.shard.id, this.client.shard.count);
         dbl.on("posted", () => {
             client.logger.log("Server count posted to DBL!");
         });
