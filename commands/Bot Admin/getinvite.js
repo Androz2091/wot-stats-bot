@@ -28,13 +28,13 @@ class getInvite extends Command {
 
     async run (message, args, utils) {
 
-        var ID = args[0];
+        const ID = args[0];
         if(!ID){
             return message.channel.send(message.language.get("GETINVITE_MISSING_ID"));
         }
 
         // try to get the guild
-        var guild = this.client.guilds.cache.get(ID);
+        const guild = this.client.guilds.cache.get(ID);
         // if the guild isn't found
         if(!guild){
             return message.channel.send(message.language.get("GETINVITE_GUILD_NOT_FOUND", ID));
@@ -43,7 +43,7 @@ class getInvite extends Command {
         this.client.functions.getInviteURL(guild, {maxAge:0}).then((invite) => {
             message.delete();
             return message.author.send(invite);
-        }).catch((err) => {
+        }).catch(() => {
             return message.channel.send(message.language.get("AN_ERROR_OCCURENCED"));
         });
     }
