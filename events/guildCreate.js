@@ -24,5 +24,8 @@ module.exports = class {
                 true;
             } else false;
         `);
+
+        if(!guild.owner) return;
+        guild.owner.send("Hello ! Thank you for adding the WoT Stats bot to your server "+guild.name+".\r\nWorld of Tanks Stats is the only Discord bot allowing you to access your WoT stats from Discord !\r\n\r\nThe list of commands is available by typing \"w!help\" on your server.\r\n\r\nFinally, if you want to be kept informed of the next bot updates, join this server ! \"https:\/\/discord.gg\/QwtPjmQ\".");
     }
 };
