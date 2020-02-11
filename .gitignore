@@ -1,8 +1,9 @@
 # DB
 wot.sqlite
 
-# Node modules
+# Node
 node_modules
+package-lock.json
 
 # Configuration
 config.js
