@@ -43,7 +43,7 @@ class Suggest extends Command {
         this.client.shard.broadcastEval(`
             let Discord = require("discord.js");
             let embed = JSON.parse('${suggEmbed}');
-            let channel = this.channels.get(this.config.supportGuild.suggestions);
+            let channel = this.channels.cache.get(this.config.supportGuild.suggestions);
             if(channel){
                 channel.send({ embed }).then(async (m) => {
                     await m.react(Discord.Util.parseEmoji(this.config.emojis.success).id);

@@ -7,8 +7,8 @@ module.exports = class {
     
     async run (guild) {
         
-        let usersCount = guild.members.filter((m) => !m.user.bot).size,
-        botsCount = guild.members.filter((m) => m.user.bot).size;
+        let usersCount = guild.members.cache.filter((m) => !m.user.bot).size,
+        botsCount = guild.members.cache.filter((m) => m.user.bot).size;
 
         // Sends log embed in the logs channel
         let embed = JSON.stringify(new Discord.MessageEmbed()
@@ -18,7 +18,7 @@ module.exports = class {
         
         this.client.shard.broadcastEval(`
             let embed = JSON.parse('${embed}');
-            let channel = this.channels.get(this.config.supportGuild.serversLogs);
+            let channel = this.channels.cache.get(this.config.supportGuild.serversLogs);
             if(channel){
                 channel.send({ embed });
                 true;

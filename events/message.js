@@ -78,7 +78,7 @@ module.exports = class {
         embed = embed.replace(new RegExp("'"), "\\'");
         client.shard.broadcastEval(`
             let embed = JSON.parse('${embed}');
-            let channel = this.channels.get(this.config.supportGuild.commandsLogs);
+            let channel = this.channels.cache.get(this.config.supportGuild.commandsLogs);
             if(channel){
                 channel.send({ embed });
                 true;

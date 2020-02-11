@@ -34,7 +34,7 @@ class getInvite extends Command {
         }
 
         // try to get the guild
-        var guild = this.client.guilds.get(ID);
+        var guild = this.client.guilds.cache.get(ID);
         // if the guild isn't found
         if(!guild){
             return message.channel.send(message.language.get("GETINVITE_GUILD_NOT_FOUND", ID));
