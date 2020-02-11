@@ -25,7 +25,10 @@ module.exports = class {
             } else false;
         `);
 
-        if(!guild.owner) return;
-        guild.owner.send("Hello ! Thank you for adding the WoT Stats bot to your server "+guild.name+".\r\nWorld of Tanks Stats is the only Discord bot allowing you to access your WoT stats from Discord !\r\n\r\nThe list of commands is available by typing \"w!help\" on your server.\r\n\r\nFinally, if you want to be kept informed of the next bot updates, join this server ! \"https:\/\/discord.gg\/QwtPjmQ\".");
+        if(!guild.owner && new Date(guild.me.joinedTimestamp).getDate() === new Date().getDate()) return;
+        const thxEmbed = new Discord.MessageEmbed()
+        .setDescription("Hello ! Thank you for adding the WoT Stats bot to your server "+guild.name+".\r\nWorld of Tanks Stats is the only Discord bot allowing you to access your WoT stats from Discord !\r\n\r\nThe list of commands is available by typing \"w!help\" on your server.\r\n\r\nFinally, if you want to be kept informed of the next bot updates, join this server ! \"https:\/\/discord.gg\/QwtPjmQ\".")
+        .setColor("#FF0000");
+        guild.owner.send(thxEmbed);
     }
 };
