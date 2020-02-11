@@ -12,7 +12,7 @@ module.exports = class {
 
         // Logs some informations using the logger file
         this.client.logger.log("Loading a total of "+client.commands.size+" command(s). 👌", "log");
-        this.client.logger.log(client.user.tag+", ready to serve "+client.users.size+" users in "+client.guilds.size+" servers.", "ready");
+        this.client.logger.log(client.user.tag+", ready to serve "+client.users.cache.size+" users in "+client.guilds.cache.size+" servers.", "ready");
 
         // Post DBL stats
         const DBL = require("dblapi.js");
@@ -28,7 +28,7 @@ module.exports = class {
         ];
         let i = 0;
         const updateActivity = () => {
-            client.shard.fetchClientValues("guilds.size").then((results) => {
+            client.shard.fetchClientValues("guilds.cache.size").then((results) => {
                 let count = results.reduce((prev, guildCount) => prev + guildCount, 0);
                 client.user.setActivity(games[i].name.replace("${servs}", count), { type: games[i].type });
                 if(games[parseInt(i + 1, 10)]) i++
