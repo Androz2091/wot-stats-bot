@@ -30,9 +30,9 @@ class Infos extends Command {
 
         const infosHeaders = message.language.get("INFOS_HEADERS", this.client);
 
-        let guildsCounts = await this.client.shard.fetchClientValues("guilds.size");
+        let guildsCounts = await this.client.shard.fetchClientValues("guilds.cache.size");
         let guildsCount = guildsCounts.reduce((p, count) => p+count);
-        let usersCounts = await this.client.shard.fetchClientValues("users.size");
+        let usersCounts = await this.client.shard.fetchClientValues("users.cache.size");
         let usersCount = usersCounts.reduce((p, count) => p+count);
         
         let results = await this.client.shard.broadcastEval(`
