@@ -38,7 +38,7 @@ class Infos extends Command {
         let results = await this.client.shard.broadcastEval(`
             [
                 Math.round((process.memoryUsage().heapUsed / 1024 / 1024)),
-                this.guilds.size,
+                this.guilds.cache.size,
                 this.shard.ids[0],
                 Math.round(this.ws.ping)
             ]
