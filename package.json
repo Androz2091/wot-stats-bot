@@ -18,7 +18,7 @@
   "homepage": "https://github.com/Androz2091/WorldOfTanks-Bot#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "dblapi.js": "^2.3.0",
+    "dblapi.js": "^2.3.1",
     "discord.js": "github:discordjs/discord.js",
     "express": "^4.17.1",
     "klaw": "^3.0.0",
