@@ -19,13 +19,14 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "dblapi.js": "^2.3.1",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "^12.1.1",
     "express": "^4.17.1",
     "klaw": "^3.0.0",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "quick.db": "github:Androz2091/quick.db",
     "quick.db-plus": "^0.1.3-build",
+    "request": "^2.88.2",
     "tabletojson": "^1.0.4"
   }
 }
