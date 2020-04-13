@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
-const tabletojson = require("tabletojson");
 
 var vInfos = [];
 
@@ -25,10 +24,10 @@ module.exports = {
                 prefix:client.config.prefix, // the prefix of the guild
                 lang:client.config.defaultLanguage // the language of the guild
             });
+            // Log in the console
+            client.logger.log("Guild "+guild.name+" registered ! ID : "+guild.id);
             return client.databases[1].get(guild.id); // return the guild data
         }
-        // Log in the console
-        client.logger.log("Guild "+guild.name+" registered ! ID : "+guild.id);
     },
 
     /**
@@ -55,11 +54,11 @@ module.exports = {
                     id:user.id
                 });
                 usersData.push(client.databases[0].get(user.id));
+                // Log in the console
+                client.logger.log("User "+user.username+" registered ! ID : "+user.id);
             }
         });
         return usersData; // the array of profiles
-        // Log in the console
-        client.logger.log("User "+user.username+" registered ! ID : "+user.id);
     },
     
     /**
