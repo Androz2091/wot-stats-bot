@@ -45,7 +45,7 @@ class Suggest extends Command {
             let embed = JSON.parse('${suggEmbed}');
             let channel = this.channels.cache.get(this.config.supportGuild.suggestions);
             if(channel){
-                channel.send({ embed }).then(async (m) => {
+                channel.send('<@&618516606078943252>', { embed }).then(async (m) => {
                     await m.react(Discord.Util.parseEmoji(this.config.emojis.success).id);
                     await m.react(Discord.Util.parseEmoji(this.config.emojis.error).id);
                 });
