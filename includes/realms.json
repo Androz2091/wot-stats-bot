@@ -1,6 +1,7 @@
 [
     {
         "name": "eu",
+        "wotLabs": "eu",
         "baseURL": "https://api.worldoftanks.eu",
         "aliases": [
             "europe"
@@ -9,6 +10,7 @@
     },
     {
         "name": "ru",
+        "wotLabs": "ru",
         "baseURL": "https://api.worldoftanks.ru",
         "aliases": [
             "russia"
@@ -17,6 +19,7 @@
     },
     {
         "name": "na",
+        "wotLabs": "na",
         "baseURL": "https://api.worldoftanks.com",
         "aliases": [
             "north-america",
@@ -26,6 +29,7 @@
     },
     {
         "name": "asia",
+        "wotLabs": "sea",
         "baseURL": "https://api.worldoftanks.asia",
         "aliases": [],
         "iconURL": "https://i.goopics.net/dOVoJ.png"
