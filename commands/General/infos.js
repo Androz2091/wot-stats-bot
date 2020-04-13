@@ -60,10 +60,10 @@ class Infos extends Command {
             .addField(infosHeaders[6],
                 message.language.get("INFOS_FIELDS", "https://discord.gg/Vu4tb4t")[2]
             )
-            .addBlankField();
+            .addField("\u200B", "\u200B");
             let emojis = this.client.config.emojis;
             results.forEach((shard) => {
-                let title = this.client.shard.ids.includes(shard[2]) ? emojis.online+" Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : emojis.dnd+" Shard #"+(shard[2]+1);
+                let title = emojis.success + (this.client.shard.ids.includes(shard[2]) ? " Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : " Shard #"+(shard[2]+1));
                 embed.addField(title, message.language.get("FORMAT_SHARD", shard), true);
             });
 
