@@ -15,12 +15,14 @@ module.exports = class {
         this.client.logger.log(client.user.tag+", ready to serve "+client.users.cache.size+" users in "+client.guilds.cache.size+" servers.", "ready");
 
         // Post DBL stats
-        const DBL = require("dblapi.js");
-        const dbl = new DBL(this.client.config.dbl, this.client);
-        dbl.postStats(this.client.guilds.cache.size, this.client.shard.id, this.client.shard.count);
-        dbl.on("posted", () => {
-            client.logger.log("Server count posted to DBL!");
-        });
+        if(this.client.config.dbl){
+            const DBL = require("dblapi.js");
+            const dbl = new DBL(this.client.config.dbl, this.client);
+            dbl.postStats(this.client.guilds.cache.size, this.client.shard.ids[0], this.client.shard.count);
+            dbl.on("posted", () => {
+                client.logger.log("Server count posted to DBL!");
+            });
+        }
         
         // Update the game every 20s
         const games = [
