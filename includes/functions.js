@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 
+const tabletojson = require("tabletojson").Tabletojson;
+
 var vInfos = [];
 
 module.exports = {
