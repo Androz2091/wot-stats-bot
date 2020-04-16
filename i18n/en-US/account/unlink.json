@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Unlink your wot account!",
+    "USAGE": "unlink",
+    "EXAMPLES": "$unlink",
+    "NO_LINKED": "You currently have no linked accounts! Please link one with `{{prefix}}link [server] [nickname]`!",
+    "SUCCESS": "Your account is no longer linked!"
+}

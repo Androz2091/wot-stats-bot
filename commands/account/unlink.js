@@ -1,16 +1,11 @@
-const Command = require("../../structures/Command.js"),
-Discord = require("discord.js");
+const Command = require("../../structures/Command.js");
 
-class Unlink extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "unlink",
-            // Displayed in the help command
-            description: (language) => language.get("UNLINK_DESCRIPTION"),
-            usage: (language) => language.get("UNLINK_USAGE"),
-            examples: (languages) => languages.get("UNLINK_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -30,17 +25,15 @@ class Unlink extends Command {
 
         // if an account is already linked
         if(utils.usersData[0].wot === "unknow"){
-            return message.channel.send(message.language.get("NOT_LINKED"));
+            return message.error("account/unlink:NOT_LINKED");
         }
 
         // Updates datastructures
         this.client.databases[0].set(message.author.id+".wot", "unknow");
 
         // Send a success message
-        message.channel.send(message.language.get("UNLINK_SUCCESS"));
+        message.success("account/unlink:SUCCESS");
         
     }
 
-}
-
-module.exports = Unlink;
+};
