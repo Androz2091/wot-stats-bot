@@ -1,16 +1,12 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
-class Infos extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "infos",
-            // Displayed in the help command
-            description: (language) => language.get("INFOS_DESCRIPTION"),
-            usage: (language) => language.get("INFOS_USAGE"),
-            examples: (languages) => languages.get("INFOS_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -47,24 +43,26 @@ class Infos extends Command {
         let embed = new Discord.MessageEmbed()
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer)
-            .setAuthor(infosHeaders[0]+this.client.user.tag)
-
-            .setDescription(this.client.user.username+message.language.get("INFOS_HEADERS")[1])        
-
-            .addField(infosHeaders[2], 
-                message.language.get("INFOS_FIELDS", null, guildsCount, usersCount)[0]
-            , true)
-            .addField(infosHeaders[3], 
-                "`Discord.js: v"+Discord.version+"`\n`Nodejs: v"+process.versions.node+"`"
-            , true)
-            .addField(infosHeaders[6],
-                message.language.get("INFOS_FIELDS", "https://discord.gg/Vu4tb4t")[2]
-            )
+            .setAuthor(message.translate("core/infos:TITLE"))
+            .setDescription(message.translate("core/infos:TITLE_CREDITS"))        
+            .addField(message.translate("core/infos:TITLE_STATS"), message.translate("core/infos:CONTENT_STATS", {
+                servers: guildsCount,
+                users: usersCount
+            }), true)
+            .addField(message.translate("core/infos:TITLE_VERSION", {
+                discord: Discord.version,
+                node: process.versions.node
+            }), true)
+            .addField(message.translate("core/infos:TITLE_LINKS"), message.translate("core/infos:CONTENT_LINKS"))
             .addField("\u200B", "\u200B");
-            let emojis = this.client.config.emojis;
+            const emojis = this.client.config.emojis;
             results.forEach((shard) => {
-                let title = emojis.success + (this.client.shard.ids.includes(shard[2]) ? " Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : " Shard #"+(shard[2]+1));
-                embed.addField(title, message.language.get("FORMAT_SHARD", shard), true);
+                const title = emojis.success + (this.client.shard.ids.includes(shard[2]) ? " Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : " Shard #"+(shard[2]+1));
+                embed.addField(title, message.translate("core/infos:SHARD", {
+                    ram: shard[0],
+                    servers: shard[1],
+                    ping: shard[3]
+                }), true);
             });
 
 
@@ -72,6 +70,4 @@ class Infos extends Command {
         
     }
 
-}
-
-module.exports = Infos;
+};
