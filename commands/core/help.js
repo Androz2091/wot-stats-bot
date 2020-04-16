@@ -1,7 +1,7 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
-class Help extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
@@ -44,7 +44,7 @@ class Help extends Command {
                 });
             }
         } else {
-            const commandsEmbed = new Discord.MessageEmbed()
+            /*const commandsEmbed = new Discord.MessageEmbed()
                 .setAuthor(message.translate("core/help:TITLE", {
                     user: message.author.tag
                 }), message.author.displayAvatarURL())
@@ -72,10 +72,8 @@ class Help extends Command {
                 commandsEmbed.addField(cat, category);
             });
 
-            message.channel.send(commandsEmbed);
+            message.channel.send(commandsEmbed);*/
         }
     }
 
 };
-
-module.exports = Help;
