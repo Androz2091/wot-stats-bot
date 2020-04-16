@@ -227,7 +227,7 @@ module.exports = class {
 			// Errors
 			SETPREFIX_MISSING_PREFIX: e.error+" | Please enter a prefix!",
 			// Content
-			SETPREFIX_SUCCESS: (prefix) => e.success+" | Your new prefix is `"+prefix+"` ! Type `"+prefix+"help` to see the list of commands!",
+			SETPREFIX_SUCCESS: (prefix) => e.success+" | ",
 
             /* SETLANG COMMAND */
 

@@ -1,16 +1,11 @@
-const Command = require("../../structures/Command.js"),
-Discord = require("discord.js");
+const Command = require("../../structures/Command.js");
 
-class SetPrefix extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "setprefix",
-            // Displayed in the help command
-            description: (language) => language.get("SETPREFIX_DESCRIPTION"),
-            usage: (language) => language.get("SETPREFIX_USAGE"),
-            examples: (languages) => languages.get("SETPREFIX_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -26,20 +21,18 @@ class SetPrefix extends Command {
         });
     }
 
-    async run (message, args, utils) {
+    async run (message, args) {
         
         // Gets the prefix
-        var prefix = args[0];
+        const prefix = args[0];
         
         if(!prefix){
-            return message.channel.send(message.language.get("SETPREFIX_MISSING_PREFIX"));
+            return message.error("admin/setprefix:MISSING");
         } else {
             this.client.databases[1].set(message.guild.id+".prefix", prefix);
-            return message.channel.send(message.language.get("SETPREFIX_SUCCESS", prefix));
+            return message.success("admin/setprefix:SUCCESS", prefix);
         }
         
     }
 
-}
-
-module.exports = SetPrefix;
+};
