@@ -108,7 +108,7 @@ module.exports = class extends Command {
 
         for(let rank in ranks){
             if ({}.hasOwnProperty.call(ranks, rank)) {
-                let title = message.translate("stats/clan-stats:RANK_"+ranks[ranks]);
+                let title = message.translate("stats/clan-stats:RANK_"+ranks[rank]);
                 let newTitle = ((rank === Object.keys(ranks)[Object.keys(ranks).length - 1]) ? ("\n\n"+message.translate("stats/clan-stats:TITLE_BASTION")) : "");
                 embed.addField(title,
                     message.translate("stats/clan-stats:LAST_BATTLE")+
