@@ -19,7 +19,7 @@ module.exports = class {
                 color: this.client.config.embed.color,
                 footer: this.client.config.embed.footer
             },
-            guildData:{
+            guildData: {
                 lang: this.client.config.defaultLanguage,
                 prefix: ""
             }
@@ -54,18 +54,22 @@ module.exports = class {
             }
         });
         if(neededPermissions.length > 0){
-            return message.channel.send(message.language.get("MISSING_BOT_PERMS", neededPermissions.map((p) => p).join(", ")));
+            return message.error("misc:BOT_MISSING_PERMISSIONS", {
+                permissions: neededPermissions.map((p) => p).join(", ")
+            });
         }
 
         /* Command disabled */
         if(!cmd.conf.enabled){
-            return message.channel.send(message.language.get("COMMAND_DISABLED"));
+            return message.error("misc:COMMAND_DISABLED");
         }
 
         /* User permissions */
         const permLevel = await client.getLevel(message);
         if(permLevel < client.levelCache[cmd.conf.permLevel]){
-            return message.channel.send(message.language.get("MISSING_PERMS", cmd.conf.permLevel));
+            return message.error("misc:USER_MISSING_PERMISSIONS", {
+                level: cmd.conf.permLevel
+            });
         }
 
         utils.cmd = cmd;

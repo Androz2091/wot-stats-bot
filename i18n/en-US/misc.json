@@ -1,3 +1,6 @@
 {
-    "PREFIX": "Hello {{author}}, my prefix on this server is **{{prefix}}**"
+    "PREFIX": "Hello {{author}}, my prefix on this server is **{{prefix}}**",
+    "BOT_MISSING_PERMISSIONS": "I need the following permissions to run this command: {{permissions}}",
+    "USER_MISSING_PERMISSIONS": "You need the permission level **{{level}}** to run this command!",
+    "COMMAND_DISABLED": "This command is currently disabled!"
 }
