@@ -1,3 +1,5 @@
+require("./includes/extenders");
+
 const { promisify } = require("util"),
 fs = require("fs"),
 readdir = promisify(require("fs").readdir);
@@ -39,6 +41,9 @@ const init = async () => {
 
     const Wargamer = require("./includes/Wargamer");
     client.Wargamer = new Wargamer(client.config.wargaming);
+
+    const i18n = require("./includes/i18n");
+    client.translations = await i18n();
 
     client.login(client.config.token); // Log to the discord api
 

@@ -1,0 +1,3 @@
+{
+    "PREFIX": "Hello {{author}}, my prefix on this server is **{{prefix}}**"
+}

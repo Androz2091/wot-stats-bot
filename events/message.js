@@ -29,13 +29,14 @@ module.exports = class {
         var users = [message.author].concat(message.mentions.users.array());
         utils.usersData = this.client.functions.getUsersData(users, this.client);
         utils.guildData = this.client.functions.getGuildData(message.guild, this.client);
-
-        let Language = require("../languages/"+utils.guildData.lang+".js");
-        message.language = new Language();
+        message.guild.language = utils.guildData.lang;
 
         // Checks if the bot was mentioned, with no message after it, returns the prefix.
-        if(message.content.indexOf(`<@${client.user.id}>`) > -1){
-            return message.reply(message.language.get("PREFIX_INFO", utils.guildData.prefix));
+        if(message.content.match(new RegExp(`^<@!?${this.client.user.id}>( |)$`))){
+            return message.sendT("misc:PREFIX", {
+                author: message.author.toString(),
+                prefix: utils.guildData.prefix
+            });
         }
 
         if(!message.content.startsWith(utils.guildData.prefix)) return;
