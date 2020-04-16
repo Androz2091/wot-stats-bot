@@ -1,16 +1,12 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
-class Invite extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "invite",
-            // Displayed in the help command
-            description: (language) => language.get("INVITE_DESCRIPTION"),
-            usage: (language) => language.get("INVITE_USAGE"),
-            examples: (languages) => languages.get("INVITE_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -27,16 +23,14 @@ class Invite extends Command {
     }
 
     async run (message, args, utils) {
-        var embed = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
             .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL())
-            .addField(message.language.get("INVITE_HEADERS")[0], await this.client.generateInvite(2146958847))
-            .addField(message.language.get("INVITE_HEADERS")[1], "https://discord.gg/Vu4tb4t")
+            .addField(message.translate("core/invite:TITLE_INVITE"), await this.client.generateInvite(2146958847))
+            .addField(message.translate("core/invite:TITLE_SUPPORT"), "https://discord.gg/Vu4tb4t")
             .setColor(utils.embed.color)
             .setFooter(utils.embed.footer);
 
         message.channel.send(embed);
     }
 
-}
-
-module.exports = Invite;
+};
