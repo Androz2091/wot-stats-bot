@@ -73,7 +73,7 @@ module.exports = class extends Command {
             .addField(message.translate("stats/profile:HEADER_CREATED"), dateAndTime.format(new Date(stats.created_at*1000), pattern), true)
             .addField(message.translate("stats/profile:HEADER_LAST_UPDATE"), dateAndTime.format(new Date(stats.updated_at*1000), pattern), true)
             .addField(message.translate("stats/profile:HEADER_LAST_BATTLE"), (stats.last_battle_time > 0 ? dateAndTime.format(new Date(stats.last_battle_time*1000), pattern) : message.translate("stats/profile:NO_BATTLES")), true)
-            .addField(message.translate("stats/profile:HEADER_CLAN"), (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
+            .addField(message.translate("stats/profile:HEADER_CLAN"), (stats.clan_id) ? stats.clan.clan_tag : message.translate("stats/profile:NO_CLAN"), true)
             .addField(message.translate("stats/profile:HEADER_WIN_RATE"), (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.translate("stats/profile:NO_BATTLES")), true)
             .addField(message.translate("stats/profile:HEADER_WN8"), stats.wn8.now, true)
             .addField(message.translate("stats/profile:HEADER_WN8_24"), stats.wn8["24h"], true)

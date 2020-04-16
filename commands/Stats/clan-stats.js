@@ -125,7 +125,7 @@ module.exports = class extends Command {
             }
         }
 
-        embed.addField(message.language.get("CLANSTATS_HEADERS")[1],
+        embed.addField(message.translate("stats/clan-stats:RANK_X"),
             message.translate("stats/clan-stats:BASTION_TOTAL_LEVEL")+
             (clanStats.stronghold_buildings_level)+"\n"+
             message.translate("stats/clan-stats:BASTION_LEVEL")+
@@ -139,7 +139,7 @@ module.exports = class extends Command {
             message.translate("stats/clan-stats:WIN_RATE")+
             ((clanStats.battles_for_strongholds_statistics.win_10 === 0) ? "0%" : client.functions.percentage(clanStats.battles_for_strongholds_statistics.win_10, clanStats.battles_for_strongholds_statistics.lose_10))+"\n"+
             message.translate("stats/clan-stats:WIN_RATE_28")+
-            ((clanStats.battles_for_strongholds_statistics.win_10_in_28d === 0) ? "0%" : client.functions.percentage(clanStats.battles_for_strongholds_statistics.win_10_in_28d, clanStats.battles_for_strongholds_statistics.total_10_in_28d-clanStats.battles_for_strongholds_statistics.win_10_in_28d))+"\n\n"+message.language.get("CLANSTATS_TITLES")[2]
+            ((clanStats.battles_for_strongholds_statistics.win_10_in_28d === 0) ? "0%" : client.functions.percentage(clanStats.battles_for_strongholds_statistics.win_10_in_28d, clanStats.battles_for_strongholds_statistics.total_10_in_28d-clanStats.battles_for_strongholds_statistics.win_10_in_28d))+"\n\n"+message.translate("stats/clan-stats:TITLE_WN8")
         );
 
         embed.addField(clanStats.wn8.now, "\u200B");

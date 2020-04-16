@@ -93,10 +93,10 @@ module.exports = class extends Command {
                 message.translate("stats/profile:FIELD_DAMAGE_I")+stats.statistics.all.max_damage,
                 true
             )
-            .addField(message.language.get("stats/profile:HEADER_WN8_HISTORY")[11],
-                message.language.get("STATS_FIELDS").wn8[0]+stats.wn8["24h"]+"\n"+
-                message.language.get("STATS_FIELDS").wn8[1]+stats.wn8["7d"]+"\n"+
-                message.language.get("STATS_FIELDS").wn8[2]+stats.wn8["30d"],
+            .addField(message.translate("stats/profile:HEADER_WN8_HISTORY")[11],
+                message.translate("STATS_FIELDS").wn8[0]+stats.wn8["24h"]+"\n"+
+                message.translate("STATS_FIELDS").wn8[1]+stats.wn8["7d"]+"\n"+
+                message.translate("STATS_FIELDS").wn8[2]+stats.wn8["30d"],
                 true
             );
 

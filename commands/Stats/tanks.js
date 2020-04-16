@@ -49,7 +49,7 @@ module.exports = class extends Command {
             if(!realm) return m.error("account/link:INVALID_REALM", {
                 realm: args[0].toLowerCase()
             }, true);
-            if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
+            if(!args[1]) return m.error("account/link:INVALID_NICKNAME", null, true);
             userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
                 return m.error("account/link:ACCOUNT_NOT_FOUND", {
                     search: args.slice(1).join(" ")

@@ -24,8 +24,6 @@ module.exports = class extends Command {
 
     async run (message, args, utils) {
 
-        const infosHeaders = message.language.get("INFOS_HEADERS", this.client);
-
         let guildsCounts = await this.client.shard.fetchClientValues("guilds.cache.size");
         let guildsCount = guildsCounts.reduce((p, count) => p+count);
         let usersCounts = await this.client.shard.fetchClientValues("users.cache.size");
@@ -57,7 +55,7 @@ module.exports = class extends Command {
             .addField("\u200B", "\u200B");
             const emojis = this.client.config.emojis;
             results.forEach((shard) => {
-                const title = emojis.success + (this.client.shard.ids.includes(shard[2]) ? " Shard ("+message.language.get("CURRENT")+") #"+(shard[2]+1) : " Shard #"+(shard[2]+1));
+                const title = emojis.success + (this.client.shard.ids.includes(shard[2]) ? " Shard ("+message.translate("common:CURRENT")+") #"+(shard[2]+1) : " Shard #"+(shard[2]+1));
                 embed.addField(title, message.translate("core/infos:SHARD", {
                     ram: shard[0],
                     servers: shard[1],

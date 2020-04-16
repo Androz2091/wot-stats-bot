@@ -31,7 +31,7 @@ module.exports = class extends Command {
                 const commandEmbed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .addField(message.translate("core/help:TITLE_CATEGORY"), cmd.help.category, true)
-                    .addField(message.translate("core/help:TITLE_ALIAS"), cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
+                    .addField(message.translate("core/help:TITLE_ALIAS"), cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.translate("core/help:NO_ALIASES"), true)
                     .addField(message.translate("core/help:TITLE_USAGE"), utils.guildData.prefix+message.translate(`${cmd.help.category}/${cmd.help.name}:USAGE`), true)
                     .addField(message.translate("core/help:TITLE_EXAMPLES"), message.translate(`${cmd.help.category}/${cmd.help.name}:EXAMPLES`).replace(/[$_]/g, utils.guildData.prefix), true)
                     .addField(message.translate("core/help:TITLE_DESCRIPTION"), message.translate(`${cmd.help.category}/${cmd.help.name}:DESCRIPTION`))
