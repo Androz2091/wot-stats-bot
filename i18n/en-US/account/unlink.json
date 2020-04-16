@@ -3,5 +3,6 @@
     "USAGE": "unlink",
     "EXAMPLES": "$unlink",
     "NO_LINKED": "You currently have no linked accounts! Please link one with `{{prefix}}link [server] [nickname]`!",
+    "NO_LINKED_USER": "**{{user}}* has no WoT account linked!",
     "SUCCESS": "Your account is no longer linked!"
 }
