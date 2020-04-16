@@ -1,6 +1,9 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
+const dateAndTime = require("date-and-time");
+const pattern = dateAndTime.compile('MMM D YYYY');
+
 module.exports = class extends Command {
 
     constructor (client) {
@@ -67,11 +70,11 @@ module.exports = class extends Command {
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
             .setAuthor(stats.nickname, client.user.displayAvatarURL())
             .addField(message.translate("stats/profile:HEADER_NICKNAME"), "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
-            .addField(message.translate("stats/profile:HEADER_CREATED"), message.language.printDate(new Date(stats.created_at*1000)), true)
-            .addField(message.translate("stats/profile:HEADER_LAST_UPDATE"), message.language.printDate(new Date(stats.updated_at*1000)), true)
-            .addField(message.translate("stats/profile:HEADER_LAST_BATTLE"), (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
+            .addField(message.translate("stats/profile:HEADER_CREATED"), dateAndTime.format(new Date(stats.created_at*1000), pattern), true)
+            .addField(message.translate("stats/profile:HEADER_LAST_UPDATE"), dateAndTime.format(new Date(stats.updated_at*1000), pattern), true)
+            .addField(message.translate("stats/profile:HEADER_LAST_BATTLE"), (stats.last_battle_time > 0 ? dateAndTime.format(new Date(stats.last_battle_time*1000), pattern) : message.translate("stats/profile:NO_BATTLES")), true)
             .addField(message.translate("stats/profile:HEADER_CLAN"), (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
-            .addField(message.translate("stats/profile:HEADER_WIN_RATE"), (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
+            .addField(message.translate("stats/profile:HEADER_WIN_RATE"), (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.translate("stats/profile:NO_BATTLES")), true)
             .addField(message.translate("stats/profile:HEADER_WN8"), stats.wn8.now, true)
             .addField(message.translate("stats/profile:HEADER_WN8_24"), stats.wn8["24h"], true)
             .addField(message.translate("stats/profile:HEADER_WN8_30"), stats.wn8["30d"], true);
