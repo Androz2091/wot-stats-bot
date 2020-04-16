@@ -20,6 +20,18 @@ module.exports = {
         loading:        "Emoji string",
         warn:           "Emoji string",
         stats:          "Emoji string",
+        numbers: [
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string",
+            "Emoji string"
+        ]
     },
     dbl:                "Discordbots API Key",
     permLevels: [
