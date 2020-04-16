@@ -51,7 +51,7 @@ module.exports = class extends Command {
         let m = await message.sendT("account/link:SEARCHING");
         
         client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).then((player) => {
-            m.sendT("account/link:LINK_SUCCESS", {
+            m.sendT("account/link:SUCCESS", {
                 prefix: utils.guildData.prefix
             }, true, null, "loading");
             return client.databases[0].set(message.author.id+".wot", player);
