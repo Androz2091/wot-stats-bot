@@ -2,7 +2,7 @@ const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
 const dateAndTime = require("date-and-time");
-const pattern = date.compile('MMM D YYYY');
+const pattern = dateAndTime.compile('MMM D YYYY');
 
 module.exports = class extends Command {
 
