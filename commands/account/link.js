@@ -1,16 +1,11 @@
-const Command = require("../../structures/Command.js"),
-Discord = require("discord.js");
+const Command = require("../../structures/Command.js");
 
-class Link extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "link",
-            // Displayed in the help command
-            description: (language) => language.get("LINK_DESCRIPTION"),
-            usage: (language) => language.get("LINK_USAGE"),
-            examples: (languages) => languages.get("LINK_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -32,34 +27,40 @@ class Link extends Command {
 
         // if an account is already linked
         if(utils.usersData[0].wot !== "unknow"){
-            return message.channel.send(message.language.get("LINK_ALREADY_LINKED", utils.guildData.prefix));
+            return message.error("account/link:ALREADY_LINKED", {
+                prefix: utils.guildData.prefix
+            });
         }
 
         // if no realm is provided
         if(!args[0]){
-            return message.channel.send(message.language.get("LINK_REALM"));
+            return message.error("account/link:MISSING_REALM");
         }
         let realm = client.realms.find((r) => r.name === args[0] || r.aliases.includes(args[0]));
         if(!realm){
-            return message.channel.send(message.language.get("LINK_BAD_REALM", args[0]));
+            return message.error("account/link:INVALID_REALM", {
+                realm: args[0]
+            });
         }
 
         // if no nickname is provided
         if(!args[1]){
-            return message.channel.send(message.language.get("LINK_NICKNAME"));
+            return message.error("account/link:MISSING_NICKNAME");
         }
 
-        let m = await message.channel.send(message.language.get("LINK_SEARCH"));
+        let m = await message.sendT("account/link:SEARCHING");
         
         client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).then((player) => {
-            m.edit(message.language.get("LINK_SUCCESS", utils.guildData.prefix));
+            m.sendT("account/link:LINK_SUCCESS", {
+                prefix: utils.guildData.prefix
+            }, true, null, "loading");
             return client.databases[0].set(message.author.id+".wot", player);
-        }).catch((err) => {
-            return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
+        }).catch((_err) => {
+            return m.error("account/link:ACCOUNT_NOT_FOUND", {
+                search: args.slice(1).join(" ")
+            }, true);
         });
 
     }
     
 };
-
-module.exports = Link;
