@@ -82,21 +82,21 @@ module.exports = class extends Command {
             .addField(message.translate("stats/profile:HEADER_WIN_RATE"), client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles), true)
             .addField(message.translate("stats/profile:HEADER_WN8"), stats.wn8.now, true)
             .addField(message.translate("common:TOTAL"),
-                message.translate("stats/profile:FIELD_DAMAGE_R")+stats.statistics.all.damage_received+"\n"+
-                message.translate("stats/profile:FIELD_DAMAGE_I")+stats.statistics.all.damage_dealt+"\n"+
-                message.translate("stats/profile:FIELD_DESTROYED")+stats.statistics.all.frags+"\n"+
-                message.translate("stats/profile:FIELD_SHOTS")+stats.statistics.all.shots,
+                message.translate("stats/stats:FIELD_DAMAGE_R")+stats.statistics.all.damage_received+"\n"+
+                message.translate("stats/stats:FIELD_DAMAGE_I")+stats.statistics.all.damage_dealt+"\n"+
+                message.translate("stats/stats:FIELD_DESTROYED")+stats.statistics.all.frags+"\n"+
+                message.translate("stats/stats:FIELD_SHOTS")+stats.statistics.all.shots,
                 true
             )
-            .addField(message.translate("stats/profile:HEADER_MAX_GAME"),
-                message.translate("stats/profile:FIELD_DESTROYED")+stats.statistics.all.max_frags+"\n"+
-                message.translate("stats/profile:FIELD_DAMAGE_I")+stats.statistics.all.max_damage,
+            .addField(message.translate("stats/stats:HEADER_MAX_GAME"),
+                message.translate("stats/stats:FIELD_DESTROYED")+stats.statistics.all.max_frags+"\n"+
+                message.translate("stats/stats:FIELD_DAMAGE_I")+stats.statistics.all.max_damage,
                 true
             )
             .addField(message.translate("stats/profile:HEADER_WN8_HISTORY")[11],
-                message.translate("STATS_FIELDS").wn8[0]+stats.wn8["24h"]+"\n"+
-                message.translate("STATS_FIELDS").wn8[1]+stats.wn8["7d"]+"\n"+
-                message.translate("STATS_FIELDS").wn8[2]+stats.wn8["30d"],
+                message.translate("stats/stats:WN8_24")+stats.wn8["24h"]+"\n"+
+                message.translate("stats/stats:WN8_7")+stats.wn8["7d"]+"\n"+
+                message.translate("stats/stats:WN8_30")+stats.wn8["30d"],
                 true
             );
 
