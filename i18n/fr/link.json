@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Link your WoT account to your Discord account!",
+    "USAGE": "link [na/asia/eu/ru] [nickname]",
+    "EXAMPLES": "$link eu ThibaudFvrx",
+    "ALREADY_LINKED": "You have already linked a WoT account! Type `{{prefix}}unlink` and try again!",
+    "MISSING_NICKNAME": "You must specify your WoT nickname!",
+    "MISSING_REALM": "You must specify a server! Here's the list of servers: `asia`, `eu` (europe), `na` (north america), `ru` (russia)!",
+    "INVALID_REALM": "`{{realm}}` is not a valid server! Here's the list of servers: `asia`, `eu` (europe), `na` (north america), `ru` (russia)!",
+    "SEARCHING": "Searching your account...",
+    "SUCCESS": "Your WoT account has been correctly linked to your Discord account! To see your profile, type `{{prefix}}profile`!",
+    "ACCOUNT_NOT_FOUND": "No account found for `{{search}}`!"
+}
