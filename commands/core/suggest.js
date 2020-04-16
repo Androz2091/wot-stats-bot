@@ -1,16 +1,12 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
-class Suggest extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "suggest",
-            // Displayed in the help command
-            description: (language) => language.get("SUGGEST_DESCRIPTION"),
-            usage: (language) => language.get("SUGGEST_USAGE"),
-            examples: (languages) => languages.get("SUGGEST_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -31,10 +27,10 @@ class Suggest extends Command {
         // Gets the suggestion
         let suggestion = args.join(" ");
         if(!suggestion){
-            return message.channel.send(message.language.get("SUGGEST_MISSING_SUGGESTION"));
+            return message.error("core/suggest:MISSING");
         }
 
-        let suggEmbed = JSON.stringify(new Discord.MessageEmbed()
+        const suggEmbed = JSON.stringify(new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription(suggestion)
             .setColor(utils.embed.color)
@@ -52,9 +48,7 @@ class Suggest extends Command {
                 true;
             } else false;
         `);
-        message.channel.send(message.language.get("SUGGEST_SUCCESS"));
+        message.success("core/suggest:SENT");
     }
 
 };
-
-module.exports = Suggest;
