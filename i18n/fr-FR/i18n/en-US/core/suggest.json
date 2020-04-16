@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Submit a suggestion!",
+    "USAGE": "suggest [suggestion]",
+    "EXAMPLES": "$suggest A new command: this command will...",
+    "MISSING": "You must specify a suggestion!",
+    "SENT": "Your suggestion has just been sent to the administrators!"
+}
