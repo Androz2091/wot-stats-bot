@@ -17,7 +17,6 @@ module.exports = class {
 			PAGE: "Page",
 			MEMBERS: "Members",
 			TOTAL_SERVERS:"Total servers",
-			NO_TANKS: (tier) => "No tanks of `"+tier+"` tier to display!",
 			CURRENT: "Current",
 
 			/* ERRORS */
@@ -50,22 +49,8 @@ module.exports = class {
 			// Utils
 			EVAL_DESCRIPTION: "Executes the code",
 			EVAL_USAGE: "eval [code]",
-			EVAL_EXAMPLES: "$eval message.channel.send('Hey');",
-
-			/* TANKS COMMAND */
-
-			// Utils
-			TANKS_DESCRIPTION: "Displays a player's tanks!",
-			TANKS_USAGE: "tanks [@member/nickname]",
-			TANKS_EXAMPLES: "$tanks ThibaudFvrx",
-			// Content
-			TANKS_FIELDS: [
-				"Battles: ",
-				"Mark of mastery:",
-				"Nation: "
-			],
-			TANKS_CHOOSE_TIER: "Please choose the tier of the tanks to display!",
-			TANKS_TIMEOUT:"The message has expired, type the command again!"
+			EVAL_EXAMPLES: "$eval message.channel.send('Hey');"
+			
 
         }
     }

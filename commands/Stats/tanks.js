@@ -7,16 +7,12 @@ const asyncForEach = async (array, callback) => {
     }
 }
 
-class Tanks extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "tanks",
-            // Displayed in the help command
-            description: (language) => language.get("TANKS_DESCRIPTION"),
-            usage: (language) => language.get("TANKS_USAGE"),
-            examples: (languages) => languages.get("TANKS_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -36,26 +32,34 @@ class Tanks extends Command {
         
         let client = this.client;
 
-        let m = await message.channel.send(message.language.get("PLEASE_WAIT"));
+        let m = await message.sendT("PLEASE_WAIT", null, false, null, "loading");
 
         let userData;
 
         if(message.mentions.users.first()){
             if(utils.usersData[1].wot === "unknow"){
-                return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
+                return m.error("account/unlink:NOT_LINKED_USER", {
+                    user: message.mentions.users.first().tag
+                }, true);
             } else {
                 userData = utils.usersData[1].wot;
             }
         } else if(args[0]){
             let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
-            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0].toLowerCase()));
+            if(!realm) return m.error("account/link:INVALID_REALM", {
+                realm: args[0].toLowerCase()
+            }, true);
             if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
             userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
-                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
+                return m.error("account/link:ACCOUNT_NOT_FOUND", {
+                    search: args.slice(1).join(" ")
+                }, true);
             });
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
-                return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
+                return m.error("account/unlink:NOT_LINKED", {
+                    prefix: utils.guildData.prefix
+                }, true);
             } else {
                 userData = utils.usersData[0].wot;
             }
@@ -70,7 +74,7 @@ class Tanks extends Command {
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
             .setAuthor(stats.nickname, client.user.displayAvatarURL())
-            .setDescription(message.language.get("TANKS_CHOOSE_TIER"));
+            .setDescription(message.translate("stats/tanks:CHOOSE_TIER"));
         
         let msg = await m.edit(null, { embed });
         let rCollector = msg.createReactionCollector((reaction, user) => user.id === message.author.id, { time: 60000 });
@@ -84,7 +88,7 @@ class Tanks extends Command {
             ended = true;
             msg.reactions.removeAll();
             if(reason !== "OK"){
-                embed.setTitle("").setDescription(message.language.get("TANKS_TIMEOUT"));
+                embed.setTitle("").setDescription(message.translate("stats/tanks:TIMEOUT"));
                 msg.edit(null, { embed });
             }
         });
@@ -99,14 +103,16 @@ class Tanks extends Command {
             var tier = reaction._emoji.name.substr(4, reaction._emoji.name.length);
             var toDisplay = tanks.filter(t => t.tier === parseInt(tier, 10)).sort( (a, b) => b.mark_of_mastery - a.mark_of_mastery);
             if(toDisplay.length < 1){
-                embed.setDescription(message.language.get("NO_TANKS", tier));
+                embed.setDescription(message.translate("stats/tanks:NO_TANKS", {
+                    tier
+                }));
             } else {
                 toDisplay.forEach(tank => {
                     var title = (tank.is_premium ? client.config.emojis.star+" "+tank.short_name : tank.short_name);
                     embed.addField(title,
-                        message.language.get("TANKS_FIELDS")[0]+tank.statistics.battles+"\n"+
-                        message.language.get("TANKS_FIELDS")[1]+tank.mark_of_mastery+"\n"+
-                        message.language.get("TANKS_FIELDS")[2]+tank.nation,
+                        message.translate("stats/tanks:HEADER_BATTLES")+tank.statistics.battles+"\n"+
+                        message.translate("stats/tanks:HEADER_MARK")+tank.mark_of_mastery+"\n"+
+                        message.translate("stats/tanks:HEADER_NATION")+tank.nation,
                         true
                     );
                 });
@@ -117,5 +123,3 @@ class Tanks extends Command {
     }
 
 };
-
-module.exports = Tanks;
