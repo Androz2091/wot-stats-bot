@@ -1,17 +1,16 @@
 const { Guild, Message } = require("discord.js");
 const config = require("../config");
 
-const resolveLanguage = (setLanguage) => setLanguage === "english" ? "en-US" : setLanguage === "french" ? "fr-FR" : "en-US";
 
 Guild.prototype.translate = function(key, args) {
-    const language = this.client.translations.get(resolveLanguage(this.data.language));
+    const language = this.client.translations.get(this.language);
     if (!language) throw "Message: Invalid language set in data.";
     return language(key, args);
 };
 
 Message.prototype.translate = function(key, args) {
     const language = this.client.translations.get(
-        this.guild ? resolveLanguage(this.guild.language) : "en-US"
+        this.guild ? this.guild.language : "en-US"
     );
     if (!language) throw "Message: Invalid language set in data.";
     return language(key, args);

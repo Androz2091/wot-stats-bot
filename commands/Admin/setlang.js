@@ -1,16 +1,27 @@
-const Command = require("../../structures/Command.js"),
-Discord = require("discord.js");
+const Command = require("../../structures/Command.js");
+const languages = [
+    {
+        "name": "en-US",
+        "aliases": [
+            "english",
+            "en"
+        ]
+    },
+    {
+        "name": "fr-FR",
+        "aliases": [
+            "french",
+            "fr"
+        ]
+    }
+];
 
-class Setlang extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "setlang",
-            // Displayed in the help command
-            description: (language) => language.get("SETLANG_DESCRIPTION"),
-            usage: (language) => language.get("SETLANG_USAGE"),
-            examples: (languages) => languages.get("SETLANG_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -28,19 +39,18 @@ class Setlang extends Command {
 
     async run (message, args, utils) {
         
-        var lang = args[0];
-        if(!lang || (lang !== "en" && lang !== "fr")){
-            return message.channel.send(message.language.get("SETLANG_VALID_LANGUAGES"));
+        const lang = args[0];
+        if(!languages.some((language) => language.name === lang || language.aliases.includes(lang))){
+            return message.error("admin/setlang:INVALID_LANGUAGE")
         }
+        
+        const languageName = languages.find((language) => language.name === lang || language.aliases.includes(lang)).name;
+        message.guild.language = languageName;
+        
+        message.success("admin/setlang:SUCCESS");
 
-        var tlang = new(require("../../languages/"+lang+".js"));
-
-        message.channel.send(tlang.get("SETLANG_SUCCESS"));
-
-        this.client.databases[1].set(message.guild.id+".lang", lang);
+        this.client.databases[1].set(message.guild.id+".lang", languageName);
         
     }
 
-}
-
-module.exports = Setlang;
+};
