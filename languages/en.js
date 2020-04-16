@@ -23,53 +23,9 @@ module.exports = class {
 			DM_COMMAND_UNAVAILABLE: e.error+" | This command is not available in private messages. Join a server to run it!",
 			ADMIN_ONLY: e.error+" | Only bots administrators can execute this command!",
 			MISSING_PERMS: (perm) => e.error+" | This command requires permission `"+perm+"` !",
-			ERROR: e.error+" | An error has occurred.... If it happens again, you can report it on the Discord!",
+			ERROR: e.error+" | An error has occurred.... If it happens again, you can report it on the Discord!"
 
-            /* SERVERSLIST COMMAND */
-
-			// Utils
-			SERVERSLIST_DESCRIPTION: "Displays the list of the servers of the bot!",
-			SERVERSLIST_USAGE: "serverslist",
-			SERVERSLIST_EXAMPLES: "$serverslist",
-			// Content
-			SERVERSLIST_TIMEOUT: "The message has expired, type the command again!",
-            
-            /* GETINVITE COMMAND */
-
-			// Utils
-			GETINVITE_DESCRIPTION: "Generates an invitation to the Discord!",
-			GETINVITE_USAGE: "getinvite [ID]",
-			GETINVITE_EXAMPLES: "$getinvite 457888575111954434",
-			// Errors
-			GETINVITE_GUILD_NOT_FOUND: (id) => e.error+" | No servers found with `"+id+"`!",
-            GETINVITE_MISSING_ID: e.error+" | You must enter a server ID!",
-
-			/* EVAL COMMAND */
-
-			// Utils
-			EVAL_DESCRIPTION: "Executes the code",
-			EVAL_USAGE: "eval [code]",
-			EVAL_EXAMPLES: "$eval message.channel.send('Hey');"
-			
-
-        }
-    }
-
-	/**
-	 * Convert milliseconds to a string
-	 * @param {number} ms 
-	 */
-	convertMs(ms){
-		var d, h, m, s;
-		s = Math.floor(ms / 1000);
-		m = Math.floor(s / 60);
-		s = s % 60;
-		h = Math.floor(m / 60);
-		m = m % 60;
-		d = Math.floor(h / 24);
-		h = h % 24;
-		h += d * 24;
-		return h + " hour(s) " + m + " minute(s) " + s + " second(s)";
+		}
 	}
 
 };

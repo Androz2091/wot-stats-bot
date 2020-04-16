@@ -1,16 +1,11 @@
-const Command = require("../../structures/Command.js"),
-Discord = require("discord.js");
+const Command = require("../../structures/Command.js");
 
-class Eval extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "eval",
-            // Displayed in the help command
-            description: (language) => language.get("EVAL_DESCRIPTION"),
-            usage: (language) => language.get("EVAL_USAGE"),
-            examples: (languages) => languages.get("EVAL_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -29,7 +24,7 @@ class Eval extends Command {
     async run (message, args, utils) {
 
         const content = message.content.split(" ").slice(1).join(" ");
-        const result = new Promise((resolve, reject) => resolve(eval(content)));
+        const result = new Promise((resolve) => resolve(eval(content)));
         
         return result.then((output) => {
             if(typeof output !== "string"){
@@ -54,5 +49,3 @@ class Eval extends Command {
     }
 
 };
-
-module.exports = Eval;
