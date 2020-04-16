@@ -7,10 +7,6 @@ class Help extends Command {
         super(client, {
             // The name of the command
             name: "help",
-            // Displayed in the help command
-            description: (language) => language.get("HELP_DESCRIPTION"),
-            usage: (language) => language.get("HELP_USAGE"),
-            examples: (languages) => languages.get("HELP_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -30,33 +26,37 @@ class Help extends Command {
         
         // if the user wants the help of a specific command
         if(args[0]){
-            let cmd = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
+            const cmd = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
             if(cmd){
-                var commandEmbed = new Discord.MessageEmbed()
+                const commandEmbed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .addField(message.language.get("HELP_HEADERS")[0], cmd.help.category, true)
-                    .addField(message.language.get("HELP_HEADERS")[1], cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
-                    .addField(message.language.get("HELP_HEADERS")[2], utils.guildData.prefix+cmd.help.usage(message.language), true)
-                    .addField(message.language.get("HELP_HEADERS")[3], cmd.help.examples(message.language).replace(/[$_]/g, utils.guildData.prefix), true)
-                    .addField(message.language.get("HELP_HEADERS")[4], cmd.help.description(message.language))
+                    .addField(message.translate("core/help:TITLE_CATEGORY"), cmd.help.category, true)
+                    .addField(message.translate("core/help:TITLE_ALIAS"), cmd.conf.aliases.length > 0 ? cmd.conf.aliases.map((a) => "`"+a+"`").join(", ") : message.language.get("HELP_NO_ALIASES"), true)
+                    .addField(message.translate("core/help:TITLE_USAGE"), utils.guildData.prefix+message.translate(`${cmd.help.category}/${cmd.help.name}:USAGE`), true)
+                    .addField(message.translate("core/help:TITLE_EXAMPLES"), message.translate(`${cmd.help.category}/${cmd.help.name}:EXAMPLES`).replace(/[$_]/g, utils.guildData.prefix), true)
+                    .addField(message.translate("core/help:TITLE_DESCRIPTION"), message.translate(`${cmd.help.category}/${cmd.help.name}:DESCRIPTION`))
                     .setColor(utils.embed.color)
                     .setFooter(utils.embed.footer);
                 return message.channel.send(commandEmbed);
             } else {
-                return message.channel.send(message.language.get("COMMAND_NOT_FOUND", args[0]));
+                return message.error("core/help:COMMAND_NOT_FOUND", {
+                    search: args[0]
+                });
             }
         } else {
-            let commandsEmbed = new Discord.MessageEmbed()
-            .setAuthor(message.language.get("WELCOME")+", "+message.author.tag, message.author.displayAvatarURL())
-            .setDescription(message.language.get("HELP_REMIND"))
-            .setColor(utils.embed.color)
-            .setFooter(utils.embed.footer);
+            const commandsEmbed = new Discord.MessageEmbed()
+                .setAuthor(message.translate("core/help:TITLE", {
+                    user: message.author.tag
+                }), message.author.displayAvatarURL())
+                .setDescription(message.translate("core/help:TIP"))
+                .setColor(utils.embed.color)
+                .setFooter(utils.embed.footer);
             
             // Gets an array of all categories
             let categories = [];
             this.client.commands.forEach((cmd) => {
                 if(!categories.includes(cmd.help.category)){
-                    if(cmd.help.category === "Bot Admin" && !this.client.config.owners.includes(message.author.id)) return;
+                    if(cmd.help.category === "bot-admin" && !this.client.config.owners.includes(message.author.id)) return;
                     categories.push(cmd.help.category);
                 }
             });
