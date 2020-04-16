@@ -10,5 +10,10 @@
     "NO_ALIASES": "No aliases.",
     "TIP": "Reminder: `[]` means mandatory parameter and `()` means optional parameter.",
     "COMMAND_NOT_FOUND": "No command found for `{{search}}`!",
-    "TITLE": "Welcome, {{user}}"
+    "TITLE": "Welcome, {{user}}",
+    "CATEGORY_ACCOUNT": "Your account",
+    "CATEGORY_ADMIN": "Admin",
+    "CATEGORY_BOT_ADMIN": "Admin Of WoT Stats",
+    "CATEGORY_CORE": "Core",
+    "CATEGORY_STATS": "Stats"
 }
