@@ -1,5 +1,7 @@
 {
     "WINS": "Wins",
+    "LOSSES": "Losses",
+    "TOTAL": "Total",
     "NAME": "Name",
     "YES": "Yes",
     "No": "No"

@@ -13,8 +13,6 @@ module.exports = class {
 			// UTILS
 			WELCOME:"Welcome",
 			NO_CLAN1: "No clan",
-			YES:"Yes",
-			NO:"No",
 			NO_BATTLES:"No battles",
 			PAGE: "Page",
 			MEMBERS: "Members",
@@ -27,84 +25,6 @@ module.exports = class {
 			ADMIN_ONLY: e.error+" | Only bots administrators can execute this command!",
 			MISSING_PERMS: (perm) => e.error+" | This command requires permission `"+perm+"` !",
 			ERROR: e.error+" | An error has occurred.... If it happens again, you can report it on the Discord!",
-
-			/* PROFILE COMMAND */
-
-			// Utils
-			PROFILE_DESCRIPTION: "Shows the profile of a WoT player!",
-			PROFILE_USAGE: "profile [@member/nickname]",
-			PROFILE_EXAMPLES: "$profile ThibaudFvrx",
-			// Success
-			PROFILE_SUCCESS: (username) => e.stats+" | This is the profile of **"+username+"** :",
-			PROFILE_HEADERS: [
-				"Nickname",
-				"Creation date",
-				"Last update",
-				"Last battle",
-				"Clan",
-				"Win Rate",
-				"WN8",
-				"WN8 - 24h",
-				"WN8 - 30d"
-			],
-
-			/* STATS COMMAND */
-
-			// Utils
-			STATS_DESCRIPTION: "Displays the stats of a WoT player!",
-			STATS_USAGE: "stats [@member/nickname]",
-			STATS_EXAMPLES: "$stats ThibaudFvrx",
-			// Content
-			STATS_SUCCESS: (username) => e.stats+" | These are the stats of **"+username+"** :",
-			STATS_HEADERS: [
-				"Nickname",
-				"Battles",
-				"Wins",
-				"Defeats",
-				"Equalities",
-				"Survived Battles",
-				"Survived Battles Ratio",
-				"Win rate",
-				"WN8",
-				"Total",
-				"Maximum in one game",
-				"History WN8"
-			],
-			STATS_FIELDS: {
-				max: [
-					"Destroyed vehicles: ",
-					"Damage inflicted : "
-				],
-				total: [
-					"Damage received: ",
-					"Damage inflicted : ",
-					"Destroyed vehicles: ",
-					"Shots: "
-				],
-				wn8: [
-					"24 hours : ",
-					"7 days : ",
-					"30 days : "
-				]
-			},
-
-			/* CLAN COMMAND */
-
-			// Utils
-			CLAN_DESCRIPTION: "Displays information about the clan!",
-			CLAN_USAGE: "clan [nom]",
-			CLAN_EXAMPLES: "$clan LeClan",
-			// Content
-			CLAN_SUCCESS: (name) => e.stats+" | Here is the information for the clan **"+name+"** :",
-			CLAN_HEADERS: [
-				"Name",
-				"Founder",
-				"Created at",
-				"Members",
-				"Private",
-				"WN8",
-				"Description"
-			],
 
             /* SERVERSLIST COMMAND */
 
