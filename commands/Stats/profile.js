@@ -1,16 +1,12 @@
 const Command = require("../../structures/Command.js"),
 Discord = require("discord.js");
 
-class Profile extends Command {
+module.exports = class extends Command {
 
     constructor (client) {
         super(client, {
             // The name of the command
             name: "profile",
-            // Displayed in the help command
-            description: (language) => language.get("PROFILE_DESCRIPTION"),
-            usage: (language) => language.get("PROFILE_USAGE"),
-            examples: (languages) => languages.get("PROFILE_EXAMPLES"),
             // The name of the command folder, to detect the category
             dirname: __dirname,
             // Whether the command is enabled
@@ -30,26 +26,34 @@ class Profile extends Command {
         
         let client = this.client;
 
-        let m = await message.channel.send(message.language.get("PLEASE_WAIT"));
+        let m = await message.sendT("misc:PLEASE_WAIT", null, false, null, "loading");
 
         let userData;
 
         if(message.mentions.users.first()){
             if(utils.usersData[1].wot === "unknow"){
-                return m.edit(message.language.get("NOT_LINKED_USER", message.mentions.users.first()));
+                return m.error("account/unlink:NOT_LINKED_USER", {
+                    user: message.mentions.users.first().tag
+                }, true);
             } else {
                 userData = utils.usersData[1].wot;
             }
         } else if(args[0]){
             let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
-            if(!realm) return m.edit(message.language.get("LINK_BAD_REALM", args[0]));
-            if(!args[1]) return m.edit(message.language.get("VALID_NICKNAME"));
+            if(!realm) return m.error("account/link:INVALID_REALM", {
+                realm: args[0]
+            }, true);
+            if(!args[1]) return m.error("stats/profile:MISSING_NICKNAME", null, true);
             userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
-                return m.edit(message.language.get("ACCOUNT_NOT_FOUND", args.slice(1).join(" ")));
+                return m.error("account/link:ACCOUNT_NOT_FOUND", {
+                    search: args.slice(1).join(" ")
+                }, true);
             });
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
-                return m.edit(message.language.get("NOT_LINKED", utils.guildData.prefix));
+                return m.error("account/unlink:NOT_LINKED", {
+                    prefix: utils.guildData.prefix
+                });
             } else {
                 userData = utils.usersData[0].wot;
             }
@@ -62,19 +66,19 @@ class Profile extends Command {
             .setColor(stats.wn8.color)
             .setFooter(utils.embed.footer, stats.realmData.iconURL)
             .setAuthor(stats.nickname, client.user.displayAvatarURL())
-            .addField(message.language.get("PROFILE_HEADERS")[0], "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
-            .addField(message.language.get("PROFILE_HEADERS")[1], message.language.printDate(new Date(stats.created_at*1000)), true)
-            .addField(message.language.get("PROFILE_HEADERS")[2], message.language.printDate(new Date(stats.updated_at*1000)), true)
-            .addField(message.language.get("PROFILE_HEADERS")[3], (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
-            .addField(message.language.get("PROFILE_HEADERS")[4], (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
-            .addField(message.language.get("PROFILE_HEADERS")[5], (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
-            .addField(message.language.get("PROFILE_HEADERS")[6], stats.wn8.now, true)
-            .addField(message.language.get("PROFILE_HEADERS")[7], stats.wn8["24h"], true)
-            .addField(message.language.get("PROFILE_HEADERS")[8], stats.wn8["30d"], true);
+            .addField(message.translate("stats/profile:HEADER_NICKNAME"), "["+stats.nickname+"](https://fr.wot-life.com/eu/player/"+stats.nickname+"-"+userData.ID+")", true)
+            .addField(message.translate("stats/profile:HEADER_CREATED"), message.language.printDate(new Date(stats.created_at*1000)), true)
+            .addField(message.translate("stats/profile:HEADER_LAST_UPDATE"), message.language.printDate(new Date(stats.updated_at*1000)), true)
+            .addField(message.translate("stats/profile:HEADER_LAST_BATTLE"), (stats.last_battle_time > 0 ? message.language.printDate(new Date(stats.last_battle_time*1000)) : message.language.get("NO_BATTLES")), true)
+            .addField(message.translate("stats/profile:HEADER_CLAN"), (stats.clan_id) ? stats.clan.clan_tag : message.language.get("NO_CLAN1"), true)
+            .addField(message.translate("stats/profile:HEADER_WIN_RATE"), (stats.statistics.all.battles > 0 ? client.functions.percentage(stats.statistics.all.wins, stats.statistics.all.battles) : message.language.get("NO_BATTLES")), true)
+            .addField(message.translate("stats/profile:HEADER_WN8"), stats.wn8.now, true)
+            .addField(message.translate("stats/profile:HEADER_WN8_24"), stats.wn8["24h"], true)
+            .addField(message.translate("stats/profile:HEADER_WN8_30"), stats.wn8["30d"], true);
 
-        m.edit(message.language.get("PROFILE_SUCCESS", stats.nickname), embed);
+        m.edit(message.translate("stats/profile:CONTENT", {
+            nickname: stats.nickname
+        }), embed);
     }
 
-}
-
-module.exports = Profile;
+};
