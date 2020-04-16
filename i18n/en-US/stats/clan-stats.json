@@ -6,7 +6,6 @@
     "MISSING_CLAN": "You must specify a valid clan name!",
     "CLAN_NOT_FOUND": "No clan found for `{{search}}`!",
     "CONTENT": "Here are the statistics for the clan **{{name}}** :",
-    "HEADER_NAME": "Name",
     "HEADER_TIER": "Tier X vehicles",
     "RANK_X": "Tier X vehicles",
     "RANK_VIII": "Tier VIII vehicles",

@@ -1,3 +1,6 @@
 {
-    "WINS": "wins"
+    "WINS": "Wins",
+    "NAME": "Name",
+    "YES": "Yes",
+    "No": "No"
 }

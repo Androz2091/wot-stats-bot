@@ -94,7 +94,7 @@ module.exportds = class extends Command {
             .setColor(clanStats.wn8.color)
             .setFooter(utils.embed.footer, clanStats.realmData.iconURL)
             .setAuthor(clanStats.name, clanStats.emblems.x195.portal)
-            .addField(message.translate("stats/clan-stats:HEADER_NAME"),
+            .addField(message.translate("common:NAME"),
                 "["+clanStats.name+"](https://eu.wargaming.net/clans/wot/"+clanData.clan_id+"/)\n\n"+message.translate("stats/clan-stats:TITLE_SKIRMISH")
             , true);
 
@@ -114,9 +114,9 @@ module.exportds = class extends Command {
                     message.translate("stats/clan-stats:LAST_BATTLE")+
                     ((clanStats.skirmish_statistics["last_time_"+rank] === 0) ? message.translate("stats/clan-stats:NO_RECENT_BATTLE") : dateAndTime.format(new Date(clanStats.skirmish_statistics["last_time_"+rank]*1000), pattern))+"\n"+
                     message.translate("stats/clan-stats:TOTAL_BATTLES")+
-                    (clanStats.skirmish_statistics["total_"+rank]+" ("+clanStats.skirmish_statistics["win_"+rank]+" "+message.translate("common:WINS")+")")+"\n"+
+                    (clanStats.skirmish_statistics["total_"+rank]+" ("+clanStats.skirmish_statistics["win_"+rank]+" "+message.translate("common:WINS").toLowerCase()+")")+"\n"+
                     message.translate("stats/clan-stats:TOTAL_BATTLES_28")+
-                    (clanStats.skirmish_statistics["total_"+rank+"_in_28d"]+" ("+clanStats.skirmish_statistics["win_"+rank+"_in_28d"]+" "+message.translate("common:WINS")+")")+"\n"+
+                    (clanStats.skirmish_statistics["total_"+rank+"_in_28d"]+" ("+clanStats.skirmish_statistics["win_"+rank+"_in_28d"]+" "+message.translate("common:WINS").toLowerCase()+")")+"\n"+
                     message.translate("stats/clan-stats:WIN_RATE")+
                     ((clanStats.skirmish_statistics["win_"+rank] === 0) ? "0%" : client.functions.percentage(clanStats.skirmish_statistics["win_"+rank], clanStats.skirmish_statistics["lose_"+rank]))+"\n"+
                     message.translate("stats/clan-stats:WIN_RATE_28")+
