@@ -4,6 +4,7 @@ const realms = require("./realms.json");
 // Load modules
 const fetch = require("node-fetch"),
 cheerio = require("cheerio");
+const tabletojson = require("tabletojson").Tabletojson;
 
 class Wargamer {
     constructor(apiKey){
