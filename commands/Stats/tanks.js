@@ -32,7 +32,7 @@ module.exports = class extends Command {
         
         let client = this.client;
 
-        let m = await message.sendT("PLEASE_WAIT", null, false, null, "loading");
+        let m = await message.sendT("misc:PLEASE_WAIT", null, false, null, "loading");
 
         let userData;
 
