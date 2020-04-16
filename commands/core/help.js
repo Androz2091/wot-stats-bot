@@ -44,7 +44,7 @@ module.exports = class extends Command {
                 });
             }
         } else {
-            /*const commandsEmbed = new Discord.MessageEmbed()
+            const commandsEmbed = new Discord.MessageEmbed()
                 .setAuthor(message.translate("core/help:TITLE", {
                     user: message.author.tag
                 }), message.author.displayAvatarURL())
@@ -67,12 +67,12 @@ module.exports = class extends Command {
                 let category = "";
                 let commands = this.client.commands.filter((cmd) => cmd.help.category === cat);
                 commands.forEach((cmd) => {
-                    category += "**"+utils.guildData.prefix+cmd.help.usage(message.language)+"** - "+cmd.help.description(message.language)+"\n";
+                    category += "**"+utils.guildData.prefix+message.translate(`${cmd.help.category}/${cmd.help.name}:USAGE`)+"** - "+message.translate(`${cmd.help.category}/${cmd.help.name}:DESCRIPTION`)+"\n";
                 });
-                commandsEmbed.addField(cat, category);
+                commandsEmbed.addField(message.translate("core/help:CATEGORY_"+(cat.toUpperCase().replace("-", "_"))), category);
             });
 
-            message.channel.send(commandsEmbed);*/
+            message.channel.send(commandsEmbed);
         }
     }
 
