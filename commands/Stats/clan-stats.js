@@ -45,7 +45,7 @@ module.exports = class extends Command {
                 }, false);
                 if(!userStats.clan_id){
                     return m.error("stats/clan-stats:NO_CLAN_USER", {
-                        user: message.mentions.users.first().tag
+                        nickname: utils.userData[1].wot.nickname
                     }, true);
                 }
                 clanData = {
@@ -73,7 +73,7 @@ module.exports = class extends Command {
                 let userStats = await client.Wargamer.getPlayerStats({ realm: utils.usersData[0].wot.realm, ID: utils.usersData[0].wot.ID }, false);
                 if(!userStats.clan_id){
                     return m.error("stats/clan-stats:NO_CLAN_USER", {
-                        user: message.mentions.users.first().tag
+                        nickname: utils.usersData[0].wot.nickname
                     });
                 }
                 clanData = {

@@ -100,7 +100,7 @@ module.exports = class extends Command {
                 true
             );
 
-        m.edit(message.translate("stats/profile:CONTENT", {
+        m.edit(message.translate("stats/stats:CONTENT", {
             nickname: stats.nickname
         }), embed);
     }

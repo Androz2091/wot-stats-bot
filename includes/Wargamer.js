@@ -29,7 +29,7 @@ class Wargamer {
         return new Promise(async function(resolve, reject){
             const realmData = (options ? realms.find((r) => r.name === options.realm || r.aliases.includes(options.realm)) : realms[0]);
             let data = await _this.get(`${realmData.baseURL}/wot/account/list/?search=${options.search}&application_id=${_this.apiKey}`);
-            if(!data[0]) return reject("Player not found");
+            if(!data || !data[0]) return reject("Player not found");
             resolve({ realm: realmData.name, ID: data[0].account_id, nickname: data[0].nickname });
         });
     }
