@@ -20,12 +20,12 @@ module.exports = {
         var guildData = client.databases[1].get(guild.id);
         // if a configuration was found
         if(guildData){
-            if(guildData.language === "en"){
-                client.databases[1].set(`${guild.id}.language`, "en-US");
-                guildData.language = "en-US";
-            } else if(guildData.language === "fr"){
-                client.databases[1].set(`${guild.id}.language`, "fr-FR");
-                guildData.language = "fr-FR";
+            if(guildData.lang === "en"){
+                client.databases[1].set(`${guild.id}.lang`, "en-US");
+                guildData.lang = "en-US";
+            } else if(guildData.lang === "fr"){
+                client.databases[1].set(`${guild.id}.lang`, "fr-FR");
+                guildData.lang = "fr-FR";
             }
             return guildData; // return the guild data
         } else {
