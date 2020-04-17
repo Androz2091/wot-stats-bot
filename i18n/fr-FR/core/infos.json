@@ -1,14 +1,14 @@
 {
-    "DESCRIPTION": "Display the stats of the bot!",
+    "DESCRIPTION": "Affiche les stats du bot !",
     "USAGE": "infos",
     "EXAMPLES": "$infos",
-    "TITLE": "Stats of WoT Stats",
-    "TITLE_CREDITS": "WoT Stats is an open source bot maintained by `Androz#2091`!",
-    "TITLE_STATS": ":bar_chart: • __Statistics__",
-    "CONTENT_STATS": "`Servers: {{servers}}`\n`Users: {{users}}`",
+    "TITLE": "Stats de WoT Stats",
+    "TITLE_CREDITS": "WoT Stats est un bot open source maintenu par `Androz#2091` !",
+    "TITLE_STATS": ":bar_chart: • __Statistiques__",
+    "CONTENT_STATS": "`Serveurs: {{servers}}`\n`Utilisateurs: {{users}}`",
     "TITLE_VERSION": ":gear: • __Version__",
     "CONTENT_VERSION": "`Discord.js: v{{discord}}`\n`Nodejs: v{{node}}`",
-    "TITLE_LINKS": ":link: • __Links__",
+    "TITLE_LINKS": ":link: • __Liens__",
     "CONTENT_LINKS": "[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Invitation](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support](https://top.gg/557649686417113149)",
-    "SHARD": "`{{ram}}` mb ram\n`{{servers}}` servers\n`{{ping}}` ms"
+    "SHARD": "`{{ram}}` mb ram\n`{{servers}}` serveurs\n`{{ping}}` ms"
 }
