@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Délie votre compte WoT à votre compte Discord !",
+    "USAGE": "unlink",
+    "EXAMPLES": "$unlink",
+    "NOT_LINKED": "Vous n'avez actuellement aucun compte lié ! Veuillez en lier un avec `{{prefix}}link [serveur] [pseudo]`!",
+    "NOT_LINKED_USER": "**{{user}}** n'a pas de compte WoT lié !",
+    "SUCCESS": "Votre compte n'est plus lié !"
+}

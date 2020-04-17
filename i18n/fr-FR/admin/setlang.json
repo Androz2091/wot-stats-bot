@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Changez la langue du serveur !",
+    "USAGE": "setlang [langue]",
+    "EXAMPLES": "$setlang fr-FR",
+    "INVALID_LANGUAGE": "Veuillez envoyer une langue valide ! Les langues disponibles sont : `en-US`, `fr-FR`.",
+    "SUCCESS": "La langue a été changée !"
+}

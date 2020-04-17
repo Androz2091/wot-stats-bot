@@ -1,0 +1,18 @@
+{
+    "DESCRIPTION": "Affiche le profil d'un joueur WoT !",
+    "USAGE": "profile [@membre/pseudo]",
+    "EXAMPLES": "$profile ThibaudFvrx",
+    "MISSING_NICKNAME": "Vous devez spécifier un pseudo valide !",
+    "CONTENT": "Voilà le profil de **{{nickname}}** :",
+    "HEADER_NICKNAME": "Pseudo",
+    "HEADER_CREATED": "Date de création",
+    "HEADER_LAST_UPDATE": "Dernière MAJ",
+    "HEADER_LAST_BATTLE": "Dernière bataille",
+    "HEADER_CLAN": "Clan",
+    "HEADER_WIN_RATE": "Ratio de victoires",
+    "HEADER_WN8": "WN8",
+    "HEADER_WN8_24": "WN8 - 24h",
+    "HEADER_WN8_30": "WN8 - 30j",
+    "NO_BATTLES": "Pas de batailles",
+    "NO_CLAN": "Pas de clan"
+}
