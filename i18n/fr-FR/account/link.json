@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Link your WoT account to your Discord account!",
+    "DESCRIPTION": "Relie votre compte WoT à votre compte Discord !",
     "USAGE": "link [na/asia/eu/ru] [nickname]",
     "EXAMPLES": "$link eu ThibaudFvrx",
     "ALREADY_LINKED": "You have already linked a WoT account! Type `{{prefix}}unlink` and try again!",
