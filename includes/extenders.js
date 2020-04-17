@@ -1,6 +1,7 @@
+require("date-and-time/locale/fr");
+
 const { Guild, Message } = require("discord.js");
 const config = require("../config");
-
 
 Guild.prototype.translate = function(key, args) {
     const language = this.client.translations.get(this.language);
