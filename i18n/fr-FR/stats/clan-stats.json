@@ -12,12 +12,12 @@
     "TITLE_SKIRMISH": "__**Statistiques d'escarmouches:**__",
     "TITLE_BASTION": "__**Statistiques des batailles du clan en mode Bastion:**__",
     "TITLE_WN8": "__**WN8 du clan**__",
-    "NO_RECENT_BATTLE": "No recent battle",
-    "LAST_BATTLE": "Last battle:",
-    "TOTAL_BATTLES": "Total battles:",
-    "TOTAL_BATTLES_28": "Total battles (last 28 days):",
-    "WIN_RATE": "Win rate:",
-    "WIN_RATE_28": "Win rate (last 28 days):",
-    "BASTION_TOTAL_LEVEL": "Total level of the Bastion's structures:",
-    "BASTION_LEVEL": "Bastion level:"
+    "NO_RECENT_BATTLE": "Pas de bataille récente",
+    "LAST_BATTLE": "Dernière bataille:",
+    "TOTAL_BATTLES": "Total des batailles:",
+    "TOTAL_BATTLES_28": "Total des batailles (28 derniers jours):",
+    "WIN_RATE": "Ratio de victoires:",
+    "WIN_RATE_28": "Ratio de victoires (28 derniers jours):",
+    "BASTION_TOTAL_LEVEL": "Niveau total des structures du Bastion :",
+    "BASTION_LEVEL": "Niveau Bastion:"
 }
