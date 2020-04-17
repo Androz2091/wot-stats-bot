@@ -1,6 +1,6 @@
 files:
   - source: /i18n/en-US/*.json
-    translation: /i18/%locale%/%original_file_name%
+    translation: /i18n/%locale%/%original_file_name%
   - source: /i18n/en-US/account/*.json
     translation: /i18n/%locale%/account/%original_file_name%
   - source: /i18n/en-US/admin/*.json
