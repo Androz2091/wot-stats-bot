@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Unlink your wot account!",
+    "DESCRIPTION": "Délie votre compte WoT à votre compte Discord !",
     "USAGE": "unlink",
     "EXAMPLES": "$unlink",
     "NOT_LINKED": "You currently have no linked accounts! Please link one with `{{prefix}}link [server] [nickname]`!",
