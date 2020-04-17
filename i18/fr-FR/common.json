@@ -1,9 +1,9 @@
 {
-    "WINS": "Wins",
-    "LOSSES": "Losses",
+    "WINS": "Victoires",
+    "LOSSES": "Défaites",
     "TOTAL": "Total",
-    "NAME": "Name",
-    "YES": "Yes",
-    "NO": "No",
-    "CURRENT": "Current"
+    "NAME": "Nom",
+    "YES": "Oui",
+    "NO": "Non",
+    "CURRENT": "Actuel"
 }
