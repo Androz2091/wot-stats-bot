@@ -1,11 +1,11 @@
 {
-    "DESCRIPTION": "Displays a player's tanks!",
-    "USAGE": "tanks [@member/nickname]",
+    "DESCRIPTION": "Affiche les tanks d'un joueur !",
+    "USAGE": "tanks [@membre/pseudo]",
     "EXAMPLES": "$tanks ThibaudFvrx",
-    "HEADER_BATTLES": "Battles: ",
-    "HEADER_MARK": "Mark of mastery: ",
+    "HEADER_BATTLES": "Batailles: ",
+    "HEADER_MARK": "Marque d'excellence: ",
     "HEADER_NATION": "Nation: ",
-    "CHOOSE_TIER": "Please choose the tier of the tanks to display!",
-    "TIMEOUT": "The message has expired, type the command again!",
-    "NO_TANKS": "No tanks of `{{tier}}` tier to display!"
+    "CHOOSE_TIER": "Veuillez choisir le tier des tanks à afficher !",
+    "TIMEOUT": "Le message a expiré, retapez la commande !",
+    "NO_TANKS": "Pas de tanks de `{{tier}}` tier à afficher !"
 }
