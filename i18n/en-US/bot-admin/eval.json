@@ -1,5 +1,0 @@
-{
-    "DESCRIPTION": "Executes the code",
-    "USAGE": "eval [code]",
-    "EXAMPLES": "$eval message.channel.send('Hey');"
-}
