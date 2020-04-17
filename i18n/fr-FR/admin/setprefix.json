@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Change the server prefix!",
-    "USAGE": "setprefix [prefix]",
+    "DESCRIPTION": "Changez le préfixe du serveur !",
+    "USAGE": "setprefix [préfixe]",
     "EXAMPLES": "$setprefix !",
-    "MISSING": "You need to specify a valid prefix!",
-    "SUCCESS": "Your new prefix is `{{prefix}}`! Send `{{prefix}}help` to see the list of commands!"
+    "MISSING": "Vous devez spécifier un préfixe valide !",
+    "SUCCESS": "Votre nouveau préfixe est `{{prefix}}` ! Envoyez `{{prefix}}}help` pour voir la liste des commandes !"
 }
