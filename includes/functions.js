@@ -20,11 +20,16 @@ module.exports = {
         var guildData = client.databases[1].get(guild.id);
         // if a configuration was found
         if(guildData){
+            if(guildData.language === "en"){
+                client.databases[1].set(`${guild.id}.language`, "en-US");
+            } else if(guildData.language === "fr"){
+                client.databases[1].set(`${guild.id}.language`, "fr-FR");
+            }
             return guildData; // return the guild data
         } else {
             client.databases[1].set(guild.id, {
                 prefix:client.config.prefix, // the prefix of the guild
-                lang:client.config.defaultLanguage // the language of the guild
+                lang: "en-US" // the language of the guild
             });
             // Log in the console
             client.logger.log("Guild "+guild.name+" registered ! ID : "+guild.id);
