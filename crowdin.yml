@@ -1,3 +1,13 @@
 files:
-  - source: /i18n/en-US/
-    translation: /i18n/%locale%/%original_path%/%original_file_name%
+  - source: /i18n/en-US/*.json
+    translation: /i18/%locale%/%original_file_name%
+  - source: /i18n/en-US/account/*.json
+    translation: /i18n/%locale%/account/%original_file_name%
+  - source: /i18n/en-US/admin/*.json
+    translation: /i18n/%locale%/admin/%original_file_name%
+  - source: /i18n/en-US/bot-admin/*.json
+    translation: /i18n/%locale%/bot-admin/%original_file_name%
+  - source: /i18n/en-US/core/*.json
+    translation: /i18n/%locale%/core/%original_file_name%
+  - source: /i18n/en-US/stats/*.json
+    translation: /i18n/%locale%/stats/%original_file_name%
