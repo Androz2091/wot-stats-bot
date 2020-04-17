@@ -22,8 +22,10 @@ module.exports = {
         if(guildData){
             if(guildData.language === "en"){
                 client.databases[1].set(`${guild.id}.language`, "en-US");
+                guildData.language = "en-US";
             } else if(guildData.language === "fr"){
                 client.databases[1].set(`${guild.id}.language`, "fr-FR");
+                guildData.language = "fr-FR";
             }
             return guildData; // return the guild data
         } else {
