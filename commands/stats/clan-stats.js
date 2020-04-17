@@ -148,7 +148,7 @@ module.exports = class extends Command {
             embed.setDescription(clanStats.motto);
         }
 
-        message.channel.send(message.translate("stats/clan-stats:CONTENT", {
+        m.edit(message.translate("stats/clan-stats:CONTENT", {
             name: clanStats.name
         }), embed);
     }
