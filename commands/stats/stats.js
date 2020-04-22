@@ -41,7 +41,7 @@ module.exports = class extends Command {
         } else if(args[0]){
             let realm = client.realms.find((r) => r.name === args[0].toLowerCase() || r.aliases.includes(args[0].toLowerCase()));
             if(!realm) return m.error("account/link:INVALID_REALM", {
-                search: args[0]
+                realm: args[0]
             }, true);
             if(!args[1]) return m.error("stats/profile:MISSING_NICKNAME", null, true);
             userData = await client.Wargamer.findPlayer({
