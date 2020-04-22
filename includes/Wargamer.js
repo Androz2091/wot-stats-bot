@@ -74,16 +74,34 @@ class Wargamer {
     async getPlayerWn8(options){
         return new Promise(async function(resolve, reject){
             const realmData = (options ? realms.find((r) => r.name === options.realm || r.aliases.includes(options.realm)) : realms[0]);
-            const res = await fetch(`https://wotlabs.net/${realmData.wotLabs}/player/${options.nickname}`);
-            const html = await res.text();
-            const $ = cheerio.load(html);
-            const stats = {
-                now:    parseInt($(".wnrow").get(0).children[1].children[0].data) || 0,
-                "24h":  parseInt($(".wnrow").get(0).children[2].children[0].data) || 0,
-                "7d":   parseInt($(".wnrow").get(0).children[3].children[0].data) || 0,
-                "30d":  parseInt($(".wnrow").get(0).children[4].children[0].data) || 0,
-                color:  "#000000"
-            };
+            let stats;
+            if(realmData.name === "eu" || realmData.name === "na"){
+                const json = await tabletojson.convertUrl(`https://wot-life.com/${realmData.name}/player/${options.nickname}/${options.ID}`);
+                if(!json[0]) return resolve({
+                    now:    0,
+                    "24h":  0,
+                    "7d":   0,
+                    "30d":  0,
+                    color:  "#000000"
+                });
+                stats = {
+                    now:    parseInt(json[0][json[0].length-1].WN8, 10),
+                    "24h":  parseInt(json[0][json[0].length-1]["Past 24 hours"], 10),
+                    "7d":   parseInt(json[0][json[0].length-1]["Past 7 days"], 10),
+                    "30d":  parseInt(json[0][json[0].length-1]["Past 30 days"], 10)
+                };
+            } else {
+                const res = await fetch(`https://wotlabs.net/${realmData.wotLabs}/player/${options.nickname}`);
+                const html = await res.text();
+                const $ = cheerio.load(html);
+                stats = {
+                    now:    parseInt($(".wnrow").get(0).children[1].children[0].data) || 0,
+                    "24h":  parseInt($(".wnrow").get(0).children[2].children[0].data) || 0,
+                    "7d":   parseInt($(".wnrow").get(0).children[3].children[0].data) || 0,
+                    "30d":  parseInt($(".wnrow").get(0).children[4].children[0].data) || 0,
+                    color:  "#000000"
+                };
+            }
             if(stats.now > 300 && stats.now < 599)          stats.color = "#cd3333";
             else if(stats.now > 600 && stats.now < 899)     stats.color = "#d77900";
             else if(stats.now > 900 && stats.now < 1249)    stats.color = "#d7b600";
