@@ -5,6 +5,7 @@ const realms = require("./realms.json");
 const fetch = require("node-fetch"),
 cheerio = require("cheerio");
 const tabletojson = require("tabletojson").Tabletojson;
+const { JSDOM } = require("jsdom");;
 
 class Wargamer {
     constructor(apiKey){
@@ -162,11 +163,21 @@ class Wargamer {
     async getClanWn8(options){
         return new Promise(async function(resolve, reject){
             const realmData = (options ? realms.find((r) => r.name === options.realm || r.aliases.includes(options.realm)) : realms[0]);
+            let stats;
+            if(realmData.name === "eu" || realmData.name === "na"){
             let json = await tabletojson.convertUrl(`https://wot-life.com/${realmData.name}/clan/${options.tag}-${options.ID}`);
-            const stats = {
-                now:    parseInt(json[0][1].Total, 10),
-                color:  "#000000"
-            };
+                stats = {
+                    now:    parseInt(json[0][1].Total, 10),
+                    color:  "#000000"
+                };
+            } else {
+                const res = await fetch(`https://wotlabs.net/${realmData.wotLabs}/clan/${options.tag}`);
+                const html = await res.text();
+                stats = {
+                    now:    parseInt(new JSDOM(html).window.document.querySelector(".boxStats.boxWn.dgreen").childNodes[2].textContent.trim()) || 0,
+                    color:  "#000000"
+                };
+            }
             if(stats.now > 300 && stats.now < 599)          stats["color"] = "#cd3333";
             else if(stats.now > 600 && stats.now < 899)     stats["color"] = "#d77900";
             else if(stats.now > 900 && stats.now < 1249)    stats["color"] = "#d7b600";
