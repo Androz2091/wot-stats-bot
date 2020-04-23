@@ -111,34 +111,34 @@ module.exports = class extends Command {
                 let title = message.translate("stats/clan-stats:RANK_"+ranks[rank]);
                 let newTitle = ((rank === Object.keys(ranks)[Object.keys(ranks).length - 1]) ? ("\n\n"+message.translate("stats/clan-stats:TITLE_BASTION")) : "");
                 embed.addField(title,
-                    message.translate("stats/clan-stats:LAST_BATTLE")+
+                    message.translate("stats/clan-stats:LAST_BATTLE")+" "+
                     ((clanStats.skirmish_statistics["last_time_"+rank] === 0) ? message.translate("stats/clan-stats:NO_RECENT_BATTLE") : dateAndTime.format(new Date(clanStats.skirmish_statistics["last_time_"+rank]*1000), pattern))+"\n"+
-                    message.translate("stats/clan-stats:TOTAL_BATTLES")+
+                    message.translate("stats/clan-stats:TOTAL_BATTLES")+" "+
                     (clanStats.skirmish_statistics["total_"+rank]+" ("+clanStats.skirmish_statistics["win_"+rank]+" "+message.translate("common:WINS").toLowerCase()+")")+"\n"+
-                    message.translate("stats/clan-stats:TOTAL_BATTLES_28")+
+                    message.translate("stats/clan-stats:TOTAL_BATTLES_28")+" "+
                     (clanStats.skirmish_statistics["total_"+rank+"_in_28d"]+" ("+clanStats.skirmish_statistics["win_"+rank+"_in_28d"]+" "+message.translate("common:WINS").toLowerCase()+")")+"\n"+
-                    message.translate("stats/clan-stats:WIN_RATE")+
+                    message.translate("stats/clan-stats:WIN_RATE")+" "+
                     ((clanStats.skirmish_statistics["win_"+rank] === 0) ? "0%" : client.functions.percentage(clanStats.skirmish_statistics["win_"+rank], clanStats.skirmish_statistics["lose_"+rank]))+"\n"+
-                    message.translate("stats/clan-stats:WIN_RATE_28")+
+                    message.translate("stats/clan-stats:WIN_RATE_28")+" "+
                     ((clanStats.skirmish_statistics["win_"+rank+"_in_28d"] === 0) ? "0%" : client.functions.percentage(clanStats.skirmish_statistics["win_"+rank+"_in_28d"], clanStats.skirmish_statistics["total_"+rank+"_in_28d"]-clanStats.skirmish_statistics["win_"+rank+"_in_28d"]))+newTitle
                 );
             }
         }
 
         embed.addField(message.translate("stats/clan-stats:RANK_X"),
-            message.translate("stats/clan-stats:BASTION_TOTAL_LEVEL")+
+            message.translate("stats/clan-stats:BASTION_TOTAL_LEVEL")+" "+
             (clanStats.stronghold_buildings_level)+"\n"+
-            message.translate("stats/clan-stats:BASTION_LEVEL")+
+            message.translate("stats/clan-stats:BASTION_LEVEL")+" "+
             (clanStats.stronghold_level)+"\n"+
-            message.translate("stats/clan-stats:LAST_BATTLE")+
+            message.translate("stats/clan-stats:LAST_BATTLE")+" "+
             ((clanStats.battles_for_strongholds_statistics.last_time_10 === 0) ? message.translate("stats/clan-stats:NO_RECENT_BATTLE") : dateAndTime.format(new Date(clanStats.battles_for_strongholds_statistics.last_time_10*1000), pattern))+"\n"+
-            message.translate("stats/clan-stats:TOTAL_BATTLES")+
+            message.translate("stats/clan-stats:TOTAL_BATTLES")+" "+
             (clanStats.battles_for_strongholds_statistics.total_10)+"\n"+
-            message.translate("stats/clan-stats:TOTAL_BATTLES_28")+
+            message.translate("stats/clan-stats:TOTAL_BATTLES_28")+" "+
             (clanStats.battles_for_strongholds_statistics.total_10_in_28d)+"\n"+
-            message.translate("stats/clan-stats:WIN_RATE")+
+            message.translate("stats/clan-stats:WIN_RATE")+" "+
             ((clanStats.battles_for_strongholds_statistics.win_10 === 0) ? "0%" : client.functions.percentage(clanStats.battles_for_strongholds_statistics.win_10, clanStats.battles_for_strongholds_statistics.lose_10))+"\n"+
-            message.translate("stats/clan-stats:WIN_RATE_28")+
+            message.translate("stats/clan-stats:WIN_RATE_28")+" "+
             ((clanStats.battles_for_strongholds_statistics.win_10_in_28d === 0) ? "0%" : client.functions.percentage(clanStats.battles_for_strongholds_statistics.win_10_in_28d, clanStats.battles_for_strongholds_statistics.total_10_in_28d-clanStats.battles_for_strongholds_statistics.win_10_in_28d))+"\n\n"+message.translate("stats/clan-stats:TITLE_WN8")
         );
 
