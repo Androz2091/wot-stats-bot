@@ -58,23 +58,23 @@ module.exports = class extends Command {
             if(!realm) return m.error("account/link:INVALID_REALM", {
                 realm: args[0]
             }, true);
-            if(!args[1]) return m.error("stats/clan-stats:MISSING_CLAN", true);
+            if(!args[1]) return m.error("stats/clan-stats:MISSING_CLAN", null, true);
             clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((_err) => {
                 return m.error("stats/clan-stats:CLAN_NOT_FOUND", {
                     search: args.slice(1).join(" ")
-                });
+                }, true);
             });
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
                 return m.error("account/unlink:NOT_LINKED", {
                     prefix: utils.guildData.prefix
-                });
+                }, true);
             } else {
                 let userStats = await client.Wargamer.getPlayerStats({ realm: utils.usersData[0].wot.realm, ID: utils.usersData[0].wot.ID }, false);
                 if(!userStats.clan_id){
                     return m.error("stats/clan-stats:NO_CLAN_USER", {
                         nickname: utils.usersData[0].wot.nickname
-                    });
+                    }, true);
                 }
                 clanData = {
                     realm: utils.usersData[0].wot.realm,
