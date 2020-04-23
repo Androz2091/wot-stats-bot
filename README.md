@@ -17,7 +17,6 @@ Wot Stats is an open source Discord bot developed by [Androz2091](https://github
 
 - `setlang`: Configure the server language (`fr` or `en`)
 - `setprefix`: Configure the server prefix  
-- `eval`: Run code from Discord
 
 #### Stats commands
 
