@@ -53,7 +53,7 @@ module.exports = class extends Command {
         client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0] }).then((player) => {
             m.sendT("account/link:SUCCESS", {
                 prefix: utils.guildData.prefix
-            }, true, null, "loading");
+            }, true, null, "success");
             return client.databases[0].set(message.author.id+".wot", player);
         }).catch((_err) => {
             return m.error("account/link:ACCOUNT_NOT_FOUND", {
