@@ -30,7 +30,9 @@ module.exports = class extends Command {
             return message.error("admin/setprefix:MISSING");
         } else {
             this.client.databases[1].set(message.guild.id+".prefix", prefix);
-            return message.success("admin/setprefix:SUCCESS", prefix);
+            return message.success("admin/setprefix:SUCCESS", {
+                prefix
+            });
         }
         
     }
