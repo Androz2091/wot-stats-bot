@@ -1,0 +1,23 @@
+{
+    "DESCRIPTION": "Displays the statistics of a clan!",
+    "USAGE": "clan-stats [name]",
+    "EXAMPLES": "$clanstats TheClan",
+    "NO_CLAN_USER": "**{{nickname}}** is not in a clan!",
+    "MISSING_CLAN": "You must specify a valid clan name!",
+    "CLAN_NOT_FOUND": "No clan found for `{{search}}`!",
+    "CONTENT": "Here are the statistics for the clan **{{name}}** :",
+    "RANK_X": "Tier X vehicles",
+    "RANK_VIII": "Tier VIII vehicles",
+    "RANK_VI": "Tier VI vehicles",
+    "TITLE_SKIRMISH": "__**Clan skirmish stats:**__",
+    "TITLE_BASTION": "__**Clan battles stats in Bastion mode:**__",
+    "TITLE_WN8": "__**WN8 of the clan**__",
+    "NO_RECENT_BATTLE": "No recent battle",
+    "LAST_BATTLE": "Last battle:",
+    "TOTAL_BATTLES": "Total battles:",
+    "TOTAL_BATTLES_28": "Total battles (last 28 days):",
+    "WIN_RATE": "Win rate:",
+    "WIN_RATE_28": "Win rate (last 28 days):",
+    "BASTION_TOTAL_LEVEL": "Total level of the Bastion's structures:",
+    "BASTION_LEVEL": "Bastion level:"
+}
