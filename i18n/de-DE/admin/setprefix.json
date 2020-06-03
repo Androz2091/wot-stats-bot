@@ -3,5 +3,5 @@
     "USAGE": "setpräfix [prefix]",
     "EXAMPLES": "$setprefix !",
     "MISSING": "Du musst ein gültiges Präfix angeben!",
-    "SUCCESS": "Dein neuer Präfix ist `{{prefix}}`! Sende `{{prefix}}hilfe` um eine Liste der Commands zu sehen!"
+    "SUCCESS": "Dein neuer Präfix ist `{{prefix}}`! Sende `{{prefix}}hilfe` um eine Liste der Befehle zu sehen!"
 }
