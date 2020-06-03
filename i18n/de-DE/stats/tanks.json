@@ -1,11 +1,11 @@
 {
-    "DESCRIPTION": "Displays a player's tanks!",
-    "USAGE": "tanks [@member/nickname]",
+    "DESCRIPTION": "Zeigt die Panzer eines Spielers an!",
+    "USAGE": "panzer [@mitglied/benutzername]",
     "EXAMPLES": "$tanks ThibaudFvrx",
-    "HEADER_BATTLES": "Battles: ",
-    "HEADER_MARK": "Mark of mastery: ",
+    "HEADER_BATTLES": "Gefechte: ",
+    "HEADER_MARK": "Zeichen der Meisterschaft: ",
     "HEADER_NATION": "Nation: ",
-    "CHOOSE_TIER": "Please choose the tier of the tanks to display!",
-    "TIMEOUT": "The message has expired, type the command again!",
+    "CHOOSE_TIER": "Bitte wähle die Stufe der anzuzeigenden Panzer!",
+    "TIMEOUT": "Die Nachricht ist abgelaufen, geben Sie den Befehl erneut ein!",
     "NO_TANKS": "Keine Panzer der {{tier}} Stufe können angezeigt werden!"
 }
