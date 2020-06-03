@@ -1,9 +1,9 @@
 {
     "WINS": "Siegreiche Gefechte",
     "LOSSES": "Niederlagen",
-    "TOTAL": "Total",
+    "TOTAL": "Gesamt",
     "NAME": "Name",
-    "YES": "Yes",
-    "NO": "No",
-    "CURRENT": "Current"
+    "YES": "Ja",
+    "NO": "Nein",
+    "CURRENT": "Aktuell"
 }
