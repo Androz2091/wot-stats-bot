@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Displays the profile of a WoT player!",
+    "DESCRIPTION": "Zeigt das Profil eines WoT-Spielers an!",
     "USAGE": "profile [@member/nickname]",
     "EXAMPLES": "$profile ThibaudFvrx",
     "MISSING_NICKNAME": "You must specify a valid nickname!",
