@@ -7,5 +7,5 @@
     "HEADER_NATION": "Nation: ",
     "CHOOSE_TIER": "Please choose the tier of the tanks to display!",
     "TIMEOUT": "The message has expired, type the command again!",
-    "NO_TANKS": "No tanks of `{{tier}}` tier to display!"
+    "NO_TANKS": "Keine Panzer der {{tier}} Stufe können angezeigt werden!"
 }
