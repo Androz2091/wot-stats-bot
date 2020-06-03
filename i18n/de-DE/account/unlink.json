@@ -2,7 +2,7 @@
     "DESCRIPTION": "Entferne deinen Account!",
     "USAGE": "entfern",
     "EXAMPLES": "$unlink",
-    "NOT_LINKED": "You currently have no linked accounts! Please link one with `{{prefix}}link [server] [nickname]`!",
-    "NOT_LINKED_USER": "**{{user}}* has no WoT account linked!",
-    "SUCCESS": "Your account is no longer linked!"
+    "NOT_LINKED": "Du hast im Moment keinen Account verbunden! Bitte verbinde einen mit `{{prefix}}verbinde [server] [nickname]`!",
+    "NOT_LINKED_USER": "**{{user}}* hat keinen WoT-Account verbunden!",
+    "SUCCESS": "Dein Account ist nicht mehr verbunden!"
 }
