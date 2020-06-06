@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt das Profil eines WoT-Spielers an!",
-    "USAGE": "profil [@mitglied/benutzername]",
+    "USAGE": "profile [@mitglied/benutzername]",
     "EXAMPLES": "$profile ThibaudFvrx",
     "MISSING_NICKNAME": "Du musst einen gültigen Benutzernamen angeben!",
     "CONTENT": "Das ist das Profil von **{{nickname}}**:",
