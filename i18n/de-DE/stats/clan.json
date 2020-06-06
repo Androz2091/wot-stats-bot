@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt Informationen über den Clan an!",
-    "USAGE": "Clan [nom]",
+    "USAGE": "clan [nom]",
     "EXAMPLES": "$clan LeClan",
     "CONTENT": "Hier sind die Informationen über den Clan **{{name}}**:",
     "HEADER_FOUNDER": "Gründer",
