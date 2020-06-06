@@ -2,6 +2,6 @@
     "DESCRIPTION": "Ändere die Server Sprache!",
     "USAGE": "setlang [lang]",
     "EXAMPLES": "$setlang en-US",
-    "INVALID_LANGUAGE": "Please send a valid language! Available languages are: `en-US`, `fr-FR` or `de-DE`.",
+    "INVALID_LANGUAGE": "Bitte sende eine gültige Sprache! Verfügbare Sprachen sind: `en-US`, `fr-FR`, `de-DE`.",
     "SUCCESS": "Sprache geändert!"
 }
