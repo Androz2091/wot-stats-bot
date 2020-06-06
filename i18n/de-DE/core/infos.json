@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt die Statistiken des Bots an!",
-    "USAGE": "Infos",
+    "USAGE": "infos",
     "EXAMPLES": "$infos",
     "TITLE": "Statistiken von WoT Stats",
     "TITLE_CREDITS": "WoT Stats ist ein Open-Source-Bot, der von `Androz#2091` gepflegt wird!",
