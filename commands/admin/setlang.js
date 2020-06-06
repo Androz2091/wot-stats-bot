@@ -13,6 +13,13 @@ const languages = [
             "french",
             "fr"
         ]
+    },
+    {
+        "name": "de-DE",
+        "aliases": [
+            "german",
+            "ge"
+        ]
     }
 ];
 
