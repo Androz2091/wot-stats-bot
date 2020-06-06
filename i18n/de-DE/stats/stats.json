@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt die Statistiken eines WoT-Spielers an!",
-    "USAGE": "stats [@mitglied/benutzername",
+    "USAGE": "stats [@mitglied/benutzername]",
     "EXAMPLES": "$stats ThibaudFvrx",
     "CONTENT": "Hier sind die Statistiken von **{{nickname}}**:",
     "HEADER_BATTLES": "Gefechte",
