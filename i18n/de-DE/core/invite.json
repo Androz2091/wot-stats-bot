@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt die Bot-Einladungs-Links an!",
-    "USAGE": "lad ein",
+    "USAGE": "invite",
     "EXAMPLES": "$invite",
     "TITLE_INVITE": "Einladung",
     "TITLE_SUPPORT": "Support"
