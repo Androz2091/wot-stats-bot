@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt die Panzer eines Spielers an!",
-    "USAGE": "panzer [@mitglied/benutzername]",
+    "USAGE": "tanks [@mitglied/benutzername]",
     "EXAMPLES": "$tanks ThibaudFvrx",
     "HEADER_BATTLES": "Gefechte: ",
     "HEADER_MARK": "Zeichen der Meisterschaft: ",
