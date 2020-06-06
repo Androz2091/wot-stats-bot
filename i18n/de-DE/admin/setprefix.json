@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Ändere den Server Präfix!",
+    "USAGE": "setprefix [prefix]",
+    "EXAMPLES": "$setprefix !",
+    "MISSING": "Du musst ein gültiges Präfix angeben!",
+    "SUCCESS": "Dein neuer Präfix ist `{{prefix}}`! Sende `{{prefix}}help` um eine Liste der Befehle zu sehen!"
+}

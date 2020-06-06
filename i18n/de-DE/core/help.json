@@ -1,0 +1,19 @@
+{
+    "DESCRIPTION": "Zeigt die Liste der Befehle an!",
+    "USAGE": "help [command]",
+    "EXAMPLES": "$help stats",
+    "TITLE_CATEGORY": "Kategorie",
+    "TITLE_ALIAS": "Alias",
+    "TITLE_USAGE": "Verwendung",
+    "TITLE_EXAMPLES": "Beispiel(e)",
+    "TITLE_DESCRIPTION": "Beschreibung",
+    "NO_ALIASES": "Keine Aliase.",
+    "TIP": "Erinnerung: '[]' bedeutet obligatorischer Parameter und '()' bedeutet optionaler Parameter.",
+    "COMMAND_NOT_FOUND": "Es wurde kein Befehl für `{{search}}` gefunden!",
+    "TITLE": "Willkommen, {{user}}",
+    "CATEGORY_ACCOUNT": "Dein Account",
+    "CATEGORY_ADMIN": "Admin",
+    "CATEGORY_BOT_ADMIN": "Admin von WoT Stats",
+    "CATEGORY_CORE": "Kern",
+    "CATEGORY_STATS": "Statistiken"
+}

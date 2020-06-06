@@ -1,0 +1,13 @@
+{
+    "DESCRIPTION": "Zeigt Informationen über den Clan an!",
+    "USAGE": "clan [nom]",
+    "EXAMPLES": "$clan LeClan",
+    "CONTENT": "Hier sind die Informationen über den Clan **{{name}}**:",
+    "HEADER_FOUNDER": "Gründer",
+    "HEADER_CREATED": "Erstellt am",
+    "HEADER_MEMBERS": "Mitglieder",
+    "HEADER_PRIVATE": "Privat",
+    "HEADER_WN8": "WN8",
+    "HEADER_DESCRIPTION": "Beschreibung",
+    "NO_DESCRIPTION": "Keine Beschreibung"
+}

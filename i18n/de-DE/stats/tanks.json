@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Zeigt die Panzer eines Spielers an!",
+    "USAGE": "tanks [@mitglied/benutzername]",
+    "EXAMPLES": "$tanks ThibaudFvrx",
+    "HEADER_BATTLES": "Gefechte: ",
+    "HEADER_MARK": "Zeichen der Meisterschaft: ",
+    "HEADER_NATION": "Nation: ",
+    "CHOOSE_TIER": "Bitte wähle die Stufe der anzuzeigenden Panzer!",
+    "TIMEOUT": "Die Nachricht ist abgelaufen, geben Sie den Befehl erneut ein!",
+    "NO_TANKS": "Keine Panzer der {{tier}} Stufe können angezeigt werden!"
+}

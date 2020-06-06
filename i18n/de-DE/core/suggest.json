@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Sende einen Vorschlag!",
+    "USAGE": "suggest [suggestion]",
+    "EXAMPLES": "$suggest Ein neuer Befehle: Dieser Befehl wird...",
+    "MISSING": "Du musst einen Vorschlag angeben!",
+    "SENT": "Ihr Vorschlag wurde soeben an die Administratoren gesendet!"
+}

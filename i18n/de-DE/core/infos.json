@@ -1,0 +1,14 @@
+{
+    "DESCRIPTION": "Zeigt die Statistiken des Bots an!",
+    "USAGE": "infos",
+    "EXAMPLES": "$infos",
+    "TITLE": "Statistiken von WoT Stats",
+    "TITLE_CREDITS": "WoT Stats ist ein Open-Source-Bot, der von `Androz#2091` gepflegt wird!",
+    "TITLE_STATS": ":bar_chart: • __Statistics__",
+    "CONTENT_STATS": "`Server: {{servers}}`\n`Benutzer: {{users}}`",
+    "TITLE_VERSION": ":gear: • __Version__",
+    "CONTENT_VERSION": "`Discord.js: v{{discord}}`\n`Nodejs: v{{node}}`",
+    "TITLE_LINKS": ":link: • __Links__",
+    "CONTENT_LINKS": "[Github](https://github.com/Androz2091/WorldOfTanks-Bot) | [Einladung](https://discordapp.com/oauth2/authorize?client_id=557649686417113149&permissions=2146958847&scope=bot) | [Support](https://top.gg/557649686417113149)",
+    "SHARD": "`{{ram}}` mb ram\n`{{servers}}` servers\n`{{ping}}` ms"
+}
