@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "Zeigt die Liste der Befehle an!",
-    "USAGE": "hilfe [command]",
+    "USAGE": "help [command]",
     "EXAMPLES": "$help stats",
     "TITLE_CATEGORY": "Kategorie",
     "TITLE_ALIAS": "Alias",
