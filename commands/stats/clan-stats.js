@@ -59,11 +59,12 @@ module.exports = class extends Command {
                 realm: args[0]
             }, true);
             if(!args[1]) return m.error("stats/clan-stats:MISSING_CLAN", null, true);
-            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((_err) => {
+            clanData = await client.Wargamer.findClan({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch(() => {});
+            if(!clanData){
                 return m.error("stats/clan-stats:CLAN_NOT_FOUND", {
                     search: args.slice(1).join(" ")
                 }, true);
-            });
+            }
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
                 return m.error("account/unlink:NOT_LINKED", {

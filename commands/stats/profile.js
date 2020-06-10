@@ -47,11 +47,12 @@ module.exports = class extends Command {
                 realm: args[0]
             }, true);
             if(!args[1]) return m.error("stats/profile:MISSING_NICKNAME", null, true);
-            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch((err) => {
+            userData = await client.Wargamer.findPlayer({ search: args.slice(1).join(" "), realm: args[0].toLowerCase() }).catch(() => {});
+            if(!userData){
                 return m.error("account/link:ACCOUNT_NOT_FOUND", {
                     search: args.slice(1).join(" ")
                 }, true);
-            });
+            }
         } else if(!args[0]){
             if(utils.usersData[0].wot === "unknow"){
                 return m.error("account/unlink:NOT_LINKED", {
