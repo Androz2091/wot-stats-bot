@@ -6,7 +6,7 @@
     "MISSING_NICKNAME": "Musíš zadat svou WoT přezdívku!",
     "MISSING_REALM": "Musíš zadat server! Vyber z následujících: `asia`, `eu` (Evropa), `na` (Severní Amerika), `ru` (Rusko)!",
     "INVALID_REALM": "`{{realm}}` není podporovaný server! Vyber z následujících: `asia`, `eu` (Evropa), `na` (Severní Amerika), `ru` (Rusko)!",
-    "SEARCHING": "Searching your account...",
-    "SUCCESS": "Your WoT account has been correctly linked to your Discord account! To see your profile, type `{{prefix}}profile`!",
-    "ACCOUNT_NOT_FOUND": "No account found for `{{search}}`!"
+    "SEARCHING": "Hledám tvůj účet...",
+    "SUCCESS": "Tvůj WoT účet byl úspěšně přiřazen ke tvému Discord účtu! Pro zobrazení tvého profilu zadej `{{prefix}}profile`!",
+    "ACCOUNT_NOT_FOUND": "Pro `{{search}}` nebyl nalezen žádný výsledek!"
 }
