@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Submit a suggestion!",
+    "DESCRIPTION": "Podat návrh!",
     "USAGE": "suggest [suggestion]",
-    "EXAMPLES": "$suggest A new command: this command will...",
-    "MISSING": "You must specify a suggestion!",
-    "SENT": "Your suggestion has just been sent to the administrators!"
+    "EXAMPLES": "$suggest Nový příkaz: tento příkaz bude...",
+    "MISSING": "Musíš zadat návrh!",
+    "SENT": "Tvůj návrh byl právě odeslán administrátorům!"
 }
