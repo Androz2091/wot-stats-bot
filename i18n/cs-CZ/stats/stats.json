@@ -1,0 +1,19 @@
+{
+    "DESCRIPTION": "Displays the stats of a WoT player!",
+    "USAGE": "stats [@member/nickname]",
+    "EXAMPLES": "$stats ThibaudFvrx",
+    "CONTENT": "Here are the stats of **{{nickname}}**:",
+    "HEADER_BATTLES": "Battles",
+    "HEADER_EQUALITIES": "Equalities",
+    "HEADER_SURV_BATTLES": "Survived Battles",
+    "HEADER_SURV_BATTLES_RATIO": "Survived Battles Ratio",
+    "HEADER_MAX_GAME": "Max in one game",
+    "HEADER_HISTORY_WN8": "History WN8",
+    "FIELD_DESTROYED": "Destroyed vehicles: ",
+    "FIELD_DAMAGE_R": "Damage received: ",
+    "FIELD_DAMAGE_I": "Damage inflicted: ",
+    "FIELD_SHOTS": "Shots: ",
+    "WN8_24": "24 hours: ",
+    "WN8_7": "7 days: ",
+    "WN8_30": "30 days: "
+}
