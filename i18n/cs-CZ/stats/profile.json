@@ -2,7 +2,7 @@
     "DESCRIPTION": "Zobrazuje účet hráče WoT!",
     "USAGE": "profile [@uživatel/přezdívka]",
     "EXAMPLES": "$profile ThibaudFvrx",
-    "MISSING_NICKNAME": "Musíš zadat správně přezdívku!",
+    "MISSING_NICKNAME": "Musíš zadat platnou přezdívku!",
     "CONTENT": "Profil hráče **{{nickname}}**:",
     "HEADER_NICKNAME": "Přezdívka",
     "HEADER_CREATED": "Datum vytvoření",
