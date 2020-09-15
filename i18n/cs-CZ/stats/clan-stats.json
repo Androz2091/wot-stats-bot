@@ -15,9 +15,9 @@
     "NO_RECENT_BATTLE": "Žádná nedávná bitva",
     "LAST_BATTLE": "Poslední bitva:",
     "TOTAL_BATTLES": "Celkem bitev:",
-    "TOTAL_BATTLES_28": "Total battles (last 28 days):",
-    "WIN_RATE": "Win rate:",
-    "WIN_RATE_28": "Win rate (last 28 days):",
-    "BASTION_TOTAL_LEVEL": "Total level of the Bastion's structures:",
-    "BASTION_LEVEL": "Bastion level:"
+    "TOTAL_BATTLES_28": "Celkem bitev (posledních 28 dní):",
+    "WIN_RATE": "Míra výher:",
+    "WIN_RATE_28": "Míra výher (posledních 28 dní):",
+    "BASTION_TOTAL_LEVEL": "Celková úroveň budov Opevnění:",
+    "BASTION_LEVEL": "Úroveň opevnění:"
 }
