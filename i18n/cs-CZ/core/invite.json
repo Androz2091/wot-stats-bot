@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Displays the bot's invitation links!",
+    "DESCRIPTION": "Zobrazuje odkaz pro pozvání bota na server!",
     "USAGE": "invite",
     "EXAMPLES": "$invite",
-    "TITLE_INVITE": "Invitation",
-    "TITLE_SUPPORT": "Support"
+    "TITLE_INVITE": "Pozvánka",
+    "TITLE_SUPPORT": "Podpora"
 }
