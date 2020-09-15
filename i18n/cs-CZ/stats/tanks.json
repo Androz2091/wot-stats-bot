@@ -1,11 +1,11 @@
 {
-    "DESCRIPTION": "Displays a player's tanks!",
-    "USAGE": "tanks [@member/nickname]",
+    "DESCRIPTION": "Zobrazuje tanky hráče!",
+    "USAGE": "tanks [@uživatel/přezdívka]",
     "EXAMPLES": "$tanks ThibaudFvrx",
-    "HEADER_BATTLES": "Battles: ",
-    "HEADER_MARK": "Mark of mastery: ",
-    "HEADER_NATION": "Nation: ",
-    "CHOOSE_TIER": "Please choose the tier of the tanks to display!",
-    "TIMEOUT": "The message has expired, type the command again!",
-    "NO_TANKS": "No tanks of `{{tier}}` tier to display!"
+    "HEADER_BATTLES": "Bitev: ",
+    "HEADER_MARK": "Znaky mistrovství: ",
+    "HEADER_NATION": "Národnost: ",
+    "CHOOSE_TIER": "Zvol třídu tanků k zobrazení!",
+    "TIMEOUT": "Čas vypršel, napiš příkaz znovu!",
+    "NO_TANKS": "Žádné tanky třídy `{{tier}}` k zobrazení!"
 }
