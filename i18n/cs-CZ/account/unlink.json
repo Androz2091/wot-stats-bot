@@ -3,6 +3,6 @@
     "USAGE": "unlink",
     "EXAMPLES": "$unlink",
     "NOT_LINKED": "Momentálně nemáš přiřazený účet! Přiřaď si jej zadáním `{{prefix}}link [server] [nickname]`!",
-    "NOT_LINKED_USER": "**{{user}}* has no WoT account linked!",
-    "SUCCESS": "Your account is no longer linked!"
+    "NOT_LINKED_USER": "**{{user}}* nemá přiřazen žádný účet WoT!",
+    "SUCCESS": "Tvůj účet již není spárován!"
 }
