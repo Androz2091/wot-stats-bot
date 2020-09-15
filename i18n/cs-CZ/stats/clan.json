@@ -3,11 +3,11 @@
     "USAGE": "clan [nom]",
     "EXAMPLES": "$clan LeClan",
     "CONTENT": "Zde jsou informace o klanu **{{name}}**:",
-    "HEADER_FOUNDER": "Founder",
-    "HEADER_CREATED": "Created at",
-    "HEADER_MEMBERS": "Members",
-    "HEADER_PRIVATE": "Private",
+    "HEADER_FOUNDER": "Zakladatel",
+    "HEADER_CREATED": "Vytvořeno v",
+    "HEADER_MEMBERS": "Členové",
+    "HEADER_PRIVATE": "Soukromý",
     "HEADER_WN8": "WN8",
-    "HEADER_DESCRIPTION": "Description",
-    "NO_DESCRIPTION": "No description"
+    "HEADER_DESCRIPTION": "Popis",
+    "NO_DESCRIPTION": "Žádný popis"
 }
