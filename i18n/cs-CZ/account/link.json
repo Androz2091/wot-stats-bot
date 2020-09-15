@@ -5,7 +5,7 @@
     "ALREADY_LINKED": "Již máš přiřazen WoT účet! Napiš `{{prefix}}unlink` a zkus to znovu!",
     "MISSING_NICKNAME": "Musíš zadat svou WoT přezdívku!",
     "MISSING_REALM": "Musíš zadat server! Vyber z následujících: `asia`, `eu` (Evropa), `na` (Severní Amerika), `ru` (Rusko)!",
-    "INVALID_REALM": "`{{realm}}` není podporovaný server! Vyber z následujících: `asia`, `eu` (Evropa), `na` (Severní Amerika), `ru` (Rusko)!",
+    "INVALID_REALM": "`{{realm}}` není podporovaný server! Vyber ze seznamu: `asia`, `eu` (Evropa), `na` (Severní Amerika), `ru` (Rusko)!",
     "SEARCHING": "Hledám tvůj účet...",
     "SUCCESS": "Tvůj WoT účet byl úspěšně přiřazen ke tvému Discord účtu! Pro zobrazení tvého profilu zadej `{{prefix}}profile`!",
     "ACCOUNT_NOT_FOUND": "Pro `{{search}}` nebyl nalezen žádný výsledek!"
