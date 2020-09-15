@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Displays information about the clan!",
+    "DESCRIPTION": "Zobrazuje informace o klanu!",
     "USAGE": "clan [nom]",
     "EXAMPLES": "$clan LeClan",
     "CONTENT": "Zde jsou informace o klanu **{{name}}**:",
