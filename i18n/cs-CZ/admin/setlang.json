@@ -2,6 +2,6 @@
     "DESCRIPTION": "Změnit jazyk serveru!",
     "USAGE": "setlang [lang]",
     "EXAMPLES": "$setlang en-US",
-    "INVALID_LANGUAGE": "Please send a valid language! Available languages are: `en-US`, `fr-FR` or `de-DE`.",
-    "SUCCESS": "Language changed!"
+    "INVALID_LANGUAGE": "Zadej podporovaný jazyk! Na výběr: `en-US`, `fr-FR` or `de-DE`.",
+    "SUCCESS": "Jazyk změněn!"
 }
