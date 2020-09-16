@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Změnit předponu serveru!",
+    "USAGE": "setprefix [prefix]",
+    "EXAMPLES": "$setprefix !",
+    "MISSING": "Musíš zvolit platnou předponu!",
+    "SUCCESS": "Tvoje nová předpona je `{{prefix}}`! Zadej `{{prefix}}help` pro zobrazení seznamu příkazů!"
+}

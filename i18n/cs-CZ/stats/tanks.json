@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Zobrazuje tanky hráče!",
+    "USAGE": "tanks [@uživatel/přezdívka]",
+    "EXAMPLES": "$tanks ThibaudFvrx",
+    "HEADER_BATTLES": "Bitev: ",
+    "HEADER_MARK": "Znaky mistrovství: ",
+    "HEADER_NATION": "Národnost: ",
+    "CHOOSE_TIER": "Zvol třídu tanků k zobrazení!",
+    "TIMEOUT": "Čas vypršel, napiš příkaz znovu!",
+    "NO_TANKS": "Žádné tanky třídy `{{tier}}` k zobrazení!"
+}

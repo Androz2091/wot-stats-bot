@@ -1,0 +1,23 @@
+{
+    "DESCRIPTION": "Zobrazuje statistiky klanu!",
+    "USAGE": "clan-stats [name]",
+    "EXAMPLES": "$clanstats TheClan",
+    "NO_CLAN_USER": "**{{nickname}}** není v klanu!",
+    "MISSING_CLAN": "Musíš zadat platný název klanu!",
+    "CLAN_NOT_FOUND": "Pro `{{search}}` nebyl nalezen žádný klan!",
+    "CONTENT": "Zde jsou statistiky klanu **{{name}}** :",
+    "RANK_X": "Vozidla třídy X",
+    "RANK_VIII": "Vozidla třídy VIII",
+    "RANK_VI": "Vozidla třídy VI",
+    "TITLE_SKIRMISH": "__**Statistiky šarvátek klanu:**__",
+    "TITLE_BASTION": "__**Statistiky klanu v Opevnění:**__",
+    "TITLE_WN8": "__**WN8 klanu**__",
+    "NO_RECENT_BATTLE": "Žádná nedávná bitva",
+    "LAST_BATTLE": "Poslední bitva:",
+    "TOTAL_BATTLES": "Celkem bitev:",
+    "TOTAL_BATTLES_28": "Celkem bitev (posledních 28 dní):",
+    "WIN_RATE": "Míra výher:",
+    "WIN_RATE_28": "Míra výher (posledních 28 dní):",
+    "BASTION_TOTAL_LEVEL": "Celková úroveň budov Opevnění:",
+    "BASTION_LEVEL": "Úroveň opevnění:"
+}

@@ -1,0 +1,18 @@
+{
+    "DESCRIPTION": "Zobrazuje účet hráče WoT!",
+    "USAGE": "profile [@uživatel/přezdívka]",
+    "EXAMPLES": "$profile ThibaudFvrx",
+    "MISSING_NICKNAME": "Musíš zadat platnou přezdívku!",
+    "CONTENT": "Profil hráče **{{nickname}}**:",
+    "HEADER_NICKNAME": "Přezdívka",
+    "HEADER_CREATED": "Datum vytvoření",
+    "HEADER_LAST_UPDATE": "Poslední aktualizace",
+    "HEADER_LAST_BATTLE": "Poslední bitva",
+    "HEADER_CLAN": "Klan",
+    "HEADER_WIN_RATE": "Míra výher",
+    "HEADER_WN8": "WN8",
+    "HEADER_WN8_24": "WN8 - 24h",
+    "HEADER_WN8_30": "WN8 - 30d",
+    "NO_BATTLES": "Žádné bitvy",
+    "NO_CLAN": "Žádný klan"
+}

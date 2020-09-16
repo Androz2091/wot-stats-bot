@@ -1,0 +1,19 @@
+{
+    "DESCRIPTION": "Zobrazuje seznam příkazů!",
+    "USAGE": "help [command]",
+    "EXAMPLES": "$help stats",
+    "TITLE_CATEGORY": "Kategorie",
+    "TITLE_ALIAS": "Alias",
+    "TITLE_USAGE": "Užití",
+    "TITLE_EXAMPLES": "Příklad(y)",
+    "TITLE_DESCRIPTION": "Popis",
+    "NO_ALIASES": "Žádné aliasy.",
+    "TIP": "Připomínka: `[]` znamená povinný parametr a `()` znamená volitelný parametr.",
+    "COMMAND_NOT_FOUND": "Pro `{{search}}` nebyl nalezen žádný příkaz!",
+    "TITLE": "Vítej, {{user}}",
+    "CATEGORY_ACCOUNT": "Tvůj účet",
+    "CATEGORY_ADMIN": "Admin",
+    "CATEGORY_BOT_ADMIN": "Admin WoT Stats",
+    "CATEGORY_CORE": "Jádro",
+    "CATEGORY_STATS": "Statistiky"
+}

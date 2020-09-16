@@ -1,0 +1,7 @@
+{
+    "PREFIX": "Ahoj {{author}}, má předpona pro tento server je **{{prefix}}**",
+    "BOT_MISSING_PERMISSIONS": "Potřebuji následující oprávnění pro vykonání tohoto příkazu: {{permissions}}",
+    "USER_MISSING_PERMISSIONS": "Potřebuješ mít úroveň oprávnění **{{level}}** pro vykonání tohoto příkazu!",
+    "COMMAND_DISABLED": "Tento příkaz je momentálně vypnutý!",
+    "PLEASE_WAIT": "Počkej prosím..."
+}

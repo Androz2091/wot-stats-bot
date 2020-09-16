@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Zobrazuje odkaz pro pozvání bota na server!",
+    "USAGE": "invite",
+    "EXAMPLES": "$invite",
+    "TITLE_INVITE": "Pozvánka",
+    "TITLE_SUPPORT": "Podpora"
+}

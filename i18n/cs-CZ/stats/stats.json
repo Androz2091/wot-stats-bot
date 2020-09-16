@@ -1,0 +1,19 @@
+{
+    "DESCRIPTION": "Zobrazuje statistiky hráče WoT!",
+    "USAGE": "stats [@uživatel/přezdívka]",
+    "EXAMPLES": "$stats ThibaudFvrx",
+    "CONTENT": "Statistiky hráče **{{nickname}}**:",
+    "HEADER_BATTLES": "Bitvy",
+    "HEADER_EQUALITIES": "Shody",
+    "HEADER_SURV_BATTLES": "Přežito bitev",
+    "HEADER_SURV_BATTLES_RATIO": "Míra přežitých bitev",
+    "HEADER_MAX_GAME": "Nejvíce za bitvu",
+    "HEADER_HISTORY_WN8": "Historie WN8",
+    "FIELD_DESTROYED": "Zničených vozidel: ",
+    "FIELD_DAMAGE_R": "Obdržené poškození: ",
+    "FIELD_DAMAGE_I": "Způsobené poškození: ",
+    "FIELD_SHOTS": "Výstřelů: ",
+    "WN8_24": "24 hodin: ",
+    "WN8_7": "7 dní: ",
+    "WN8_30": "30 dní: "
+}

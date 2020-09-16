@@ -1,0 +1,13 @@
+{
+    "DESCRIPTION": "Zobrazuje informace o klanu!",
+    "USAGE": "clan [nom]",
+    "EXAMPLES": "$clan LeClan",
+    "CONTENT": "Zde jsou informace o klanu **{{name}}**:",
+    "HEADER_FOUNDER": "Zakladatel",
+    "HEADER_CREATED": "Vytvořeno v",
+    "HEADER_MEMBERS": "Členové",
+    "HEADER_PRIVATE": "Soukromý",
+    "HEADER_WN8": "WN8",
+    "HEADER_DESCRIPTION": "Popis",
+    "NO_DESCRIPTION": "Žádný popis"
+}
